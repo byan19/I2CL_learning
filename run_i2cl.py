@@ -12,7 +12,7 @@ from multiprocessing import Process, Queue
 import utils
 import my_datasets as md
 import evaluator as ev
-
+import pdb
 
 def main(args):
     # set global seed
@@ -45,6 +45,7 @@ def main(args):
                                   sample_mode=args.config['sample_method'],
                                   seed=args.config['seed'])
 
+    pdb.set_trace()
     # get max demonstration token length for each dataset
     if args.config['split_demon']:
         args.test_max_token = 1e8
