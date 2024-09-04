@@ -252,7 +252,7 @@ if __name__ == "__main__":
     #pdb.set_trace()
     run_task('0', config)
     # Create a process for each GPU
-    pdb.set_trace()
+    '''
     processes = [Process(target=run_task, args=(gpu_id, config)) for gpu_id in config['gpus']]
     # Start all processes
     for p in processes:
@@ -261,3 +261,4 @@ if __name__ == "__main__":
     for p in processes:
         p.join()
     print("All tasks completed.")
+    '''
