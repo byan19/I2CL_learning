@@ -46,6 +46,7 @@ def main(args):
                                   seed=args.config['seed'])
 
     # get max demonstration token length for each dataset
+    pdb.set_trace()
     if args.config['split_demon']:
         args.test_max_token = 1e8
     else:
