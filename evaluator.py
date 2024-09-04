@@ -4,7 +4,7 @@ import torch.nn.functional as F
 import utils
 import global_vars as gv
 import my_datasets as md
-
+import pdb
 
 class Evaluator(nn.Module):
 
@@ -25,6 +25,7 @@ class Evaluator(nn.Module):
         # prepare label dict          
         label_map = {}
         ans_txt_list = self.dataset.get_dmonstration_template()['options']
+        pdb.set_trace()
         for label, ans_txt in enumerate(ans_txt_list):
             if 'gpt' in tokenizer.__class__.__name__.lower():
                 ans_txt = ' ' + ans_txt  # add space to the beginning of answer
