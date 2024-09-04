@@ -7,8 +7,8 @@ config = {}
 # general
 config['exp_name'] = 'exps/i2cl_debug'
 config['gpus'] = ['0']
-#config['models'] = ['meta-llama/Llama-2-7b-hf']  # 'gpt2-xl', 'EleutherAI/gpt-j-6B'
-config['models'] = ['gpt2-xl']  # 'gpt2-xl', 'EleutherAI/gpt-j-6B'
+config['models'] = ['meta-llama/Llama-2-7b-hf']  # 'gpt2-xl', 'EleutherAI/gpt-j-6B'
+#config['models'] = ['gpt2-xl']  # 'gpt2-xl', 'EleutherAI/gpt-j-6B'
 config['datasets'] = list(md.target_datasets.keys())
 config['seed'] = 42
 config['run_num'] = 5  # number of runs
