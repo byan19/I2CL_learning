@@ -5,7 +5,7 @@ import my_datasets as md
 
 config = {}
 # general
-config['exp_name'] = 'exps/i2cl'
+config['exp_name'] = 'exps/i2cl_debug'
 config['gpus'] = ['0']
 #config['models'] = ['meta-llama/Llama-2-7b-hf']  # 'gpt2-xl', 'EleutherAI/gpt-j-6B'
 config['models'] = ['gpt2-xl']  # 'gpt2-xl', 'EleutherAI/gpt-j-6B'
@@ -15,7 +15,7 @@ config['run_num'] = 5  # number of runs
 config['run_baseline'] = True  # whether run baseline
 config['metric'] = 'acc'  # 'acc', 'macro_f1'
 config['bs'] = 1  # batch size
-config['load_in_8bit'] = True
+config['load_in_8bit'] = False
 config['use_cache'] = True  # whether use kv cache
 config['demo_sample_method'] = 'random' # 'random' or deficient
 
