@@ -248,7 +248,7 @@ if __name__ == "__main__":
                 torch.cuda.empty_cache()
                 print(f"CUDA memory cleared for GPU {gpu_id}") 
                 time.sleep(5)
-
+    pdb.set_trace()
     # Create a process for each GPU
     processes = [Process(target=run_task, args=(gpu_id, config)) for gpu_id in config['gpus']]
     # Start all processes
