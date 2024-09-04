@@ -33,6 +33,7 @@ class Evaluator(nn.Module):
             label_map[ans_tok] = label  # index is the label
         print(f"label_map: {label_map}")
 
+        pdb.set_trace()
         # prepare all data
         all_pred_labels = []
         all_inputs, all_labels = [], []
