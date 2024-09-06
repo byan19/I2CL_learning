@@ -146,7 +146,7 @@ def main(args):
 # get args
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--config_path', type=str, default='configs/config_soft_prompt.py', help='path to config file')
+    parser.add_argument('--config_path', type=str, default='configs/config_layernorm_adaption.py', help='path to config file')
     return parser.parse_args()
 
 
