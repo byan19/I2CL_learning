@@ -352,17 +352,101 @@ class ModelWrapper(nn.Module):
         utils.plot_loss_curve(loss_list, save_dir + f'/{run_name}_loss_curve.png')
 
 
+    def layernorm_adaptation(self, config, dataset, save_dir=None, run_name=None):
+
+        pt_config = LNTuningConfig(task_type=TaskType.CAUSAL_LM)
+        peft_model = get_peft_model(self.model, pt_config)
+
+        # prepare label dict
+        label_map = {}
+        ans_txt_list = dataset.get_dmonstration_template()['options']
+        for label, ans_txt in enumerate(ans_txt_list):
+            if 'gpt' in self.tokenizer.__class__.__name__.lower():
+                ans_txt = ' ' + ans_txt  # add space to the beginning of answer
+            ans_tok = self.tokenizer.encode(ans_txt, add_special_tokens=False)[
+                0]  # use the first token if more than one token
+            print(f"ans_txt: {ans_txt}, ans_tok: {ans_tok}")
+            label_map[label] = ans_tok  # index is the label
+        print(f"label_map: {label_map}")
+
+        # print trainable parameters
+        peft_model.print_trainable_parameters()
+        print(f'PEFT model:\n {peft_model}')
+        # set model to peft model
+        self.model = peft_model
+
+        # init optimizer
+        optim_paramters = [{'params': self.model.parameters()}]
+        if config['optim'] == 'sgd':
+            optimizer = torch.optim.SGD(optim_paramters, lr=config['lr'],
+                                        weight_decay=config['wd'])
+        elif config['optim'] == 'adamW':
+            optimizer = torch.optim.AdamW(optim_paramters, config['lr'],
+                                          weight_decay=config['wd'])
+        elif config['optim'] == 'adam':
+            optimizer = torch.optim.Adam(optim_paramters, config['lr'])
+        else:
+            raise ValueError('optim must be sgd, adamW or adam!')
+
+        # get all data
+        all_data = dataset.all_data
+
+        # init lr_scheduler
+        epochs, batch_size = config['epochs'], config['grad_bs']
+        total_steps = epochs * len(all_data) // batch_size
+        warmup_steps = int((0.05 * epochs) * (len(all_data) // batch_size))
+        lr_lambda = lambda step: min(1.0, step / warmup_steps) * (1 + math.cos(math.pi * step / total_steps)) / 2 \
+            if step > warmup_steps else step / warmup_steps
+        scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lr_lambda)
+
+        # train
+        loss_list = []
+        all_data_index = list(range(len(all_data)))
+        for _ in range(epochs):
+            epoch_loss = []
+            np.random.shuffle(all_data_index)
+            for i in range(0, len(all_data), batch_size):
+                batch_index = all_data_index[i: i + batch_size]
+                batch_data = [all_data[idx] for idx in batch_index]
+                batch_input, batch_label = [], []
+                for data in batch_data:
+                    input_str, _, label = dataset.apply_template(data)
+                    batch_input.append(input_str)
+                    batch_label.append(label)
+
+                input_tok = self.tokenizer(batch_input, return_tensors='pt', padding=True)
+                input_ids = input_tok['input_ids'].to(self.device)
+                attn_mask = input_tok['attention_mask'].to(self.device)
+                pred_loc = utils.last_one_indices(attn_mask).to(self.device)
+                # forward
+                logits = self.model(input_ids=input_ids, attention_mask=attn_mask).logits
+                # get prediction logits
+                pred_logits = logits[torch.arange(logits.size(0)), pred_loc]
+                # get loss
+                gt_label = torch.tensor([label_map[label] for label in batch_label]).to(self.device)
+                loss = F.cross_entropy(pred_logits, gt_label, reduction='mean')
+                epoch_loss.append(loss.item())
+                # update strength params
+                optimizer.zero_grad()
+                loss.backward()
+                optimizer.step()
+                scheduler.step()
+            epoch_loss = np.mean(epoch_loss)
+            loss_list.append(epoch_loss)
+
+        # fronzen all learnable strength params
+        for param in self.model.parameters():
+            param.requires_grad = False
+        # set model to eval mode
+        self.model.eval()
+        # plot loss curve and save it
+        utils.plot_loss_curve(loss_list, save_dir + f'/{run_name}_loss_curve.png')
+
     def softprompt(self, config, dataset, save_dir=None, run_name=None):
-        pdb.set_trace()
-        '''
         pt_config = PromptTuningConfig(**config['pt_config'])
         peft_model = get_peft_model(self.model, pt_config)
-        '''
 
-        pt_config = LNTuningConfig(task_type= TaskType.CAUSAL_LM)
-        peft_model = get_peft_model(self.model, pt_config)
-
-        # prepare label dict          
+        # prepare label dict
         label_map = {}
         ans_txt_list = dataset.get_dmonstration_template()['options']
         for label, ans_txt in enumerate(ans_txt_list):
