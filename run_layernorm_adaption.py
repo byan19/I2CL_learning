@@ -174,6 +174,10 @@ if __name__ == "__main__":
             input_args.config = cur_config
             try:
                 main(input_args)
+                gc.collect()
+                torch.cuda.empty_cache()
+                print(f"CUDA memory cleared for GPU {gpu_id}")
+                time.sleep(5)
             finally:
                 # Clean up CUDA memory after each task
                 gc.collect()
