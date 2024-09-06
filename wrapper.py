@@ -353,7 +353,7 @@ class ModelWrapper(nn.Module):
 
 
     def layernorm_adaptation(self, config, dataset, save_dir=None, run_name=None):
-
+        pdb.set_trace()
         pt_config = LNTuningConfig(task_type=TaskType.CAUSAL_LM)
         peft_model = get_peft_model(self.model, pt_config)
 
