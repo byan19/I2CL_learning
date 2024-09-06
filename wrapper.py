@@ -9,7 +9,7 @@ from functools import reduce
 import numpy as np
 import utils
 import global_vars as gv
-from peft import get_peft_model, PromptTuningConfig
+from peft import get_peft_model, PromptTuningConfig, LNTuningConfig, TaskType
 import pdb
 
 
@@ -354,7 +354,12 @@ class ModelWrapper(nn.Module):
 
     def softprompt(self, config, dataset, save_dir=None, run_name=None):
         pdb.set_trace()
+        '''
         pt_config = PromptTuningConfig(**config['pt_config'])
+        peft_model = get_peft_model(self.model, pt_config)
+        '''
+
+        pt_config = LNTuningConfig(task_type= TaskType.CAUSAL_LM)
         peft_model = get_peft_model(self.model, pt_config)
 
         # prepare label dict          
