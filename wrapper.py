@@ -10,6 +10,7 @@ import numpy as np
 import utils
 import global_vars as gv
 from peft import get_peft_model, PromptTuningConfig
+import pdb
 
 
 class ModelWrapper(nn.Module):
@@ -352,6 +353,7 @@ class ModelWrapper(nn.Module):
 
 
     def softprompt(self, config, dataset, save_dir=None, run_name=None):
+        pdb.set_trace()
         pt_config = PromptTuningConfig(**config['pt_config'])
         peft_model = get_peft_model(self.model, pt_config)
 

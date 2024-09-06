@@ -149,6 +149,7 @@ def main(args):
 
         # extract latents 
         all_latent_dicts = []
+
         with torch.no_grad():
             if not args.config['split_demon']:
                 target_demon_list = demon_list[0]
