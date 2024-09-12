@@ -364,7 +364,7 @@ class ModelWrapper(nn.Module):
                 tuning_param_list.append(name)
 
         # tunn_off all the parameters
-        print('tunn off the gradinet require for all the parameters')
+        print('turn off the gradinet require for all the parameters')
         for param in self.model.parameters():
             param.requires_grad = False
 
@@ -375,10 +375,15 @@ class ModelWrapper(nn.Module):
                 print(name)
                 off_param_list.append(name)
 
-        print('tunn on the gradinet require for all the parameters')
-        for name, param in self.model.parameters():
+        print('turn on the gradinet require for all the parameters')
+        for name, param in peft_model.named_parameters():
             if name in tuning_param_list:
                 param.requires_grad = True
+
+        for name, param in peft_model.named_parameters():
+            if param.requires_grad:
+                print(name)
+        print('check turn on the gradinet require for all the parameters')
 
         # prepare label dict
         label_map = {}
