@@ -456,7 +456,7 @@ class ModelWrapper(nn.Module):
                 with torch.no_grad():
                     for name, param in peft_model.named_parameters():
                         try:
-                            print(f"{name}: {param.norm(2): .4f}")
+                            print(f"{name}: {param.grad.norm(2): .4f}")
                         except:
                             print(f"{name}")
                 optimizer.step()
