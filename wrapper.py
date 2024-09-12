@@ -361,7 +361,7 @@ class ModelWrapper(nn.Module):
         for name, param in peft_model.named_parameters():
             if param.requires_grad:
                 print(name)
-                tuning_param_list.append(tuning_param_list)
+                tuning_param_list.append(name)
 
         # tunn_off all the parameters
         print('tunn off the gradinet require for all the parameters')
@@ -373,7 +373,7 @@ class ModelWrapper(nn.Module):
         for name, param in peft_model.named_parameters():
             if param.requires_grad:
                 print(name)
-                off_param_list.append(tuning_param_list)
+                off_param_list.append(name)
 
         print('tunn on the gradinet require for all the parameters')
         for name, param in self.model.parameters():
