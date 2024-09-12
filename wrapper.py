@@ -357,6 +357,10 @@ class ModelWrapper(nn.Module):
         pt_config = LNTuningConfig(task_type=TaskType.CAUSAL_LM)
         peft_model = get_peft_model(self.model, pt_config)
 
+        for name, param in peft_model.named_parameters():
+            if param.requires_grad:
+                print(name)
+
         # prepare label dict
         label_map = {}
         ans_txt_list = dataset.get_dmonstration_template()['options']
