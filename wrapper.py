@@ -357,9 +357,28 @@ class ModelWrapper(nn.Module):
         pt_config = LNTuningConfig(task_type=TaskType.CAUSAL_LM)
         peft_model = get_peft_model(self.model, pt_config)
 
+        tuning_param_list = []
         for name, param in peft_model.named_parameters():
             if param.requires_grad:
                 print(name)
+                tuning_param_list.append(tuning_param_list)
+
+        # tunn_off all the parameters
+        print('tunn off the gradinet require for all the parameters')
+        for param in self.model.parameters():
+            param.requires_grad = False
+
+        pdb.set_trace()
+        off_param_list = []
+        for name, param in peft_model.named_parameters():
+            if param.requires_grad:
+                print(name)
+                off_param_list.append(tuning_param_list)
+
+        print('tunn on the gradinet require for all the parameters')
+        for name, param in self.model.parameters():
+            if name in tuning_param_list:
+                param.requires_grad = True
 
         # prepare label dict
         label_map = {}
@@ -433,6 +452,13 @@ class ModelWrapper(nn.Module):
                 # update strength params
                 optimizer.zero_grad()
                 loss.backward()
+                # get gradient
+                with torch.no_grad():
+                    for name, param in peft_model.named_parameters():
+                        try:
+                            print(f"{name}: {param.norm(2): .4f}")
+                        except:
+                            print(f"{name}")
                 optimizer.step()
                 scheduler.step()
             epoch_loss = np.mean(epoch_loss)
