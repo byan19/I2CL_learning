@@ -37,3 +37,4 @@ config['optim'] = 'adamW'  # 'adam', 'adamW', 'sgd'
 config['grad_bs'] = 4
 config['lr'] = 0.001
 config['wd'] = 1e-3
+config['rho'] = 1e-3
