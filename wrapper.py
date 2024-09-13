@@ -352,7 +352,7 @@ class ModelWrapper(nn.Module):
         utils.plot_loss_curve(loss_list, save_dir + f'/{run_name}_loss_curve.png')
 
 
-    def layernorm_adaptation_flatness(self, config, dataset, save_dir=None, run_name=None):
+    def layernorm_adaptation_sharpness_aware(self, config, dataset, save_dir=None, run_name=None):
         pt_config = LNTuningConfig(task_type=TaskType.CAUSAL_LM)
         peft_model = get_peft_model(self.model, pt_config)
 

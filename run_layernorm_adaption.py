@@ -108,7 +108,10 @@ def main(args):
 
         # train softprompt
         s_t = time.time()
-        model_wrapper.layernorm_adaptation(args.config, cali_dataset, save_dir=args.save_dir, run_name=run_name)
+        if args.config['sharpness_aware']:
+            model_wrapper.layernorm_aware(args.config, cali_dataset, save_dir=args.save_dir, run_name=run_name)
+        else:
+            model_wrapper.layernorm_adaptation(args.config, cali_dataset, save_dir=args.save_dir, run_name=run_name)
         e_t = time.time()
         print(f'Calibration time: {e_t - s_t}')
         result_dict['time']['calibrate'].append(e_t - s_t)
