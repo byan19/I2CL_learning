@@ -369,8 +369,7 @@ class ModelWrapper(nn.Module):
         for label, ans_txt in enumerate(ans_txt_list):
             if 'gpt' in self.tokenizer.__class__.__name__.lower():
                 ans_txt = ' ' + ans_txt  # add space to the beginning of answer
-            ans_tok = self.tokenizer.encode(ans_txt, add_special_tokens=False)[
-                0]  # use the first token if more than one token
+            ans_tok = self.tokenizer.encode(ans_txt, add_special_tokens=False)[0]  # use the first token if more than one token
             print(f"ans_txt: {ans_txt}, ans_tok: {ans_tok}")
             label_map[label] = ans_tok  # index is the label
         print(f"label_map: {label_map}")
@@ -446,7 +445,6 @@ class ModelWrapper(nn.Module):
                             e_w = torch.pow(param, 2) * param.grad * scale.to(param)
                             param.add_(e_w)
 
-
                 # second round
                 logits = self.model(input_ids=input_ids, attention_mask=attn_mask).logits
                 # get prediction logits
@@ -481,7 +479,7 @@ class ModelWrapper(nn.Module):
         pdb.set_trace()
         pt_config = LNTuningConfig(task_type=TaskType.CAUSAL_LM)
         peft_model = get_peft_model(self.model, pt_config)
-
+        '''
         tuning_param_list = []
         for name, param in peft_model.named_parameters():
             if param.requires_grad:
@@ -509,6 +507,7 @@ class ModelWrapper(nn.Module):
             if param.requires_grad:
                 print(name)
         print('check turn on the gradinet require for all the parameters')
+        '''
 
         # prepare label dict
         label_map = {}

@@ -11,6 +11,7 @@ from multiprocessing import Process, Queue
 import utils
 import evaluator as ev
 import my_datasets as md
+import pdb
 
 
 def main(args):
@@ -158,6 +159,7 @@ if __name__ == "__main__":
     args = get_args()
     # load config
     config = utils.load_config(args.config_path)
+    pdb.set_trace()
     # Generate all combinations of models and datasets
     combinations = list(itertools.product(config['models'], config['datasets']))
     # Queue to hold tasks
