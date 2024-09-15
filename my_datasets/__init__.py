@@ -27,6 +27,14 @@ target_datasets = {
     'trec': TREC,
 }
 
+target_datasets = {
+    'sst2': SST2,
+    'subj': Subj,
+    'mr': RottenTomatoes,
+    'hate_speech18': HateSpeech18,
+    'emo': EMO,
+}
+
 dataset_dict = {}
 dataset_dict.update(target_datasets)
 
