@@ -162,7 +162,6 @@ if __name__ == "__main__":
     # Generate all combinations of models and datasets
     combinations = list(itertools.product(config['models'], config['datasets']))
     # Queue to hold tasks
-    pdb.set_trace()
     task_queue = Queue()
     for combine in combinations:
         task_queue.put(combine)
