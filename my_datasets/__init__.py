@@ -23,14 +23,8 @@ target_datasets = {
     'emo': EMO,
 }
 
-target_datasets = {
-    'trec': TREC,
-}
 
 target_datasets = {
-    'sst2': SST2,
-    'subj': Subj,
-    'mr': RottenTomatoes,
     'hate_speech18': HateSpeech18,
     'emo': EMO,
 }

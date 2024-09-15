@@ -14,7 +14,7 @@ class HateSpeech18(BaseTask):
         # class_num
         self.class_num = 2
         # load dataset
-        self.dataset = load_dataset('hate_speech18', split='train', keep_in_memory=True)
+        self.dataset = load_dataset('hate_speech18', split='train', keep_in_memory=True,trust_remote_code=True)
         # get all data
         self.all_data = [data for data in self.dataset if data['label'] in [0, 1]]  # clean data to keep only hate and noHate
         if split in ['train', 'validation']:
