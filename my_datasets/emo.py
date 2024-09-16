@@ -19,7 +19,8 @@ class EMO(BaseTask):
         # class_num
         self.class_num = 4
         # load dataset
-        self.dataset = load_dataset('emo', split=load_split, keep_in_memory=True)
+        #self.dataset = load_dataset('emo', split=load_split, keep_in_memory=True) # old version
+        self.dataset = load_dataset('SetFit/emotion', split=load_split, keep_in_memory=True)
         # get all data
         self.all_data = [data for data in self.dataset]   
         # get all labels

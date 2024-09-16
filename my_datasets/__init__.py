@@ -25,7 +25,6 @@ target_datasets = {
 
 
 target_datasets = {
-    'hate_speech18': HateSpeech18,
     'emo': EMO,
 }
 
