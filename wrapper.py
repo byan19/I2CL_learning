@@ -476,7 +476,6 @@ class ModelWrapper(nn.Module):
         utils.plot_loss_curve(loss_list, save_dir + f'/{run_name}_loss_curve.png')
 
     def layernorm_adaptation(self, config, dataset, save_dir=None, run_name=None):
-        pdb.set_trace()
         pt_config = LNTuningConfig(task_type=TaskType.CAUSAL_LM)
         peft_model = get_peft_model(self.model, pt_config)
         '''
