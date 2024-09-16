@@ -13,6 +13,27 @@ import evaluator as ev
 import my_datasets as md
 import pdb
 
+def run_task(gpu_id, config, model_name, dataset_name):
+    print('in2')
+    print(f"Running {model_name} on {dataset_name} with GPU {gpu_id}")
+    input_args = argparse.Namespace()
+    cur_config = copy.deepcopy(config)
+    input_args.model_name = model_name
+    input_args.dataset_name = dataset_name
+    input_args.gpu = gpu_id
+    input_args.config = cur_config
+    try:
+        main(input_args)
+        gc.collect()
+        torch.cuda.empty_cache()
+        print(f"CUDA memory cleared for GPU {gpu_id}")
+        time.sleep(5)
+    finally:
+        # Clean up CUDA memory after each task
+        gc.collect()
+        torch.cuda.empty_cache()
+        print(f"CUDA memory cleared for GPU {gpu_id}")
+        time.sleep(5)
 
 def main(args):
     # set global seed
@@ -164,68 +185,21 @@ if __name__ == "__main__":
     # Queue to hold tasks
     print('all the experiments')
     print(combinations)
-    task_queue = Queue()
-    for combine in combinations:
-        task_queue.put(combine)
 
-    '''
-    def run_task(gpu_id, config):
-        while not task_queue.empty():
-            model_name, dataset_name = task_queue.get()
-            print(f"Running {model_name} on {dataset_name} with GPU {gpu_id}")
-            input_args = argparse.Namespace()
-            cur_config = copy.deepcopy(config)
-            input_args.model_name = model_name
-            input_args.dataset_name = dataset_name
-            input_args.gpu = gpu_id
-            input_args.config = cur_config
-            try:
-                main(input_args)
-                gc.collect()
-                torch.cuda.empty_cache()
-                print(f"CUDA memory cleared for GPU {gpu_id}")
-                time.sleep(5)
-            finally:
-                # Clean up CUDA memory after each task
-                gc.collect()
-                torch.cuda.empty_cache()
-                print(f"CUDA memory cleared for GPU {gpu_id}") 
-                time.sleep(5)
-    '''
-    def run_task(gpu_id, config):
-        print('in')
-        while not task_queue.empty():
-            print('in2')
-            model_name, dataset_name = task_queue.get()
-            print(f"Running {model_name} on {dataset_name} with GPU {gpu_id}")
-            input_args = argparse.Namespace()
-            cur_config = copy.deepcopy(config)
-            input_args.model_name = model_name
-            input_args.dataset_name = dataset_name
-            input_args.gpu = gpu_id
-            input_args.config = cur_config
-            try:
-                main(input_args)
-                gc.collect()
-                torch.cuda.empty_cache()
-                print(f"CUDA memory cleared for GPU {gpu_id}")
-                time.sleep(5)
-            finally:
-                # Clean up CUDA memory after each task
-                gc.collect()
-                torch.cuda.empty_cache()
-                print(f"CUDA memory cleared for GPU {gpu_id}")
-                time.sleep(5)
 
-    run_task('0', config) # without parallelisation
-    # Create a process for each GPU
-    '''
-    processes = [Process(target=run_task, args=(gpu_id, config)) for gpu_id in config['gpus']]
-    # Start all processes
-    for p in processes:
-        p.start()
-    # Wait for all processes to finish
-    for p in processes:
-        p.join()
-    print("All tasks completed.")
-    '''
+    for model_name, dataset_name in combinations:
+        run_task('0', config, model_name, dataset_name)  # without parallelisation
+
+
+
+# Create a process for each GPU
+'''
+processes = [Process(target=run_task, args=(gpu_id, config)) for gpu_id in config['gpus']]
+# Start all processes
+for p in processes:
+    p.start()
+# Wait for all processes to finish
+for p in processes:
+    p.join()
+print("All tasks completed.")
+'''
