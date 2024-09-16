@@ -24,10 +24,6 @@ target_datasets = {
 }
 
 
-target_datasets = {
-    'emo': EMO,
-}
-
 dataset_dict = {}
 dataset_dict.update(target_datasets)
 
