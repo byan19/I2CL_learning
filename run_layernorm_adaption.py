@@ -191,8 +191,7 @@ if __name__ == "__main__":
                 print(f"CUDA memory cleared for GPU {gpu_id}") 
                 time.sleep(5)
 
-    print('here')
-    run_task('0', config) # without parallelisation
+    run_task('1', config) # without parallelisation
     # Create a process for each GPU
     '''
     processes = [Process(target=run_task, args=(gpu_id, config)) for gpu_id in config['gpus']]

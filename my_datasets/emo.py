@@ -5,7 +5,6 @@ except:
 # from basetask import BaseTask
 from datasets import load_dataset
 
-
 class EMO(BaseTask):
     def __init__(self, split='train', *args, **kwargs):
         super().__init__(*args, **kwargs)

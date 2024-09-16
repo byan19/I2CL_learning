@@ -2,6 +2,7 @@ import random
 import string
 from itertools import zip_longest
 from torch.utils.data import Dataset
+import pdb
 
 
 class BaseTask(Dataset):
@@ -97,7 +98,7 @@ class BaseTask(Dataset):
         """
         # set random seed
         random.seed(seed)
-
+        pdb.set_trace()
         assert self.all_data is not None, "Please load data first!"
         assert shot_num <= len(self.all_data), "Shot number should be smaller than the number of data!"
         if hasattr(self, 'class_num') and self.class_num is not None:  # if class number is provided
