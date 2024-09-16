@@ -163,6 +163,7 @@ if __name__ == "__main__":
         task_queue.put(combine)
 
     def run_task(gpu_id, config):
+        print('in')
         while not task_queue.empty():
             model_name, dataset_name = task_queue.get()
             print(f"Running {model_name} on {dataset_name} with GPU {gpu_id}")
