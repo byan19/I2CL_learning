@@ -14,7 +14,6 @@ import my_datasets as md
 import pdb
 
 def run_task(gpu_id, config, model_name, dataset_name):
-    print('in2')
     print(f"Running {model_name} on {dataset_name} with GPU {gpu_id}")
     input_args = argparse.Namespace()
     cur_config = copy.deepcopy(config)

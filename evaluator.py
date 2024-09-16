@@ -109,16 +109,20 @@ class Evaluator(nn.Module):
         TP = [0] * num_classes
         FP = [0] * num_classes
         FN = [0] * num_classes
+        try:
         for i, true_label in enumerate(all_labels):
             pred_label = all_pred_labels[i]
             pred = pred_label == true_label
             acc.append(pred)
             # Update TP, FP, FN
+
             if pred:
                 TP[true_label] += 1
             else:
                 FP[pred_label] += 1
                 FN[true_label] += 1
+        except:
+            pdb.set_trace()
         # Calculate precision, recall, F1 for each class and macro F1
         precision = [0] * num_classes
         recall = [0] * num_classes
