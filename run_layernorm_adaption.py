@@ -195,6 +195,7 @@ if __name__ == "__main__":
     def run_task(gpu_id, config):
         print('in')
         while not task_queue.empty():
+            print('in2')
             model_name, dataset_name = task_queue.get()
             print(f"Running {model_name} on {dataset_name} with GPU {gpu_id}")
             input_args = argparse.Namespace()
