@@ -168,6 +168,7 @@ if __name__ == "__main__":
     for combine in combinations:
         task_queue.put(combine)
 
+    '''
     def run_task(gpu_id, config):
         while not task_queue.empty():
             model_name, dataset_name = task_queue.get()
@@ -190,8 +191,31 @@ if __name__ == "__main__":
                 torch.cuda.empty_cache()
                 print(f"CUDA memory cleared for GPU {gpu_id}") 
                 time.sleep(5)
+    '''
+    def run_task(gpu_id, config):
+        while not task_queue.empty():
+            model_name, dataset_name = task_queue.get()
+            print(f"Running {model_name} on {dataset_name} with GPU {gpu_id}")
+            input_args = argparse.Namespace()
+            cur_config = copy.deepcopy(config)
+            input_args.model_name = model_name
+            input_args.dataset_name = dataset_name
+            input_args.gpu = gpu_id
+            input_args.config = cur_config
+            try:
+                main(input_args)
+                gc.collect()
+                torch.cuda.empty_cache()
+                print(f"CUDA memory cleared for GPU {gpu_id}")
+                time.sleep(5)
+            finally:
+                # Clean up CUDA memory after each task
+                gc.collect()
+                torch.cuda.empty_cache()
+                print(f"CUDA memory cleared for GPU {gpu_id}")
+                time.sleep(5)
 
-    run_task('1', config) # without parallelisation
+    run_task('0', config) # without parallelisation
     # Create a process for each GPU
     '''
     processes = [Process(target=run_task, args=(gpu_id, config)) for gpu_id in config['gpus']]
