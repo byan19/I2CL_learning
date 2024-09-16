@@ -321,3 +321,33 @@ class TensorStrFinder:
             s_tensor in list_s_tensor]
         mask_tensor = functools.reduce(torch.logical_or, mask_tensor_list)
         return mask_tensor
+
+
+def result_mean_calculator(dict, key = 'ours'):
+    holder_acc = []
+    holder_macro = []
+
+    for ele in dict["test_result"][key]:
+        holder_acc.append(ele['acc'])
+        holder_macro.append(ele['macro_f1'])
+
+    dict["test_result"][key].append({
+                         'acc_mean': np.asarray(holder_acc).mean(),
+                         'acc_std': np.asarray(holder_acc).std(),
+                         'macro_f1_mean': np.asarray(holder_macro).mean(),
+                         'macro_f1_std': np.asarray(holder_macro).std(),
+                         }
+                        )
+
+
+
+'''
+if __name__ == '__main__':
+    json_file_path = 'exps/layernorm_adaption_sharpness_aware1/meta-llama/Llama-2-7b-hf/agnews/result_dict.json'
+    with open(json_file_path, 'r') as file:
+        result_dict = json.load(file)
+    result_mean_calculator(result_dict, 'ours')
+    with open('modified_result_dict.json', 'w') as f:
+        json.dump(result_dict, f, indent=4)
+    print('test loading done')
+'''

@@ -147,6 +147,9 @@ def main(args):
         print(f'Evaluate time: {e_t - s_t}')
         result_dict['time']['evaluate'].append(e_t - s_t)
 
+        if config['run_baseline']:
+            utils.result_mean_calculator(result_dict, 'few_shot')
+        utils.result_mean_calculator(result_dict, 'ours')
         # save result_dict after each run
         with open(args.save_dir + '/result_dict.json', 'w') as f:
             json.dump(result_dict, f, indent=4)
@@ -163,6 +166,8 @@ def main(args):
                                                 args.device)
         
     # delete all variables
+
+
     del model_wrapper, model, tokenizer, train_dataset, test_dataset, cali_dataset
     del test_evaluator, result_dict, demon_list
             
