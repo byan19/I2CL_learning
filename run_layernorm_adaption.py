@@ -44,19 +44,19 @@ def main(args):
     # get save dir
     utils.init_exp_path(args, args.config['exp_name'])
 
-    # load tokenizer and model
-    model, tokenizer, model_config = \
-    utils.load_model_tokenizer(args.model_name, args.device)
-    
-    # get model_wrapper
-    model_wrapper = utils.get_model_wrapper(args.model_name, model, 
-                                            tokenizer, model_config, 
-                                            args.device)
     # load datasets
     train_dataset = md.get_dataset(args.dataset_name, split='train', max_data_num=None)
     test_dataset = md.get_dataset(args.dataset_name, split='test', 
                                   max_data_num=args.config['test_data_num'],
                                   sample_mode=args.config['sample_method'])
+
+    # load tokenizer and model
+    model, tokenizer, model_config = utils.load_model_tokenizer(args.model_name, args.device)
+
+    # get model_wrapper
+    model_wrapper = utils.get_model_wrapper(args.model_name, model,
+                                            tokenizer, model_config,
+                                            args.device)
 
     # get max demonstration token length for each dataset
     args.test_max_token = test_dataset.get_max_demonstration_token_length(tokenizer)
