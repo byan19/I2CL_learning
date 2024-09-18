@@ -23,6 +23,10 @@ target_datasets = {
     'emo': EMO,
 }
 
+target_datasets = {
+    'subj': Subj,
+}
+
 
 dataset_dict = {}
 dataset_dict.update(target_datasets)

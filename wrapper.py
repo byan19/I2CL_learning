@@ -444,7 +444,7 @@ class ModelWrapper(nn.Module):
                             scale = config['rho']/(param.grad.norm() + 1e-12)
                             e_w = torch.pow(param, 2) * param.grad * scale.to(param)
                             param.add_(e_w)
-
+                pdb.set_trace()
                 # second round
                 logits = self.model(input_ids=input_ids, attention_mask=attn_mask).logits
                 # get prediction logits
