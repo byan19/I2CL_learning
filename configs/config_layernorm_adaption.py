@@ -5,7 +5,7 @@ import my_datasets as md
 
 config = {}
 # general
-config['exp_name'] = 'exps/layernorm_adaption_sam1e3'
+config['exp_name'] = 'exps/layernorm_adaption_sam1e2'
 config['gpus'] = ['0']
 config['models'] = ['meta-llama/Llama-2-7b-hf'] # 'gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
 config['datasets'] = list(md.target_datasets.keys())
@@ -37,5 +37,5 @@ config['optim'] = 'adamW'  # 'adam', 'adamW', 'sgd'
 config['grad_bs'] = 4
 config['lr'] = 0.001
 config['wd'] = 1e-3
-config['rho'] = 1e-3
+config['rho'] = 1e-2
 config['sharpness_aware'] = True
