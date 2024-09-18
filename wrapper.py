@@ -443,8 +443,8 @@ class ModelWrapper(nn.Module):
                             old_state[name]= param.data.clone()
                             scale = config['rho']/(param.grad.norm() + 1e-12)
                             e_w = torch.pow(param, 2) * param.grad * scale.to(param)
+                            pdb.set_trace()
                             param.add_(e_w)
-                pdb.set_trace()
 
                 # second round
                 logits = self.model(input_ids=input_ids, attention_mask=attn_mask).logits
@@ -461,7 +461,6 @@ class ModelWrapper(nn.Module):
                 with torch.no_grad():
                     for name, param in peft_model.named_parameters():
                         if param.requires_grad:
-                            pdb.set_trace()
                             param.data = old_state[name]
                 optimizer.step()
                 scheduler.step()
