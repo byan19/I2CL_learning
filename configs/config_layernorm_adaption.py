@@ -5,7 +5,7 @@ import my_datasets as md
 
 config = {}
 # general
-config['exp_name'] = 'exps/layernorm_debug'
+config['exp_name'] = 'exps/layernorm_debug_Llama3'
 config['gpus'] = ['0']
 config['models'] = ['meta-llama/Meta-Llama-3-8B'] # 'gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
 config['datasets'] = list(md.target_datasets.keys())
