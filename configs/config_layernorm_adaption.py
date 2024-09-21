@@ -5,9 +5,9 @@ import my_datasets as md
 
 config = {}
 # general
-config['exp_name'] = 'exps/layernorm_Llama3_rho1e4'
+config['exp_name'] = 'exps/baseline_layernorm_Llama2'
 config['gpus'] = ['0']
-config['models'] = ['meta-llama/Meta-Llama-3-8B'] # 'meta-llama/Meta-Llama-3-8B', 'gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
+config['models'] = ['meta-llama/Llama-2-7b-hf'] # 'meta-llama/Meta-Llama-3-8B', 'gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
 config['datasets'] = list(md.target_datasets.keys())
 config['seed'] = 42
 config['run_num'] = 5
@@ -38,4 +38,4 @@ config['grad_bs'] = 4
 config['lr'] = 0.001
 config['wd'] = 1e-3
 config['rho'] = 1e-4
-config['sharpness_aware'] = True
+config['sharpness_aware'] = False
