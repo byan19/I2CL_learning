@@ -130,6 +130,7 @@ def main(args):
         # train softprompt
         s_t = time.time()
         if args.config['sharpness_aware']:
+            pdb.set_trace()
             model_wrapper.layernorm_adaptation_sharpness_aware(args.config, cali_dataset, save_dir=args.save_dir, run_name=run_name)
         else:
             model_wrapper.layernorm_adaptation(args.config, cali_dataset, save_dir=args.save_dir, run_name=run_name)
