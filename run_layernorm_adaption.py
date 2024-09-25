@@ -45,7 +45,6 @@ def main(args):
     utils.init_exp_path(args, args.config['exp_name'])
 
     # load datasets
-    pdb.set_trace()
     train_dataset = md.get_dataset(args.dataset_name, split='train', max_data_num=None)
     test_dataset = md.get_dataset(args.dataset_name, split='test', 
                                   max_data_num=args.config['test_data_num'],
