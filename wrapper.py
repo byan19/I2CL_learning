@@ -358,6 +358,8 @@ class ModelWrapper(nn.Module):
 
         tuning_param_list = []
         tuning_name_list = []
+
+        pdb.set_trace()
         for name, param in peft_model.named_parameters():
             if param.requires_grad:
                 tuning_name_list.append(name)
