@@ -380,7 +380,6 @@ class ModelWrapper(nn.Module):
                 if param.requires_grad:
                     tuning_name_list.append(name)
                     tuning_param_list.append(param)
-        pdb.set_trace()
 
         # prepare label dict
         label_map = {}
