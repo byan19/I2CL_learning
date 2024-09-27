@@ -39,3 +39,4 @@ config['lr'] = 0.001
 config['wd'] = 1e-3
 config['rho'] = 1e-4
 config['sharpness_aware'] = True
+config['post_attention'] = True

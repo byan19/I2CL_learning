@@ -359,12 +359,29 @@ class ModelWrapper(nn.Module):
         tuning_param_list = []
         tuning_name_list = []
 
+        if config['post_attention']:
+            for name, param in peft_model.named_parameters():
+                if param.requires_grad and 'post_attention_layernorm' in name:
+                    tuning_name_list.append(name)
+                    tuning_param_list.append(param)
+
+            for param in peft_model.parameters():
+                param.requires_grad = False
+
+            for name, param in peft_model.named_parameters():
+                if name in tuning_name_list:
+                    param.requires_grad = True
+
+            for name, param in peft_model.named_parameters():
+                if name in tuning_param_list:
+                    param.requires_grad = True
+        else:
+            for name, param in peft_model.named_parameters():
+                if param.requires_grad:
+                    tuning_name_list.append(name)
+                    tuning_param_list.append(param)
         pdb.set_trace()
-        for name, param in peft_model.named_parameters():
-            if param.requires_grad:
-                tuning_name_list.append(name)
-                tuning_param_list.append(param)
-        pdb.set_trace()
+
         # prepare label dict
         label_map = {}
         ans_txt_list = dataset.get_dmonstration_template()['options']
