@@ -24,6 +24,7 @@ class Evaluator(nn.Module):
         model = model_wrapper.model
         # prepare label dict          
         label_map = {}
+        pdb.set_trace()
         ans_txt_list = self.dataset.get_dmonstration_template()['options']
         for label, ans_txt in enumerate(ans_txt_list):
             if 'gpt' in tokenizer.__class__.__name__.lower():
