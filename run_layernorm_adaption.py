@@ -83,7 +83,9 @@ def main(args):
         utils.set_seed(run_seed)        
 
         # zero-shot baseline
-        if run_id == 0 and args.config['run_baseline']:  
+
+        pdb.set_trace()
+        if run_id == 0 and args.config['run_baseline']:
             test_zeroshot_result = test_evaluator.evaluate(model_wrapper, tokenizer, demonstration='',
                                                            use_cache=args.config['use_cache'])
             result_dict['test_result']['zero_shot'].append(test_zeroshot_result)
@@ -97,6 +99,7 @@ def main(args):
                                                  example_separator=args.config['example_separator'],
                                                  return_data_index=True, seed=random.randint(0, 1e6))
 
+        pdb.set_trace()
         if args.config['add_extra_query']:
             first_format_anchor = train_dataset.get_dmonstration_template()['format'][0]
             # remove all contents after the last first_format_anchor including the anchor
