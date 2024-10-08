@@ -5,7 +5,7 @@ import my_datasets as md
 
 config = {}
 # general
-config['exp_name'] = 'exps/baseline_layernorm_Llama3_post_layernorm'
+config['exp_name'] = 'exps/post_layernorm_debug'
 config['gpus'] = ['0']
 config['models'] = ['meta-llama/Meta-Llama-3-8B'] # 'meta-llama/Meta-Llama-3-8B', 'gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
 config['datasets'] = list(md.target_datasets.keys())
@@ -39,4 +39,4 @@ config['lr'] = 0.001
 config['wd'] = 1e-3
 config['rho'] = 1e-4
 config['sharpness_aware'] = True
-config['post_attention'] = True
+config['post_attention'] = False
