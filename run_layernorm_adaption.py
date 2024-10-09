@@ -84,7 +84,6 @@ def main(args):
 
         # zero-shot baseline
 
-        pdb.set_trace()
         if run_id == 0 and args.config['run_baseline']:
             test_zeroshot_result = test_evaluator.evaluate(model_wrapper, tokenizer, demonstration='',
                                                            use_cache=args.config['use_cache'])
@@ -99,7 +98,6 @@ def main(args):
                                                  example_separator=args.config['example_separator'],
                                                  return_data_index=True, seed=random.randint(0, 1e6))
 
-        pdb.set_trace()
         if args.config['add_extra_query']:
             first_format_anchor = train_dataset.get_dmonstration_template()['format'][0]
             # remove all contents after the last first_format_anchor including the anchor
@@ -114,6 +112,7 @@ def main(args):
         print(f'Query demonstration:\n{query_demon}\n')
         
         # few-shot baseline
+        pdb.set_trace()
         if args.config['run_baseline']:
             test_fewshot_result = test_evaluator.evaluate(model_wrapper, tokenizer,
                                                           demonstration=baseline_demon,
