@@ -90,7 +90,7 @@ def main(args):
                                                            use_cache=args.config['use_cache'])
             result_dict['test_result']['zero_shot'].append(test_zeroshot_result)
             print(f'Test zero-shot result: {test_zeroshot_result}\n')
-        pdb.set_trace()
+        #pdb.set_trace()
         # sample demonstration
         demon, _, demon_data_index = \
         train_dataset.gen_few_shot_demonstration(tokenizer=tokenizer, shot_num=args.shot_num, 
@@ -113,7 +113,7 @@ def main(args):
         print(f'Query demonstration:\n{query_demon}\n')
         
         # few-shot baseline
-        pdb.set_trace()
+        #pdb.set_trace()
         if args.config['run_baseline']:
             test_fewshot_result = test_evaluator.evaluate(model_wrapper, tokenizer,
                                                           demonstration=baseline_demon,
