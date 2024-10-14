@@ -130,7 +130,7 @@ def main(args):
         cali_dataset = copy.deepcopy(train_dataset)
         cali_dataset.all_data = [train_dataset.all_data[i] for i in demon_data_index]
 
-        # train softprompt
+        # train sharpness_aware
         s_t = time.time()
         if args.config['sharpness_aware']:
             model_wrapper.layernorm_adaptation_sharpness_aware(args.config, cali_dataset, save_dir=args.save_dir, run_name=run_name)
@@ -140,7 +140,7 @@ def main(args):
         print(f'Calibration time: {e_t - s_t}')
         result_dict['time']['calibrate'].append(e_t - s_t)
 
-        # evaluate softprompt
+        # evaluate sharpness_aware
         s_t = time.time()
         test_ours_result = test_evaluator.evaluate(model_wrapper, tokenizer, demonstration='',
                                                    use_cache=args.config['use_cache'])
