@@ -83,8 +83,8 @@ def main(args):
         utils.set_seed(run_seed)        
 
         # zero-shot baseline
-        zero_shot_prompt = ''
         zero_shot_prompt = 'classify the type of the given sentence. '
+        zero_shot_prompt = ''
         if run_id == 0 and args.config['run_baseline']:
             test_zeroshot_result = test_evaluator.evaluate(model_wrapper, tokenizer, demonstration=zero_shot_prompt,
                                                            use_cache=args.config['use_cache'])
