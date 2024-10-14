@@ -28,7 +28,7 @@ config['add_extra_query'] = False
 pt_config = {}
 pt_config['task_type'] = 'CAUSAL_LM'
 pt_config['num_virtual_tokens'] = 1
-pt_config['num_layers'] = 28
+pt_config['num_layers'] = 32
 config['pt_config'] = pt_config
 
 # optimization
@@ -36,7 +36,7 @@ config['epochs'] = 50
 config['optim'] = 'adamW'  # 'adam', 'adamW', 'sgd'
 config['grad_bs'] = 4
 config['lr'] = 0.001
-config['wd'] = 1e-3
+config['wd'] = 0.001
 config['rho'] = 1e-4
 config['sharpness_aware'] = False
 config['post_attention'] = False
