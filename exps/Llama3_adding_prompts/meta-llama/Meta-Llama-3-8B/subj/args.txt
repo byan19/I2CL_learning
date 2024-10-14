@@ -1,0 +1,7 @@
+model_name: meta-llama/Meta-Llama-3-8B
+dataset_name: subj
+gpu: 0
+config: {'exp_name': 'exps/Llama3_adding_prompts', 'gpus': ['0'], 'models': ['meta-llama/Meta-Llama-3-8B'], 'datasets': ['agnews', 'dbpedia', 'sst5', 'trec', 'sst2', 'subj', 'mr', 'hate_speech18', 'emo'], 'seed': 42, 'run_num': 5, 'run_baseline': True, 'metric': 'acc', 'bs': 1, 'load_in_8bit': False, 'use_cache': True, 'example_separator': '\n', 'shot_per_class': 5, 'test_data_num': 500, 'sample_method': 'uniform', 'add_extra_query': False, 'pt_config': {'task_type': 'CAUSAL_LM', 'num_virtual_tokens': 1, 'num_layers': 28}, 'epochs': 50, 'optim': 'adamW', 'grad_bs': 4, 'lr': 0.001, 'wd': 0.001, 'rho': 0.0001, 'sharpness_aware': False, 'post_attention': False}
+device: cuda:0
+metric: acc
+save_dir: exps/Llama3_adding_prompts/meta-llama/Meta-Llama-3-8B/subj
