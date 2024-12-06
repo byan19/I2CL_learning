@@ -440,9 +440,9 @@ class ModelWrapper(nn.Module):
 
                 # first round
                 input_tok = self.tokenizer(batch_input, return_tensors='pt', padding=True)
-                input_ids = input_tok['input_ids'].to(self.device)
-                attn_mask = input_tok['attention_mask'].to(self.device)
-                pred_loc = utils.last_one_indices(attn_mask).to(self.device)
+                input_ids = input_tok['input_ids'].to(torch.bfloat16).to(self.device)
+                attn_mask = input_tok['attention_mask'].to(torch.bfloat16).to(self.device)
+                pred_loc = utils.last_one_indices(attn_mask).to(torch.bfloat16).to(self.device)
                 # forward
                 logits = self.model(input_ids=input_ids, attention_mask=attn_mask).logits
                 # get prediction logits
