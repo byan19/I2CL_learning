@@ -38,5 +38,5 @@ config['grad_bs'] = 4
 config['lr'] = 0.001
 config['wd'] = 0.001
 config['rho'] = 1e-4
-config['sharpness_aware'] = False
+config['sharpness_aware'] =True
 config['post_attention'] = False
