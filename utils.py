@@ -52,7 +52,9 @@ def load_model_tokenizer(model_name, device, output_hidden_states=True, load_in_
     model = AutoModelForCausalLM.from_pretrained(model_name, 
                                                  output_hidden_states=output_hidden_states, 
                                                  load_in_8bit=load_in_8bit, 
-                                                 torch_dtype=torch.float32)
+                                                 #torch_dtype=torch.float32,
+                                                    torch_dtype = torch.bfloat16,
+                                                 )
     if not load_in_8bit:
         model = model.to(device)
     config = AutoConfig.from_pretrained(model_name)
