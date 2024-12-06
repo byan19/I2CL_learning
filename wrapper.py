@@ -444,6 +444,7 @@ class ModelWrapper(nn.Module):
                 attn_mask = input_tok['attention_mask'].to(torch.bfloat16).to(self.device)
                 pred_loc = utils.last_one_indices(attn_mask).to(torch.bfloat16).to(self.device)
                 # forward
+                pdb.set_trace()
                 logits = self.model(input_ids=input_ids, attention_mask=attn_mask).logits
                 # get prediction logits
                 pred_logits = logits[torch.arange(logits.size(0)), pred_loc]
