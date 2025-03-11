@@ -64,5 +64,5 @@ def analysis(exp_name, model_name, dataset_list):
 if __name__ == "__main__":
 	exp_name = 'baseline_layernorm_Llama2'
 	model_name = 'Llama-2-7b-hf'
-	dataset_list = ['sst2', 'sst5', 'trec','agnews', 'subj', 'hate_speech18', 'dbpedia', 'emoc', 'mr' ]
+	dataset_list = ['sst2', 'sst5', 'trec','agnews', 'subj', 'hate_speech18', 'dbpedia', 'emo', 'mr' ]
 	analysis(exp_name, model_name, dataset_list)
