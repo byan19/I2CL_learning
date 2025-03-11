@@ -359,6 +359,10 @@ class ModelWrapper(nn.Module):
         tuning_param_list = []
         tuning_name_list = []
 
+        name_holder = [ name for name, pamra in peft_model.named_parameters()]
+        print(name_holder)
+        print('runing layernorm implementation')
+
         if config['post_attention']:
             for name, param in peft_model.named_parameters():
                 if param.requires_grad and 'post_attention_layernorm' in name:
@@ -440,11 +444,10 @@ class ModelWrapper(nn.Module):
 
                 # first round
                 input_tok = self.tokenizer(batch_input, return_tensors='pt', padding=True)
-                input_ids = input_tok['input_ids'].to(torch.bfloat16).to(self.device)
-                attn_mask = input_tok['attention_mask'].to(torch.bfloat16).to(self.device)
-                pred_loc = utils.last_one_indices(attn_mask).to(torch.bfloat16).to(self.device)
+                input_ids = input_tok['input_ids'].to(self.device)
+                attn_mask = input_tok['attention_mask'].to(self.device)
+                pred_loc = utils.last_one_indices(attn_mask).to(self.device)
                 # forward
-                pdb.set_trace()
                 logits = self.model(input_ids=input_ids, attention_mask=attn_mask).logits
                 # get prediction logits
                 pred_logits = logits[torch.arange(logits.size(0)), pred_loc]
