@@ -19,12 +19,12 @@ def analysis(exp_name, model_name, dataset_list):
 			result_holder["zero_shot"] = []
 		'''
 
+		'''
 		if not data['test_result']['few_shot'] ==[]:
 			acc_ = []
 			macro_ = []
 			for ele in data['test_result']['few_shot']:
-				print(ele)
-				acc_.append(ele["acc"])
+				acc_.append(ele['acc'])
 				macro_.append(ele['macro_f1'])
 
 			acc_ = np.asarray(acc_)
@@ -35,11 +35,12 @@ def analysis(exp_name, model_name, dataset_list):
 
 			macro_mean = macro_.mean()
 			macro_std = macro_.std()
+		'''
 
 		acc_ = []
 		macro_ = []
 		for ele in data['test_result']['ours']:
-			acc_.append(ele["acc"])
+			acc_.append(ele['acc'])
 			macro_.append(ele['macro_f1'])
 
 		acc_ = np.asarray(acc_)
