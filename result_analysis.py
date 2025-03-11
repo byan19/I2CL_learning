@@ -23,6 +23,7 @@ def analysis(exp_name, model_name, dataset_list):
 			acc_ = []
 			macro_ = []
 			for ele in data['test_result']['few_shot']:
+				print(ele)
 				acc_.append(ele["acc"])
 				macro_.append(ele['macro_f1'])
 
