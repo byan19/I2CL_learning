@@ -43,6 +43,9 @@ def analysis(exp_name, model_name, dataset_list):
 				acc_.append(ele['acc'])
 				macro_.append(ele['macro_f1'])
 
+			if 'acc_mean' is ele.keys():
+				print(f'acc_mean: {ele['acc_mean']}')
+
 		acc_ = np.asarray(acc_)
 		macro_ = np.asarray(macro_)
 
