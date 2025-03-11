@@ -19,7 +19,6 @@ def analysis(exp_name, model_name, dataset_list):
 			result_holder["zero_shot"] = []
 		'''
 
-		'''
 		if not data['test_result']['few_shot'] ==[]:
 			acc_ = []
 			macro_ = []
@@ -36,7 +35,6 @@ def analysis(exp_name, model_name, dataset_list):
 
 			macro_mean = macro_.mean()
 			macro_std = macro_.std()
-		'''
 
 		acc_ = []
 		macro_ = []
@@ -58,7 +56,8 @@ def analysis(exp_name, model_name, dataset_list):
 		ours_acc_std_list.append(acc_std)
 		ours_macro_f1_list.append(macro_mean)
 		ours_macro_f1_std_list.append(macro_std)
-		print(ours_acc_list)
+
+	print(ours_acc_list)
 
 
 if __name__ == "__main__":
