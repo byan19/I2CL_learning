@@ -12,7 +12,7 @@ screen -S $sessionname -X stuff "source activate /ibex/user/yangy0o/by_g/by_g_en
 screen -S $sessionname -X stuff "export HF_HOME=/ibex/user/yangy0o/by_g/huggingface_cache^M"
 screen -S $sessionname -X stuff "export HF_HUB_CACHE=/ibex/user/yangy0o/by_g/huggingface_cache^M"
 
-screen -S $sessionname -X stuff "cd /ibex/user/yangy0o/by_g/grpo2metaRL^M"
+screen -S $sessionname -X stuff "cd /ibex/user/yangy0o/by_g/I2CL_learning^M"
 sleep 1.0s
 echo ${File}
 screen -S $sessionname -X stuff "salloc --job-name by_g --gres=gpu:a100:1 --time=25:00:00 --cpus-per-task=40 srun bash ${File} ${Param} ${sessionname} ${Tunning} > Z_${sessionname}_$(date +"T%H:%M:%S_D%d_%m_%Y").log 2>&1^M"
