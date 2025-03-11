@@ -24,8 +24,9 @@ def analysis(exp_name, model_name, dataset_list):
 			acc_ = []
 			macro_ = []
 			for ele in data['test_result']['few_shot']:
-				acc_.append(ele['acc'])
-				macro_.append(ele['macro_f1'])
+				if 'acc' in ele.keys():
+					acc_.append(ele['acc'])
+					macro_.append(ele['macro_f1'])
 
 			acc_ = np.asarray(acc_)
 			macro_ = np.asarray(macro_)
