@@ -359,13 +359,15 @@ class ModelWrapper(nn.Module):
         tuning_param_list = []
         tuning_name_list = []
 
+        '''
         name_holder = [ name for name, pamra in peft_model.named_parameters()]
         print(name_holder)
         print('runing layernorm implementation')
+        '''
 
         if config['post_attention']:
             for name, param in peft_model.named_parameters():
-                if param.requires_grad and 'post_attention_layernorm' in name:
+                if param.requires_grad and 'input_layernorm' in name:
                     tuning_name_list.append(name)
                     tuning_param_list.append(param)
 
