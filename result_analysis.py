@@ -11,12 +11,13 @@ def analysis(exp_name, model_name, dataset_list):
 
 		with open(file_name) as file:
 			data = json.load(file)
-
+		'''
 		result_holder = {}
 		if not data['test_result']['zero_shot'] ==[]:
 			result_holder["zero_shot"] = {'acc': data['test_result']['zero_shot']['acc'], 'macro_f1':  data['test_result']['zero_shot']['macro_f1']}
 		else:
 			result_holder["zero_shot"] = []
+		'''
 
 		if not data['test_result']['few_shot'] ==[]:
 			acc_ = []
