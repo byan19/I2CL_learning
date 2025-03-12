@@ -33,7 +33,7 @@ pt_config['num_layers'] = 32
 config['pt_config'] = pt_config
 
 # optimization
-config['epochs'] = 50
+config['epochs'] = 30
 config['optim'] = 'sgd'  # 'adam', 'adamW', 'sgd'
 config['grad_bs'] = 4
 config['lr'] = 0.001
