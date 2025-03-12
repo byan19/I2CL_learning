@@ -63,10 +63,15 @@ def analysis(exp_name, model_name, dataset_list):
 
 	#print(ours_acc_list)
 	#print(ours_acc_std_list)
+
 	output = ''
+	ours_acc_list = np.asarray(ours_acc_list) * 100
+	ours_acc_std_list = np.asarray(ours_acc_std_list) * 100
+	ours_acc_list = np.round(ours_acc_list, 2)
+	ours_acc_std_list = np.round(ours_acc_std_list, 2)
 
 	for i in range(len(ours_acc_list)):
-		tmp = f' & ${ours_acc_list[i]*100}_'+'{'+f'\pm {ours_acc_std_list[i]*100}'+'}$'
+		tmp = f' & ${ours_acc_list[i]}_'+'{'+f'\pm {ours_acc_std_list[i]}'+'}$'
 		output += tmp
 
 	print(output)
