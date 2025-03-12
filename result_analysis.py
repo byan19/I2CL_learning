@@ -63,9 +63,12 @@ def analysis(exp_name, model_name, dataset_list):
 
 	print(ours_acc_list)
 	print(ours_acc_std_list)
+	output = ''
 
-	print([f'& {ele} ' for ele in ours_acc_list])
-	print([f'& {ele} ' for ele in ours_acc_std_list])
+	for i in range(len(ours_acc_list)):
+		tmp = f' & ${ours_acc_list[i]}_'+'{'+f'\pm {ours_acc_std_list[i]}'+'}$'
+		output += tmp
+
 
 parser = argparse.ArgumentParser(description="Example script with arguments")
 parser.add_argument('--exp_name', type=str, default ='Llama2_32layers_inputnorm' )
