@@ -8,6 +8,7 @@ def analysis(exp_name, model_name, dataset_list):
 	ours_macro_f1_std_list = []
 	for dataset in dataset_list:
 		file_name = f'exps/{exp_name}/meta-llama/{model_name}/{dataset}/result_dict.json'
+		print(file_name)
 
 		with open(file_name) as file:
 			data = json.load(file)
