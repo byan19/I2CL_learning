@@ -64,7 +64,7 @@ def analysis(exp_name, model_name, dataset_list):
 	print(ours_acc_list)
 
 parser = argparse.ArgumentParser(description="Example script with arguments")
-parser.add_argument('--exp_name', type=str, default ='exps/Llama2_32layers_inputnorm' )
+parser.add_argument('--exp_name', type=str, default ='Llama2_32layers_inputnorm' )
 parser.add_argument('--model_name', type=str, default='Llama-2-7b-hf', help='Number of epochs')
 args = parser.parse_args()
 
