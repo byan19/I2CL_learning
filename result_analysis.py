@@ -62,6 +62,10 @@ def analysis(exp_name, model_name, dataset_list):
 		ours_macro_f1_std_list.append(macro_std)
 
 	print(ours_acc_list)
+	print(ours_acc_std_list)
+
+	print([f'& {ele} ' for ele in ours_acc_list])
+	print([f'& {ele} ' for ele in ours_acc_std_list])
 
 parser = argparse.ArgumentParser(description="Example script with arguments")
 parser.add_argument('--exp_name', type=str, default ='Llama2_32layers_inputnorm' )
