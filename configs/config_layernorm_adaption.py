@@ -6,7 +6,7 @@ import my_datasets as md
 config = {}
 # general
 #config['exp_name'] = 'exps/Llama3_32layers_debug'
-config['exp_name'] = 'exps_restart/Llama2_32layers_inputnorm'
+config['exp_name'] = 'exps_restart/Llama2_32layers_inputnorm_sgd'
 config['gpus'] = ['0']
 config['models'] = ['meta-llama/Llama-2-7b-hf'] # 'meta-llama/Meta-Llama-3-8B', 'gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
 config['datasets'] = list(md.target_datasets.keys())
@@ -34,7 +34,7 @@ config['pt_config'] = pt_config
 
 # optimization
 config['epochs'] = 50
-config['optim'] = 'adamW'  # 'adam', 'adamW', 'sgd'
+config['optim'] = 'sgd'  # 'adam', 'adamW', 'sgd'
 config['grad_bs'] = 4
 config['lr'] = 0.001
 config['wd'] = 0.001
