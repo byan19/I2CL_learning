@@ -66,7 +66,7 @@ def analysis(exp_name, model_name, dataset_list):
 	output = ''
 
 	for i in range(len(ours_acc_list)):
-		tmp = f' & ${ours_acc_list[i]}_'+'{'+f'\pm {ours_acc_std_list[i]}'+'}$'
+		tmp = f' & ${ours_acc_list[i]*100}_'+'{'+f'\pm {ours_acc_std_list[i]*100}'+'}$'
 		output += tmp
 
 	print(output)
