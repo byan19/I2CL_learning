@@ -61,13 +61,15 @@ def analysis(exp_name, model_name, dataset_list):
 		ours_macro_f1_list.append(macro_mean)
 		ours_macro_f1_std_list.append(macro_std)
 
-	print(ours_acc_list)
-	print(ours_acc_std_list)
+	#print(ours_acc_list)
+	#print(ours_acc_std_list)
 	output = ''
 
 	for i in range(len(ours_acc_list)):
 		tmp = f' & ${ours_acc_list[i]}_'+'{'+f'\pm {ours_acc_std_list[i]}'+'}$'
 		output += tmp
+
+	print(output)
 
 
 parser = argparse.ArgumentParser(description="Example script with arguments")
