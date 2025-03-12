@@ -41,3 +41,4 @@ config['wd'] = 0.001
 config['rho'] = 1e-4
 config['sharpness_aware'] =True
 config['post_attention'] = False
+config['input_attention'] = True
