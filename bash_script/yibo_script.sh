@@ -29,7 +29,7 @@ for ((idx=0; idx<${#Target_Para_List[@]}; idx++)); do
 Param=${Target_Para_List[$idx]}
 Tunning=${Tunning_list[$idx]}
 
-sessionname=inputlayernorm_bound1
+sessionname=inputlayernorm_bound00001_minus
 File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
 
 CHECK=${sessionname}
