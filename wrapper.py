@@ -613,7 +613,7 @@ class ModelWrapper(nn.Module):
                 pred_loc = utils.last_one_indices(attn_mask).to(self.device)
                 # forward
                 if config['conver_bound']:
-                    print('working on the convergence bound and sharp approxi')
+                    print('working on the convergence bound and sharp approxy')
                     output = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
                     logits = output.logits
                     hidden_states = output.hidden_states
