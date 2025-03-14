@@ -472,6 +472,7 @@ class ModelWrapper(nn.Module):
                     conver_loss = 0.0
 
                     for  i in range(1, len(hidden_states -2)):
+                        pdb.set_trace()
                         conver_loss += torch.nn.functional.mse_loss(hidden_states[i][torch.arange(logits.size(0)), pred_loc]
                                                                     ,hidden_states[i+1][torch.arange(logits.size(0)), pred_loc] )
 
