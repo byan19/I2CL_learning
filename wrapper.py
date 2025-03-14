@@ -466,8 +466,8 @@ class ModelWrapper(nn.Module):
                     pred_logits = logits[torch.arange(logits.size(0)), pred_loc]
                     # get loss
                     gt_label = torch.tensor([label_map[label] for label in batch_label]).to(self.device)
-                    #loss = F.cross_entropy(pred_logits, gt_label, reduction='mean')
-                    loss = torch.tensor(0.0)
+                    loss = F.cross_entropy(pred_logits, gt_label, reduction='mean')
+                    #loss = torch.tensor(0.0)
                     epoch_loss.append(loss.item())
 
                     conver_loss = 0.0
@@ -476,7 +476,7 @@ class ModelWrapper(nn.Module):
                         conver_loss += torch.nn.functional.mse_loss(hidden_states[i][torch.arange(logits.size(0)), pred_loc]
                                                                     ,hidden_states[i+1][torch.arange(logits.size(0)), pred_loc] )
 
-                    loss = config['conver_loss_lambda'] * conver_loss
+                    loss += config['conver_loss_lambda'] * conver_loss
                 else:
                     logits = self.model(input_ids=input_ids, attention_mask=attn_mask).logits
                     # get prediction logits
