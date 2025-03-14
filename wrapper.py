@@ -518,11 +518,6 @@ class ModelWrapper(nn.Module):
         tuning_param_list = []
         tuning_name_list = []
 
-        '''
-        name_holder = [ name for name, pamra in peft_model.named_parameters()]
-        print(name_holder)
-        print('runing layernorm implementation')
-        '''
         if config['post_attention']:
             for name, param in peft_model.named_parameters():
                 if param.requires_grad and 'post_layernorm' in name:
@@ -618,7 +613,7 @@ class ModelWrapper(nn.Module):
                 pred_loc = utils.last_one_indices(attn_mask).to(self.device)
                 # forward
                 if config['conver_bound']:
-                    print('working on the convergence bound')
+                    print('working on the convergence bound and sharp approxi')
                     output = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
                     logits = output.logits
                     hidden_states = output.hidden_states
