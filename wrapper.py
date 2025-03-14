@@ -459,7 +459,8 @@ class ModelWrapper(nn.Module):
                 attn_mask = input_tok['attention_mask'].to(self.device)
                 pred_loc = utils.last_one_indices(attn_mask).to(self.device)
                 # forward
-                logits = self.model(input_ids=input_ids, attention_mask=attn_mask).logits
+                pdb.set_trace()
+                logits = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states = True).logits
                 # get prediction logits
                 pred_logits = logits[torch.arange(logits.size(0)), pred_loc]
                 # get loss
