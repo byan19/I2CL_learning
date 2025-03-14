@@ -364,7 +364,7 @@ class ModelWrapper(nn.Module):
         print(name_holder)
         print('runing layernorm implementation')
         '''
-
+        pdb.set_trace()
         if config['post_attention']:
             for name, param in peft_model.named_parameters():
                 if param.requires_grad and 'post_layernorm' in name:
