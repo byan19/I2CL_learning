@@ -611,7 +611,6 @@ class ModelWrapper(nn.Module):
                 input_ids = input_tok['input_ids'].to(self.device)
                 attn_mask = input_tok['attention_mask'].to(self.device)
                 pred_loc = utils.last_one_indices(attn_mask).to(self.device)
-                pdb.set_trace()
                 # forward
                 if config['conver_bound']:
                     print('working on the convergence bound and sharp approxy')
