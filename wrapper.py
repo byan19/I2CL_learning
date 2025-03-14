@@ -492,9 +492,9 @@ class ModelWrapper(nn.Module):
                 with torch.no_grad():
                     for name, param in peft_model.named_parameters():
                         if param.requires_grad:
-                            pdb.set_trace()
                             old_state[name]= param.data.clone()
                             scale = config['rho']/(param.grad.norm() + 1e-12)
+                            print(param.grad.norm().item())
                             e_w = torch.pow(param, 2) * param.grad * scale.to(param)
                             param.add_(e_w)
 
