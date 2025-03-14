@@ -496,6 +496,7 @@ class ModelWrapper(nn.Module):
                             e_w = torch.pow(param, 2) * param.grad * scale.to(param)
                             param.add_(e_w)
 
+                pdb.set_trace()
                 # second round
                 logits = self.model(input_ids=input_ids, attention_mask=attn_mask).logits
                 # get prediction logits
@@ -517,6 +518,7 @@ class ModelWrapper(nn.Module):
 
             epoch_loss = np.mean(epoch_loss)
             loss_list.append(epoch_loss)
+
 
         # fronzen all learnable strength params
         for param in self.model.parameters():
