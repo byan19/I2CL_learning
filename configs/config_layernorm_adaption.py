@@ -43,3 +43,4 @@ config['sharpness_aware'] = True
 config['post_attention'] = False
 config['input_attention'] = True
 config['conver_bound'] = True
+config['conver_loss_lambda'] = 0.001

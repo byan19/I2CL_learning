@@ -471,11 +471,10 @@ class ModelWrapper(nn.Module):
                     conver_loss = 0.0
 
                     for  i in range(1, len(hidden_states)-2):
-                        pdb.set_trace()
                         conver_loss += torch.nn.functional.mse_loss(hidden_states[i][torch.arange(logits.size(0)), pred_loc]
                                                                     ,hidden_states[i+1][torch.arange(logits.size(0)), pred_loc] )
 
-                    pdb.set_trace()
+                    loss += config['conver_loss_lambda'] * conver_loss
                 else:
                     logits = self.model(input_ids=input_ids, attention_mask=attn_mask).logits
                     # get prediction logits
