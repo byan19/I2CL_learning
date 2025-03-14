@@ -364,7 +364,6 @@ class ModelWrapper(nn.Module):
         print(name_holder)
         print('runing layernorm implementation')
         '''
-        pdb.set_trace()
         if config['post_attention']:
             for name, param in peft_model.named_parameters():
                 if param.requires_grad and 'post_layernorm' in name:
@@ -460,13 +459,31 @@ class ModelWrapper(nn.Module):
                 pred_loc = utils.last_one_indices(attn_mask).to(self.device)
                 # forward
                 pdb.set_trace()
-                logits = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states = True).logits
-                # get prediction logits
-                pred_logits = logits[torch.arange(logits.size(0)), pred_loc]
-                # get loss
-                gt_label = torch.tensor([label_map[label] for label in batch_label]).to(self.device)
-                loss = F.cross_entropy(pred_logits, gt_label, reduction='mean')
-                epoch_loss.append(loss.item())
+                if config['conver_bound']:
+                    output = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
+                    logits = output.logits
+                    hidden_states = output.hidden_states
+                    pred_logits = logits[torch.arange(logits.size(0)), pred_loc]
+                    # get loss
+                    gt_label = torch.tensor([label_map[label] for label in batch_label]).to(self.device)
+                    loss = F.cross_entropy(pred_logits, gt_label, reduction='mean')
+                    epoch_loss.append(loss.item())
+
+                    conver_loss = 0.0
+
+                    for  i in range(1, len(hidden_states -2)):
+                        conver_loss += torch.nn.functional.mse_loss(hidden_states[i][torch.arange(logits.size(0)), pred_loc]
+                                                                    ,hidden_states[i+1][torch.arange(logits.size(0)), pred_loc] )
+
+                    pdb.set_trace()
+                else:
+                    logits = self.model(input_ids=input_ids, attention_mask=attn_mask).logits
+                    # get prediction logits
+                    pred_logits = logits[torch.arange(logits.size(0)), pred_loc]
+                    # get loss
+                    gt_label = torch.tensor([label_map[label] for label in batch_label]).to(self.device)
+                    loss = F.cross_entropy(pred_logits, gt_label, reduction='mean')
+                    epoch_loss.append(loss.item())
 
                 # update strength params
                 optimizer.zero_grad()
