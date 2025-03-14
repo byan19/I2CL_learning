@@ -458,7 +458,6 @@ class ModelWrapper(nn.Module):
                 attn_mask = input_tok['attention_mask'].to(self.device)
                 pred_loc = utils.last_one_indices(attn_mask).to(self.device)
                 # forward
-                pdb.set_trace()
                 if config['conver_bound']:
                     output = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
                     logits = output.logits
@@ -471,7 +470,7 @@ class ModelWrapper(nn.Module):
 
                     conver_loss = 0.0
 
-                    for  i in range(1, len(hidden_states -2)):
+                    for  i in range(1, len(hidden_states)-2):
                         pdb.set_trace()
                         conver_loss += torch.nn.functional.mse_loss(hidden_states[i][torch.arange(logits.size(0)), pred_loc]
                                                                     ,hidden_states[i+1][torch.arange(logits.size(0)), pred_loc] )
