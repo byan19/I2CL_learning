@@ -459,6 +459,7 @@ class ModelWrapper(nn.Module):
                 pred_loc = utils.last_one_indices(attn_mask).to(self.device)
                 # forward
                 if config['conver_bound']:
+                    print('working on the convergence bound')
                     output = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
                     logits = output.logits
                     hidden_states = output.hidden_states
@@ -494,6 +495,7 @@ class ModelWrapper(nn.Module):
                         if param.requires_grad:
                             old_state[name]= param.data.clone()
                             scale = config['rho']/(param.grad.norm() + 1e-12)
+                            print(name)
                             print(param.grad.norm().item())
                             e_w = torch.pow(param, 2) * param.grad * scale.to(param)
                             param.add_(e_w)
