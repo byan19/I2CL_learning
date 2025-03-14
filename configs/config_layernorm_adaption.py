@@ -6,7 +6,7 @@ import my_datasets as md
 config = {}
 # general
 #config['exp_name'] = 'exps/Llama3_32layers_debug'
-config['exp_name'] = 'exps_restart/Llama2_32layers_conver_bound00001'
+config['exp_name'] = 'exps_restart/Llama2_32layers_conver_bound1'
 config['gpus'] = ['0']
 config['models'] = ['meta-llama/Llama-2-7b-hf'] # 'meta-llama/Meta-Llama-3-8B', 'gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
 config['datasets'] = list(md.target_datasets.keys())
@@ -44,4 +44,4 @@ config['sharpness_aware_approx'] = True
 config['post_attention'] = False
 config['input_attention'] = True
 config['conver_bound'] = True
-config['conver_loss_lambda'] = 0.0001
+config['conver_loss_lambda'] = 0.1
