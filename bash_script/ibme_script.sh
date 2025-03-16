@@ -14,7 +14,7 @@ sleep 1.0s
 echo ${File}
 #screen -S $sessionname -X stuff "sbatch -w node04 --gres=gpu:1 ${File} ${GPU} ${sessionname} ${Tunning}^M"
 #screen -S $sessionname -X stuff "sbatch -w node05 --gres=gpu:1 ${File} ${GPU} ${sessionname} ${Tunning}^M"
-screen -S $sessionname -X stuff "sbatch -w node05 --gres=gpu:1 ${File} ${Param} ${sessionname} ${Tunning}^M"
+screen -S $sessionname -X stuff "sbatch -w node05 --gres=gpu:1 ${File} ${Param} ${sessionname} ${Tunning} > Z_${sessionname}_$(date +"T%H:%M:%S_D%d_%m_%Y").log 2>&1^M"
 }
 
 Tunning=1
