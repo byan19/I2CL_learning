@@ -57,9 +57,9 @@ def patch_layernorm_with_rescaled_by_name(model, alpha=1.0, mode="add", match_ke
 	"""
 	for name, module in model.named_modules():
 		#if isinstance(module, nn.LayerNorm) and any(k in name.lower() for k in match_keywords):
-		pdb.set_trace()
 		print(name)
-		if isinstance(module, nn.LayerNorm) and match_key in name :
+		pdb.set_trace()
+		if match_key in name :
 		# Identify the parent module
 			print('trigger')
 			parent_name = name.rsplit(".", 1)[0]
