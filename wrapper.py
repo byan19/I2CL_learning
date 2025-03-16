@@ -629,7 +629,7 @@ class ModelWrapper(nn.Module):
                         conver_loss += torch.nn.functional.mse_loss(hidden_states[i][torch.arange(logits.size(0)), pred_loc]
                                                                     ,hidden_states[i+1][torch.arange(logits.size(0)), pred_loc] )
 
-                    loss += config['conver_loss_lambda'] * conver_loss
+                    loss = config['ce_loss_lambda'] * loss + config['conver_loss_lambda'] * conver_loss
 
                 else:
                     logits = self.model(input_ids=input_ids, attention_mask=attn_mask).logits
