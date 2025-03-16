@@ -87,7 +87,7 @@ def override_llama_rmsnorm_forward(module, mode="add", alpha=1.0):
             gamma = self.original_weight * (1.0 + self.alpha * self.eta)
         else:
             raise ValueError("Mode must be 'add' or 'mul'")
-
+        print('in my self implementation')
         return gamma * hidden_states
 
     # Replace forward
