@@ -14,7 +14,7 @@ sleep 1.0s
 echo ${File}
 #screen -S $sessionname -X stuff "sbatch -w node04 --gres=gpu:1 ${File} ${GPU} ${sessionname} ${Tunning}^M"
 #screen -S $sessionname -X stuff "sbatch -w node05 --gres=gpu:1 ${File} ${GPU} ${sessionname} ${Tunning}^M"
-screen -S $sessionname -X stuff "sbatch -w node05 --gres=gpu:2 ${File} ${Param} ${sessionname} ${Tunning} ^M"
+screen -S $sessionname -X stuff "sbatch -w node05 --gres=gpu:1 ${File} ${Param} ${sessionname} ${Tunning} ^M"
 }
 
 Tunning=1
@@ -29,7 +29,7 @@ for ((idx=0; idx<${#Target_Para_List[@]}; idx++)); do
 Param=${Target_Para_List[$idx]}
 Tunning=${Tunning_list[$idx]}
 
-sessionname=I2CL_contextlearning_1e5conv
+sessionname=I2CL_contextlearning_1e6conv
 File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
 
 MultiRun ${sessionname} ${File} ${Param} ${Tunning}
