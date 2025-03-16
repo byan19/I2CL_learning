@@ -65,12 +65,12 @@ def patch_layernorm_with_rescaled_by_name_old(model, alpha=1.0, mode="add", matc
 			
 
 
-def override_llama_rmsnorm_forward(module, mode="add", alpha_init=1.0):
+def override_llama_rmsnorm_forward(module, mode="add", alpha=1.0):
     hidden_size = module.weight.shape[0]
 
     # Inject new trainable parameters
     module.register_parameter("eta", nn.Parameter(torch.zeros_like(module.weight)))
-    module.register_parameter("alpha", nn.Parameter(torch.tensor(alpha_init)))
+    module.register_parameter("alpha", nn.Parameter(torch.tensor(alpha)))
 
     # Store original gamma
     module.register_buffer("original_weight", module.weight.clone())
