@@ -13,7 +13,8 @@ class RescaledLayerNormPEFT(nn.Module):
 		
 		# Freeze base gamma (ln.weight)
 		self.ln.weight.requires_grad = False
-		if self.ln.bias is not None:
+		self.has_bias = hasattr(self.ln, 'bias') and self.ln.bias is not None
+		if self.has_bias:
 			self.ln.bias.requires_grad = False
 		
 		# Learnable η, initialized to zeros
@@ -31,7 +32,7 @@ class RescaledLayerNormPEFT(nn.Module):
 			x,
 			normalized_shape=self.ln.normalized_shape,
 			weight=gamma,
-			bias=self.ln.bias,
+			bias=self.ln.bias if self.has_bias else None,
 			eps=self.ln.eps
 		)
 
@@ -57,7 +58,6 @@ def patch_layernorm_with_rescaled_by_name(model, alpha=1.0, mode="add", match_ke
 	"""
 	for name, module in model.named_modules():
 		#if isinstance(module, nn.LayerNorm) and any(k in name.lower() for k in match_keywords):
-		print(name)
 		if match_key in name :
 		# Identify the parent module
 			print('trigger')
