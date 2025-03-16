@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import pdb
 class RescaledLayerNormPEFT(nn.Module):
-	def __init__(self, original_ln: nn.LayerNorm, alpha=1.0, trainable_alpha=False, mode="add"):
+	def __init__(self, original_ln, alpha=1.0, trainable_alpha=False, mode="add"):
 		super().__init__()
 		self.ln = original_ln
 		if trainable_alpha:
@@ -58,10 +58,10 @@ def patch_layernorm_with_rescaled_by_name(model, alpha=1.0, mode="add", match_ke
 	for name, module in model.named_modules():
 		#if isinstance(module, nn.LayerNorm) and any(k in name.lower() for k in match_keywords):
 		print(name)
-		pdb.set_trace()
 		if match_key in name :
 		# Identify the parent module
 			print('trigger')
+			pdb.set_trace()
 			parent_name = name.rsplit(".", 1)[0]
 			ln_name = name.split(".")[-1]
 			
