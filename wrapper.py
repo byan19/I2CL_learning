@@ -713,8 +713,8 @@ class ModelWrapper(nn.Module):
         print(f"label_map: {label_map}")
 
         # print trainable parameters
-        peft_model.print_trainable_parameters()
-        print(f'PEFT model:\n {peft_model}')
+        #peft_model.print_trainable_parameters()
+        #print(f'PEFT model:\n {peft_model}')
         # set model to peft model
         self.model = peft_model
 
