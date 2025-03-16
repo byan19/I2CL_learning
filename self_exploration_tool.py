@@ -45,17 +45,7 @@ def patch_layernorm_with_rescaled(model, alpha=1.0, trainable_alpha=False, mode=
 			setattr(parent_module, ln_name, RescaledLayerNormPEFT(module, alpha=alpha, trainable_alpha=trainable_alpha, mode=mode))
 
 
-def patch_layernorm_with_rescaled_by_name(model, alpha=1.0, mode="add", match_key="inputnorm", trainable_alpha=False):
-	"""
-	Replace LayerNorms in the model with RescaledLayerNormPEFT
-	only if their parameter name contains any keyword in match_keywords.
-
-	Args:
-		model: the model object
-		alpha_init: initial value for learnable alpha
-		mode: "add" or "mul"
-		match_keywords: tuple of strings (e.g., ("inputnorm", "postnorm"))
-	"""
+def patch_layernorm_with_rescaled_by_name_old(model, alpha=1.0, mode="add", match_key="inputnorm", trainable_alpha=False):
 	for name, module in model.named_modules():
 		#if isinstance(module, nn.LayerNorm) and any(k in name.lower() for k in match_keywords):
 		if match_key in name :
@@ -71,6 +61,24 @@ def patch_layernorm_with_rescaled_by_name(model, alpha=1.0, mode="add", match_ke
 			# Replace the LayerNorm
 			setattr(parent_module, ln_name, RescaledLayerNormPEFT(module, alpha=alpha,  trainable_alpha=trainable_alpha, mode=mode))
 			print(f"Replaced LayerNorm: {name} -> RescaledLayerNormPEFT")
+			
 
+
+def patch_layernorm_with_rescaled_by_name(model, alpha=1.0, mode="add", match_key="inputnorm",
+                                              trainable_alpha=False):
+	for name, module in model.named_modules():
+		# if isinstance(module, nn.LayerNorm) and any(k in name.lower() for k in match_keywords):
+		if match_key in name:
+			# Identify the parent module
+			path_parts = name.split(".")
+			parent = model
+			for part in path_parts[:-1]:
+				parent = getattr(parent, part)
+			
+			ln_name = path_parts[-1]
+			
+			# Confirm that we are replacing actual nn.LayerNorm, not a container
+			if isinstance(getattr(parent, ln_name), nn.LayerNorm):
+				setattr(parent, ln_name, RescaledLayerNormPEFT(module, alpha=alpha, trainable_alpha=trainable_alpha, mode=mode))
 	
 	
