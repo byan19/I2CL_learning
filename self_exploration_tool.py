@@ -74,6 +74,7 @@ def patch_layernorm_with_rescaled_by_name(model, alpha=1.0, mode="add", match_ke
 			# Identify the parent module
 			path_parts = name.split(".")
 			parent = model
+			print(type(model))
 			for part in path_parts[:-1]:
 				parent = getattr(parent, part)
 			
