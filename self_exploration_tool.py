@@ -43,7 +43,7 @@ def patch_layernorm_with_rescaled(model, alpha=1.0, trainable_alpha=False, mode=
 			setattr(parent_module, ln_name, RescaledLayerNormPEFT(module, alpha=alpha, trainable_alpha=trainable_alpha, mode=mode))
 
 
-def patch_layernorm_with_rescaled_by_name(model, alpha=1.0, mode="add", match_keywords=("inputnorm",), trainable_alpha=False):
+def patch_layernorm_with_rescaled_by_name(model, alpha=1.0, mode="add", match_key="inputnorm", trainable_alpha=False):
 	"""
 	Replace LayerNorms in the model with RescaledLayerNormPEFT
 	only if their parameter name contains any keyword in match_keywords.
@@ -55,8 +55,9 @@ def patch_layernorm_with_rescaled_by_name(model, alpha=1.0, mode="add", match_ke
 		match_keywords: tuple of strings (e.g., ("inputnorm", "postnorm"))
 	"""
 	for name, module in model.named_modules():
-		if isinstance(module, nn.LayerNorm) and any(k in name.lower() for k in match_keywords):
-			# Identify the parent module
+		#if isinstance(module, nn.LayerNorm) and any(k in name.lower() for k in match_keywords):
+		if isinstance(module, nn.LayerNorm) and match_key in name :
+		# Identify the parent module
 			parent_name = name.rsplit(".", 1)[0]
 			ln_name = name.split(".")[-1]
 			

@@ -12,7 +12,7 @@ import global_vars as gv
 from peft import get_peft_model, PromptTuningConfig, LNTuningConfig, TaskType
 import pdb
 from self_exploration_tool import *
-
+import inspect
 class ModelWrapper(nn.Module):
     def __init__(self, model, tokenizer, model_config, device):
         super().__init__()
@@ -659,6 +659,7 @@ class ModelWrapper(nn.Module):
         utils.plot_loss_curve(loss_list, save_dir + f'/{run_name}_loss_curve.png')
 
     def layernorm_adaptation_additional_learn(self, config, dataset, save_dir=None, run_name=None):
+        print(inspect.currentframe().f_code.co_name)
         pt_config = LNTuningConfig(task_type=TaskType.CAUSAL_LM)
         peft_model = get_peft_model(self.model, pt_config)
 
@@ -693,7 +694,7 @@ class ModelWrapper(nn.Module):
                     param.requires_grad = True
             '''
 
-            patch_layernorm_with_rescaled_by_name(peft_model, alpha=0.5, trainable_alpha=False, match_keywords=("input_layernorm",), mode="mul")
+            patch_layernorm_with_rescaled_by_name(peft_model, alpha=0.5, trainable_alpha=False, match_key="input_layernorm", mode="mul")
             
         for name, param in peft_model.named_parameters():
             if param.requires_grad:
