@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 import pdb
+from types import MethodType
 class RescaledLayerNormPEFT(nn.Module):
 	def __init__(self, original_ln, alpha=1.0, trainable_alpha=False, mode="add"):
 		super().__init__()
@@ -64,24 +65,38 @@ def patch_layernorm_with_rescaled_by_name_old(model, alpha=1.0, mode="add", matc
 			
 
 
-def patch_layernorm_with_rescaled_by_name(model, alpha=1.0, mode="add", match_key="inputnorm",
-                                              trainable_alpha=False):
+def override_llama_rmsnorm_forward(module, mode="add", alpha_init=1.0):
+    hidden_size = module.weight.shape[0]
+
+    # Inject new trainable parameters
+    module.register_parameter("eta", nn.Parameter(torch.zeros_like(module.weight)))
+    module.register_parameter("alpha", nn.Parameter(torch.tensor(alpha_init)))
+
+    # Store original gamma
+    module.register_buffer("original_weight", module.weight.clone())
+    module.weight.requires_grad = False  # Freeze original gamma
+
+    # Define new forward
+    def custom_forward(self, hidden_states):
+        variance = hidden_states.pow(2).mean(-1, keepdim=True)
+        hidden_states = hidden_states / torch.sqrt(variance + self.variance_epsilon)
+
+        if mode == "add":
+            gamma = self.original_weight + self.alpha * self.eta
+        elif mode == "mul":
+            gamma = self.original_weight * (1.0 + self.alpha * self.eta)
+        else:
+            raise ValueError("Mode must be 'add' or 'mul'")
+
+        return gamma * hidden_states
+
+    # Replace forward
+    module.forward = MethodType(custom_forward, module)
+
+def patch_layernorm_with_rescaled_by_name(model, alpha=1.0, mode="add", match_key="inputnorm", trainable_alpha=False):
 	for name, module in model.named_modules():
 		# if isinstance(module, nn.LayerNorm) and any(k in name.lower() for k in match_keywords):
-		pdb.set_trace()
-		print(name)
 		if match_key in name:
 			# Identify the parent module
-			path_parts = name.split(".")
-			parent = model
-			print(type(model))
-			for part in path_parts[:-1]:
-				parent = getattr(parent, part)
-			
-			ln_name = path_parts[-1]
-			
-			# Confirm that we are replacing actual nn.LayerNorm, not a container
-			if isinstance(getattr(parent, ln_name), nn.LayerNorm):
-				setattr(parent, ln_name, RescaledLayerNormPEFT(module, alpha=alpha, trainable_alpha=trainable_alpha, mode=mode))
-	
+			override_llama_rmsnorm_forward(module, mode=mode, alpha = alpha)
 	
