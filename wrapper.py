@@ -11,7 +11,7 @@ import utils
 import global_vars as gv
 from peft import get_peft_model, PromptTuningConfig, LNTuningConfig, TaskType
 import pdb
-
+from self_exploration_tool import *
 
 class ModelWrapper(nn.Module):
     def __init__(self, model, tokenizer, model_config, device):
@@ -677,6 +677,7 @@ class ModelWrapper(nn.Module):
             for name, param in peft_model.named_parameters():
                 if name in tuning_name_list:
                     param.requires_grad = True
+                    
         elif config['input_attention']:
             for name, param in peft_model.named_parameters():
                 if param.requires_grad and 'input_layernorm' in name:
@@ -686,17 +687,19 @@ class ModelWrapper(nn.Module):
             for param in peft_model.parameters():
                 param.requires_grad = False
 
+            '''
             for name, param in peft_model.named_parameters():
                 if name in tuning_name_list:
                     param.requires_grad = True
+            '''
 
-        else:
-            for name, param in peft_model.named_parameters():
-                if param.requires_grad:
-                    tuning_name_list.append(name)
-                    tuning_param_list.append(param)
-
-
+            patch_layernorm_with_rescaled_by_name(peft_model, alpha=0.5, trainable_alpha=False, match_keywords=("input_layernorm",), mode="mul")
+            
+        for name, param in peft_model.named_parameters():
+            if param.requires_grad:
+                print(name)
+            
+        pdb.set_trace()
         # prepare label dict
         label_map = {}
         ans_txt_list = dataset.get_dmonstration_template()['options']
