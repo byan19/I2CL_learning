@@ -7,7 +7,7 @@ config = {}
 # general
 #config['exp_name'] = 'exps/Llama3_32layers_debug'
 config['exp_name'] = 'exps_restart/Llama2_32layers_conver_bound00000132layer'
-config['gpus'] = ['0']
+config['gpus'] = ['0,1']
 config['models'] = ['meta-llama/Llama-2-7b-hf'] # 'meta-llama/Meta-Llama-3-8B', 'gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
 config['datasets'] = list(md.target_datasets.keys())
 config['seed'] = 42
