@@ -77,6 +77,7 @@ def override_llama_rmsnorm_forward(module, mode="add", alpha=1.0):
 
     # Define new forward
     def custom_forward(self, hidden_states):
+	    pdb.set_trace()
         mean = hidden_states.mean(-1, keepdim=True)
         variance = hidden_states.mean(-1, unbiased = False, keepdim=True)
         hidden_states = (hidden_states - mean) / torch.sqrt(variance + self.variance_epsilon)
