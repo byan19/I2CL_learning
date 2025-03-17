@@ -25,7 +25,7 @@ Param=${Target_Para_List[$idx]}
 Tunning=${Tunning_list[$idx]}
 
 sessionname=I2CL_contextlearning_noCE
-sessionname=I2CL_contextlearning_additional_learn
+sessionname=I2CL_contextlearning_dyt
 File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
 
 CHECK=${sessionname}
