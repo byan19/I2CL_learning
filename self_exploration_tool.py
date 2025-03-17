@@ -98,16 +98,21 @@ def override_rmsnorm_with_dyt_forward(module, alpha=1.0):
     Replace the forward() of a LlamaRMSNorm module with a DyT-style transformation.
     γ, β, α are newly registered trainable parameters.
     """
-    hidden_size = module.weight.shape[0]
+    #hidden_size = module.weight.shape[0]
 
     # Freeze the original weight (if needed)
     module.register_buffer("original_weight", module.weight.data.clone())
     module.weight.requires_grad = False  # Make sure original γ is frozen
 
     # Register new trainable parameters
+    '''
     module.register_parameter("dyt_gamma", nn.Parameter(torch.ones(hidden_size)))
     module.register_parameter("dyt_beta", nn.Parameter(torch.zeros(hidden_size)))
     module.register_parameter("dyt_alpha", nn.Parameter(torch.ones(1) * alpha))
+    '''
+    module.register_parameter("dyt_gamma", nn.Parameter(torch.ones_list(module.weight)))
+    module.register_parameter("dyt_beta", nn.Parameter(torch.zeros_like(module.weight)))
+    module.register_parameter("dyt_alpha", nn.Parameter(torch.tensor(alpha)))
 
     # Define the DyT-style forward
     def dyt_forward(self, hidden_states):
