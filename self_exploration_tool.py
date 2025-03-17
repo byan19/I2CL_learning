@@ -110,7 +110,7 @@ def override_rmsnorm_with_dyt_forward(module, alpha=1.0):
     module.register_parameter("dyt_beta", nn.Parameter(torch.zeros(hidden_size)))
     module.register_parameter("dyt_alpha", nn.Parameter(torch.ones(1) * alpha))
     '''
-    module.register_parameter("dyt_gamma", nn.Parameter(torch.ones_list(module.weight)))
+    module.register_parameter("dyt_gamma", nn.Parameter(torch.ones_like(module.weight)))
     module.register_parameter("dyt_beta", nn.Parameter(torch.zeros_like(module.weight)))
     module.register_parameter("dyt_alpha", nn.Parameter(torch.tensor(alpha)))
 
