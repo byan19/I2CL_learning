@@ -660,9 +660,9 @@ class ModelWrapper(nn.Module):
 
     def layernorm_adaptation_additional_learn(self, config, dataset, save_dir=None, run_name=None):
         print(inspect.currentframe().f_code.co_name)
-        pt_config = LNTuningConfig(task_type=TaskType.CAUSAL_LM)
-        peft_model = get_peft_model(self.model, pt_config)
-        #peft_model = self.model
+        #pt_config = LNTuningConfig(task_type=TaskType.CAUSAL_LM)
+        #peft_model = get_peft_model(self.model, pt_config)
+        peft_model = self.model
 
         tuning_param_list = []
         tuning_name_list = []
