@@ -137,6 +137,7 @@ def patch_layernorm_with_rescaled_by_name(model, alpha=1.0, mode="add", match_ke
 			
 def patch_layernorm_with_dyt_by_name(model, alpha=1.0, mode="add", match_key="inputnorm", trainable_alpha=False):
 	for name, module in model.named_modules():
+		print(name)
 		# if isinstance(module, nn.LayerNorm) and any(k in name.lower() for k in match_keywords):
 		if match_key in name:
 			# Identify the parent module
