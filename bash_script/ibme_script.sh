@@ -29,7 +29,7 @@ for ((idx=0; idx<${#Target_Para_List[@]}; idx++)); do
 Param=${Target_Para_List[$idx]}
 Tunning=${Tunning_list[$idx]}
 
-sessionname=I2CL_contextlearning_1e6conv
+sessionname=I2CL_contextlearning_dyt_learning
 File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
 
 MultiRun ${sessionname} ${File} ${Param} ${Tunning}
