@@ -660,9 +660,9 @@ class ModelWrapper(nn.Module):
 
     def layernorm_adaptation_additional_learn(self, config, dataset, save_dir=None, run_name=None):
         print(inspect.currentframe().f_code.co_name)
-        #pt_config = LNTuningConfig(task_type=TaskType.CAUSAL_LM)
-        #peft_model = get_peft_model(self.model, pt_config)
-        peft_model = self.model
+        pt_config = LNTuningConfig(task_type=TaskType.CAUSAL_LM)
+        peft_model = get_peft_model(self.model, pt_config)
+        #peft_model = self.model
 
         tuning_param_list = []
         tuning_name_list = []
@@ -695,8 +695,8 @@ class ModelWrapper(nn.Module):
                     param.requires_grad = True
             '''
 
-            #patch_layernorm_with_rescaled_by_name(peft_model, alpha=0.01, trainable_alpha=False, match_key="input_layernorm", mode="add")
-            patch_layernorm_with_dyt_by_name(peft_model, alpha=0.01, trainable_alpha=False, match_key="input_layernorm", mode="add")
+            patch_layernorm_with_rescaled_by_name(peft_model, alpha=0.1, trainable_alpha=False, match_key="input_layernorm", mode="add")
+            #patch_layernorm_with_dyt_by_name(peft_model, alpha=0.01, trainable_alpha=False, match_key="input_layernorm", mode="add")
             
         for name, param in peft_model.named_parameters():
             if param.requires_grad:
@@ -714,6 +714,7 @@ class ModelWrapper(nn.Module):
         print(f"label_map: {label_map}")
 
         # print trainable parameters
+        #pdb.set_trace()
         #peft_model.print_trainable_parameters()
         #print(f'PEFT model:\n {peft_model}')
         # set model to peft model

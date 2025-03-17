@@ -193,6 +193,7 @@ def get_args():
 
 if __name__ == "__main__":
     # get args
+    start_time = time.time()
     args = get_args()
     # load config
     config = utils.load_config(args.config_path)
@@ -205,6 +206,7 @@ if __name__ == "__main__":
 
     for model_name, dataset_name in combinations:
         run_task('0', config, model_name, dataset_name)  # without parallelisation
+    print(f' total running time: {(time.time() - start_time)/3600: .4f} hours ')
 
 
 
