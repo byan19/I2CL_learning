@@ -30,7 +30,7 @@ Param=${Target_Para_List[$idx]}
 Tunning=${Tunning_list[$idx]}
 
 sessionname=I2CL_contextlearning_dyt_learning
-sessionname=I2CL_contextlearning_layernorm_addfix
+sessionname=I2CL_contextlearning_layernorm_mulfix
 File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
 
 MultiRun ${sessionname} ${File} ${Param} ${Tunning}
