@@ -695,7 +695,8 @@ class ModelWrapper(nn.Module):
                     param.requires_grad = True
             '''
 
-            patch_layernorm_with_rescaled_by_name(peft_model, alpha=0.01, trainable_alpha=False, match_key="input_layernorm", mode="add")
+            #patch_layernorm_with_rescaled_by_name(peft_model, alpha=0.01, trainable_alpha=False, match_key="input_layernorm", mode="add")
+            patch_layernorm_with_dyt_by_name(peft_model, alpha=0.01, trainable_alpha=False, match_key="input_layernorm", mode="add")
             
         for name, param in peft_model.named_parameters():
             if param.requires_grad:

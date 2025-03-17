@@ -92,6 +92,35 @@ def override_llama_rmsnorm_forward(module, mode="add", alpha=1.0):
 
     # Replace forward
     module.forward = MethodType(custom_forward, module)
+    
+def override_rmsnorm_with_dyt_forward(module, init_alpha=1.0):
+    """
+    Replace the forward() of a LlamaRMSNorm module with a DyT-style transformation.
+    γ, β, α are newly registered trainable parameters.
+    """
+    hidden_size = module.weight.shape[0]
+
+    # Freeze the original weight (if needed)
+    module.register_buffer("original_weight", module.weight.data.clone())
+    module.weight.requires_grad = False  # Make sure original γ is frozen
+
+    # Register new trainable parameters
+    module.register_parameter("dyt_gamma", nn.Parameter(torch.ones(hidden_size)))
+    module.register_parameter("dyt_beta", nn.Parameter(torch.zeros(hidden_size)))
+    module.register_parameter("dyt_alpha", nn.Parameter(torch.ones(1) * init_alpha))
+
+    # Define the DyT-style forward
+    def dyt_forward(self, hidden_states):
+        # Normalize input (same as original LlamaRMSNorm)
+        variance = hidden_states.pow(2).mean(-1, keepdim=True)
+        normed = hidden_states / torch.sqrt(variance + self.variance_epsilon)
+
+        # Apply DyT transform: tanh(α * x), then affine γ, β
+        transformed = torch.tanh(self.dyt_alpha * normed)
+        return self.dyt_gamma * transformed + self.dyt_beta
+
+    # Replace the forward function
+    module.forward = MethodType(dyt_forward, module)
 
 def patch_layernorm_with_rescaled_by_name(model, alpha=1.0, mode="add", match_key="inputnorm", trainable_alpha=False):
 	for name, module in model.named_modules():
@@ -99,4 +128,10 @@ def patch_layernorm_with_rescaled_by_name(model, alpha=1.0, mode="add", match_ke
 		if match_key in name:
 			# Identify the parent module
 			override_llama_rmsnorm_forward(module, mode=mode, alpha = alpha)
-	
+			
+def patch_layernorm_with_dyt_by_name(model, alpha=1.0, mode="add", match_key="inputnorm", trainable_alpha=False):
+	for name, module in model.named_modules():
+		# if isinstance(module, nn.LayerNorm) and any(k in name.lower() for k in match_keywords):
+		if match_key in name:
+			# Identify the parent module
+			override_llama_rmsnorm_forward(module, mode=mode, alpha = alpha)
