@@ -121,7 +121,7 @@ def override_rmsnorm_with_dyt_forward(module, alpha=1.0):
         normed = hidden_states / torch.sqrt(variance + self.variance_epsilon)
 
         # Apply DyT transform: tanh(α * x), then affine γ, β
-        print('in myself dyt implementation')
+        #print('in myself dyt implementation')
         transformed = torch.tanh(self.dyt_alpha * normed)
         return self.dyt_gamma * transformed + self.dyt_beta
 
