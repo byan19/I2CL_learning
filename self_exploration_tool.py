@@ -93,7 +93,7 @@ def override_llama_rmsnorm_forward(module, mode="add", alpha=1.0):
     # Replace forward
     module.forward = MethodType(custom_forward, module)
     
-def override_rmsnorm_with_dyt_forward(module, init_alpha=1.0):
+def override_rmsnorm_with_dyt_forward(module, alpha=1.0):
     """
     Replace the forward() of a LlamaRMSNorm module with a DyT-style transformation.
     γ, β, α are newly registered trainable parameters.
@@ -107,7 +107,7 @@ def override_rmsnorm_with_dyt_forward(module, init_alpha=1.0):
     # Register new trainable parameters
     module.register_parameter("dyt_gamma", nn.Parameter(torch.ones(hidden_size)))
     module.register_parameter("dyt_beta", nn.Parameter(torch.zeros(hidden_size)))
-    module.register_parameter("dyt_alpha", nn.Parameter(torch.ones(1) * init_alpha))
+    module.register_parameter("dyt_alpha", nn.Parameter(torch.ones(1) * alpha))
 
     # Define the DyT-style forward
     def dyt_forward(self, hidden_states):
@@ -116,6 +116,7 @@ def override_rmsnorm_with_dyt_forward(module, init_alpha=1.0):
         normed = hidden_states / torch.sqrt(variance + self.variance_epsilon)
 
         # Apply DyT transform: tanh(α * x), then affine γ, β
+        print('in myself dyt implementation')
         transformed = torch.tanh(self.dyt_alpha * normed)
         return self.dyt_gamma * transformed + self.dyt_beta
 
@@ -134,4 +135,4 @@ def patch_layernorm_with_dyt_by_name(model, alpha=1.0, mode="add", match_key="in
 		# if isinstance(module, nn.LayerNorm) and any(k in name.lower() for k in match_keywords):
 		if match_key in name:
 			# Identify the parent module
-			override_llama_rmsnorm_forward(module, mode=mode, alpha = alpha)
+			override_rmsnorm_with_dyt_forward(module, alpha = alpha)
