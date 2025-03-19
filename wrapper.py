@@ -593,6 +593,7 @@ class ModelWrapper(nn.Module):
 
         # train
         loss_list = []
+        pdb.set_trace()
         all_data_index = list(range(len(all_data)))
         for _ in range(epochs):
             epoch_loss = []
