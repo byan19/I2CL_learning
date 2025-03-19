@@ -7,7 +7,7 @@ config = {}
 # general
 #config['exp_name'] = 'exps/Llama3_32layers_debug'
 #config['exp_name'] = 'exps_restart/Llama2_32layers_layernorm_conv_ratio_normaliser_debug'
-config['exp_name'] = 'exps_restart2/Llama2_32layers_layernorm_minues1e-5AdamW'
+config['exp_name'] = 'exps_restart2/Llama2_32layers_layernorm_1e-5AdamW'
 config['gpus'] = ['0']
 config['models'] = ['meta-llama/Llama-2-7b-hf'] # 'meta-llama/Meta-Llama-3-8B', 'gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
 config['datasets'] = list(md.target_datasets.keys())
@@ -46,6 +46,6 @@ config['additional_layernorm_layer'] = False
 config['post_attention'] = False
 config['input_attention'] = True
 config['conver_bound'] = True
-config['conver_loss_lambda'] = -1e-5
+config['conver_loss_lambda'] = 1e-5
 config['additional_layernorm_mode'] = 'add'
 config['ce_loss_lambda'] = 1.0
