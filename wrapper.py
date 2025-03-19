@@ -640,6 +640,7 @@ class ModelWrapper(nn.Module):
                             
                             demoninator =  torch.nn.functional.mse_loss(hidden_states[i][torch.arange(logits.size(0)), pred_loc]
                                                                         ,hidden_states[i-1][torch.arange(logits.size(0)), pred_loc] )
+                            
                             if config['conver_loss_regular_expo']:
                                 conver_loss += weight_scale[i].item() * numerator/demoninator
                             else:
