@@ -53,6 +53,6 @@ config['conver_loss_lambda'] = 1e-3
 config['additional_layernorm_mode'] = 'add'
 config['conver_loss'] = True
 config['conver_loss_regular'] = False
-config['conver_loss_regular_expo'] = True
+config['conver_loss_regular_expo'] = False
 config['conver_loss_regular_temp'] = 100
 
