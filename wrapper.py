@@ -640,7 +640,6 @@ class ModelWrapper(nn.Module):
                             
 
                     
-                    pdb.set_trace()
                     loss = config['ce_loss_lambda'] * loss + config['conver_loss_lambda'] * conver_loss
 
                 else:
