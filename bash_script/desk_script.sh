@@ -27,6 +27,7 @@ Tunning=${Tunning_list[$idx]}
 sessionname=I2CL_contextlearning_noCE
 sessionname=I2CL_contextlearning_dyt
 sessionname=I2CL_contextlearning_addtional_learn
+sessionname=I2CL_contextlearning_weightexpo_desk
 File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
 
 CHECK=${sessionname}

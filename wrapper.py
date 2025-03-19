@@ -625,6 +625,10 @@ class ModelWrapper(nn.Module):
                     epoch_loss.append(loss.item())
 
                     conver_loss = 0.0
+                    weight_scale = [hold for hold in range(1, len(hidden_states))]
+                    weight_scale = torch.softmax(torch.from_numpy(np.asarray(weight_scale)/config['conver_loss_regular_temp']), dim =0)
+                    
+                    
                     if config['conver_loss']:
                         for  i in range(1, len(hidden_states)-1):
                             conver_loss += torch.nn.functional.mse_loss(hidden_states[i][torch.arange(logits.size(0)), pred_loc]
@@ -636,8 +640,12 @@ class ModelWrapper(nn.Module):
                             
                             demoninator =  torch.nn.functional.mse_loss(hidden_states[i][torch.arange(logits.size(0)), pred_loc]
                                                                         ,hidden_states[i-1][torch.arange(logits.size(0)), pred_loc] )
-                            conver_loss += numerator/demoninator
                             
+                            if config['conver_loss_regular_expo']:
+                                conver_loss += weight_scale[i].item() * numerator/demoninator
+                            else:
+                                conver_loss += numerator/demoninator
+
 
                     
                     loss = config['ce_loss_lambda'] * loss + config['conver_loss_lambda'] * conver_loss
@@ -653,7 +661,20 @@ class ModelWrapper(nn.Module):
 
                 # update strength params
                 optimizer.zero_grad()
+                pdb.set_trace()
+                loss.backward(retain_graph= True, create_graph= True)
+                gradient_holder= {}
+                with torch.no_grad():
+                    for name, param in peft_model.named_parameters():
+                        if param.requires_grad:
+                            gradient_holder[name] = param.grad.norm(2)
                 loss.backward()
+                with torch.no_grad():
+                    for name, param in peft_model.named_parameters():
+                        if param.requires_grad:
+                            print((gradient_holder[name] - param.grad.norm(2)) **2 )
+                pdb.set_trace()
+
                 optimizer.step()
                 scheduler.step()
 
