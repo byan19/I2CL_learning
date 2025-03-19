@@ -1,0 +1,67 @@
+{
+    "demon": {
+        "run_0": [
+            "Review: [i]f you've been to more than one indie flick in your life , chances are you've already seen this kind of thing .\nSentiment: negative\nReview: a photographic marvel of sorts , and it's certainly an invaluable record of that special fishy community .\nSentiment: positive\nReview: the movie does a good job of laying out some of the major issues that we encounter as we journey through life .\nSentiment: positive\nReview: the ga-zillionth airhead movie about a wife in distress who resorts to desperate measures .\nSentiment: negative\nReview: avary's film never quite emerges from the shadow of ellis' book .\nSentiment: negative\nReview: time out is existential drama without any of the pretension associated with the term .\nSentiment: positive\nReview: bad in such a bizarre way that it's almost worth seeing , if only to witness the crazy confluence of purpose and taste .\nSentiment: negative\nReview: provides an intriguing window into the imagination and hermetic analysis of todd solondz .\nSentiment: positive\nReview: we hate [madonna] within the film's first five minutes , and she lacks the skill or presence to regain any ground .\nSentiment: negative\nReview: filled with alexandre desplat's haunting and sublime music , the movie completely transfixes the audience .\nSentiment: positive\n"
+        ],
+        "run_1": [
+            "Review: the project's filmmakers forgot to include anything even halfway scary as they poorly rejigger fatal attraction into a high school setting .\nSentiment: negative\nReview: maybe thomas wolfe was right : you can't go home again .\nSentiment: positive\nReview: fulfills the minimum requirement of disney animation .\nSentiment: positive\nReview: when the casting call for this movie went out , it must have read 'seeking anyone with acting ambition but no sense of pride or shame . '\nSentiment: negative\nReview: a solid film . . . but more conscientious than it is truly stirring .\nSentiment: negative\nReview: as an introduction to the man's theories and influence , derrida is all but useless ; as a portrait of the artist as an endlessly inquisitive old man , however , it's invaluable .\nSentiment: positive\nReview: the movie would seem less of a trifle if ms . sugarman followed through on her defiance of the saccharine .\nSentiment: negative\nReview: a sequence of ridiculous shoot-'em-up scenes .\nSentiment: negative\nReview: an irresistible combination of a rousing good story set on a truly grand scale .\nSentiment: positive\nReview: 10 minutes into the film you'll be white-knuckled and unable to look away .\nSentiment: positive\n"
+        ],
+        "run_2": [
+            "Review: an occasionally interesting but mostly repetitive look at a slice of counterculture that might be best forgotten .\nSentiment: negative\nReview: rosenthal ( halloween ii ) seems to have forgotten everything he ever knew about generating suspense .\nSentiment: negative\nReview: a well-crafted film that is all the more remarkable because it achieves its emotional power and moments of revelation with restraint and a delicate ambiguity .\nSentiment: positive\nReview: a subtle variation on i spit on your grave in which our purported heroine pathologically avenges a hatred for men .\nSentiment: negative\nReview: a woefully dull , redundant concept that bears more than a whiff of exploitation , despite iwai's vaunted empathy .\nSentiment: negative\nReview: although frailty fits into a classic genre , in its script and execution it is a remarkably original work .\nSentiment: positive\nReview: a moving and important film .\nSentiment: positive\nReview: as gory as the scenes of torture and self-mutilation may be , they are pitted against shimmering cinematography that lends the setting the ethereal beauty of an asian landscape painting .\nSentiment: positive\nReview: gosling creates a staggeringly compelling character , a young man whose sharp intellect is at the very root of his contradictory , self-hating , self-destructive ways .\nSentiment: positive\nReview: given that both movies expect us to root for convicted violent felons over those assigned to protect us from same , we need every bit of sympathy the cons can muster ; this time , there isn't much .\nSentiment: negative\n"
+        ],
+        "run_3": [
+            "Review: schmaltzy and unfunny , adam sandler's cartoon about hanukkah is numbingly bad , little nicky bad , 10 worst list bad .\nSentiment: negative\nReview: only two-fifths of a satisfying movie experience .\nSentiment: negative\nReview: a story which fails to rise above its disgusting source material .\nSentiment: negative\nReview: [has] an immediacy and an intimacy that sucks you in and dares you not to believe it's all true .\nSentiment: positive\nReview: a film about female friendship that men can embrace and women will talk about for hours .\nSentiment: positive\nReview: this is nothing but familiar territory .\nSentiment: negative\nReview: sharp edges and a deep vein of sadness run through its otherwise comic narrative .\nSentiment: positive\nReview: this movie has the usual impossible stunts . . . but it has just as many scenes that are lean and tough enough to fit in any modern action movie .\nSentiment: positive\nReview: just a bunch of good actors flailing around in a caper that's neither original nor terribly funny .\nSentiment: negative\nReview: beating the austin powers films at their own game , this blaxploitation spoof downplays the raunch in favor of gags that rely on the strength of their own cleverness as opposed to the extent of their outrageousness .\nSentiment: positive\n"
+        ],
+        "run_4": [
+            "Review: the corpse count ultimately overrides what little we learn along the way about vicarious redemption .\nSentiment: negative\nReview: it's a decent glimpse into a time period , and an outcast , that is no longer accessible , but it doesn't necessarily shed more light on its subject than the popular predecessor .\nSentiment: negative\nReview: b\u00e9art and berling are both superb , while huppert . . . is magnificent .\nSentiment: positive\nReview: just a bloody mess .\nSentiment: negative\nReview: no one but a convict guilty of some truly heinous crime should have to sit through the master of disguise .\nSentiment: negative\nReview: despite the film's shortcomings , the stories are quietly moving .\nSentiment: positive\nReview: it's better suited for the history or biography channel , but there's no arguing the tone of the movie - it leaves a bad taste in your mouth and questions on your mind .\nSentiment: negative\nReview: skillfully weaves both the elements of the plot and a powerfully evocative mood combining heated sexuality with a haunting sense of malaise .\nSentiment: positive\nReview: it never fails to engage us .\nSentiment: positive\nReview: miyazaki has created such a vibrant , colorful world , it's almost impossible not to be swept away by the sheer beauty of his images .\nSentiment: positive\n"
+        ]
+    },
+    "test_result": {
+        "zero_shot": [],
+        "few_shot": [],
+        "ours": [
+            {
+                "acc": 0.896,
+                "macro_f1": 0.8958333333333334
+            },
+            {
+                "acc": 0.908,
+                "macro_f1": 0.9079985279764475
+            },
+            {
+                "acc": 0.914,
+                "macro_f1": 0.9139831406955763
+            },
+            {
+                "acc": 0.922,
+                "macro_f1": 0.9219622297191841
+            },
+            {
+                "acc": 0.904,
+                "macro_f1": 0.904
+            },
+            {
+                "acc_mean": 0.9088,
+                "acc_std": 0.008818163074019449,
+                "macro_f1_mean": 0.9087554463449082,
+                "macro_f1_std": 0.0088534300173298
+            }
+        ]
+    },
+    "time": {
+        "calibrate": [
+            53.793694257736206,
+            51.669814348220825,
+            55.7752788066864,
+            53.63519835472107,
+            53.802886962890625
+        ],
+        "evaluate": [
+            40.27659034729004,
+            40.27794361114502,
+            40.247828245162964,
+            40.25958800315857,
+            40.290563344955444
+        ]
+    }
+}
