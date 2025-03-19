@@ -663,8 +663,18 @@ class ModelWrapper(nn.Module):
                 optimizer.zero_grad()
                 pdb.set_trace()
                 loss.backward(retain_graph= True, create_graph= True)
+                gradient_holder= {}
+                with torch.no_grad():
+                    for name, param in peft_model.named_parameters():
+                        if param.requires_grad:
+                            gradient_holder[name] = param.grad.norm(2)
                 loss.backward()
-                
+                with torch.no_grad():
+                    for name, param in peft_model.named_parameters():
+                        if param.requires_grad:
+                            print((gradient_holder[name] - param.grad.norm(2)) **2 )
+                pdb.set_trace()
+
                 optimizer.step()
                 scheduler.step()
 
