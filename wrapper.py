@@ -625,9 +625,21 @@ class ModelWrapper(nn.Module):
                     epoch_loss.append(loss.item())
 
                     conver_loss = 0.0
-                    for  i in range(1, len(hidden_states)-1):
-                        conver_loss += torch.nn.functional.mse_loss(hidden_states[i][torch.arange(logits.size(0)), pred_loc]
-                                                                    ,hidden_states[i+1][torch.arange(logits.size(0)), pred_loc] )
+                    if config['conv_loss']:
+                        for  i in range(1, len(hidden_states)-1):
+                            conver_loss += torch.nn.functional.mse_loss(hidden_states[i][torch.arange(logits.size(0)), pred_loc]
+                                                                        ,hidden_states[i+1][torch.arange(logits.size(0)), pred_loc] )
+                    elif config['conv_loss_regular']:
+                        for  i in range(2, len(hidden_states)-1):
+                            numerator = torch.nn.functional.mse_loss(hidden_states[i][torch.arange(logits.size(0)), pred_loc]
+                                                                        ,hidden_states[i+1][torch.arange(logits.size(0)), pred_loc] )
+                            
+                            demoninator =  torch.nn.functional.mse_loss(hidden_states[i][torch.arange(logits.size(0)), pred_loc]
+                                                                        ,hidden_states[i-1][torch.arange(logits.size(0)), pred_loc] )
+                            conver_loss += numerator/demoninator
+                            
+
+                    
 
                     loss = config['ce_loss_lambda'] * loss + config['conver_loss_lambda'] * conver_loss
 
