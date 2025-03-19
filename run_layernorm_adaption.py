@@ -42,6 +42,7 @@ def main(args):
     # set comprare metric
     args.metric = args.config['metric']
     # get save dir
+    
     utils.init_exp_path(args, args.config['exp_name'])
 
     # load datasets
@@ -182,7 +183,6 @@ def main(args):
 
     del model_wrapper, model, tokenizer, train_dataset, test_dataset, cali_dataset
     del test_evaluator, result_dict, demon_list
-            
 
 # get args
 def get_args():
