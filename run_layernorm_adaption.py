@@ -206,6 +206,7 @@ if __name__ == "__main__":
 
     for model_name, dataset_name in combinations:
         run_task('0', config, model_name, dataset_name)  # without parallelisation
+        
     print(f' total running time: {(time.time() - start_time)/3600: .4f} hours ')
 
 
