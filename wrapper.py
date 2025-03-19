@@ -593,9 +593,11 @@ class ModelWrapper(nn.Module):
 
         # train
         loss_list = []
+        conv_loss_list = []
         all_data_index = list(range(len(all_data)))
         for _ in range(epochs):
             epoch_loss = []
+            epoch_conv_loss = []
             np.random.shuffle(all_data_index)
             for i in range(0, len(all_data), batch_size):
                 batch_index = all_data_index[i: i + batch_size]
@@ -645,9 +647,10 @@ class ModelWrapper(nn.Module):
                                 conver_loss += weight_scale[i].item() * numerator/demoninator
                             else:
                                 conver_loss += numerator/demoninator
-
-
                     
+                    
+                    
+                    epoch_conv_loss.append(conver_loss.item())
                     loss = config['ce_loss_lambda'] * loss + config['conver_loss_lambda'] * conver_loss
 
                 else:
@@ -682,6 +685,9 @@ class ModelWrapper(nn.Module):
 
             epoch_loss = np.mean(epoch_loss)
             loss_list.append(epoch_loss)
+            if config['conver_bound']:
+                epoch_conv_loss = np.mean(epoch_conv_loss)
+                conv_loss_list.append(epoch_conv_loss)
 
 
         # fronzen all learnable strength params
@@ -691,6 +697,7 @@ class ModelWrapper(nn.Module):
         self.model.eval()
         # plot loss curve and save it
         utils.plot_loss_curve(loss_list, save_dir + f'/{run_name}_loss_curve.png')
+        utils.plot_loss_curve(conv_loss_list, save_dir + f'/{run_name}_conv_loss_curve.png')
 
     def layernorm_adaptation_additional_learn(self, config, dataset, save_dir=None, run_name=None):
         print(inspect.currentframe().f_code.co_name)
@@ -780,9 +787,11 @@ class ModelWrapper(nn.Module):
 
         # train
         loss_list = []
+        conv_loss_list = []
         all_data_index = list(range(len(all_data)))
         for _ in range(epochs):
             epoch_loss = []
+            epoch_conv_loss = []
             np.random.shuffle(all_data_index)
             for i in range(0, len(all_data), batch_size):
                 batch_index = all_data_index[i: i + batch_size]
@@ -815,6 +824,8 @@ class ModelWrapper(nn.Module):
                     for  i in range(1, len(hidden_states)-1):
                         conver_loss += torch.nn.functional.mse_loss(hidden_states[i][torch.arange(logits.size(0)), pred_loc]
                                                                     ,hidden_states[i+1][torch.arange(logits.size(0)), pred_loc] )
+                    
+                    epoch_conv_loss.append(conver_loss.item())
 
                     loss = config['ce_loss_lambda'] * loss + config['conver_loss_lambda'] * conver_loss
 
@@ -835,6 +846,10 @@ class ModelWrapper(nn.Module):
 
             epoch_loss = np.mean(epoch_loss)
             loss_list.append(epoch_loss)
+            
+            if config['conver_bound']:
+                epoch_conv_loss = np.mean(epoch_conv_loss)
+                conv_loss_list.append(epoch_conv_loss)
 
 
         # fronzen all learnable strength params
@@ -844,6 +859,8 @@ class ModelWrapper(nn.Module):
         self.model.eval()
         # plot loss curve and save it
         utils.plot_loss_curve(loss_list, save_dir + f'/{run_name}_loss_curve.png')
+        utils.plot_loss_curve(conv_loss_list, save_dir + f'/{run_name}_conv_loss_curve.png')
+    
     def layernorm_adaptation(self, config, dataset, save_dir=None, run_name=None):
         pt_config = LNTuningConfig(task_type=TaskType.CAUSAL_LM)
         peft_model = get_peft_model(self.model, pt_config)
