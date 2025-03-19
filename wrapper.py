@@ -597,7 +597,6 @@ class ModelWrapper(nn.Module):
         for _ in range(epochs):
             epoch_loss = []
             np.random.shuffle(all_data_index)
-            batch_size = 4
             for i in range(0, len(all_data), batch_size):
                 batch_index = all_data_index[i: i + batch_size]
                 batch_data = [all_data[idx] for idx in batch_index]
@@ -662,7 +661,7 @@ class ModelWrapper(nn.Module):
 
                 # update strength params
                 optimizer.zero_grad()
-                
+                pdb.set_trace()
                 loss.backward(retain_graph= True, create_graph= True)
                 loss.backward()
                 
