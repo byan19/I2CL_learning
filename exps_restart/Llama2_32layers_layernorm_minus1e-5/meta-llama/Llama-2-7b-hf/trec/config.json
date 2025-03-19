@@ -1,0 +1,52 @@
+{
+    "exp_name": "exps_restart/Llama2_32layers_layernorm_minus1e-5",
+    "gpus": [
+        "0"
+    ],
+    "models": [
+        "meta-llama/Llama-2-7b-hf"
+    ],
+    "datasets": [
+        "agnews",
+        "dbpedia",
+        "sst5",
+        "trec",
+        "sst2",
+        "subj",
+        "mr",
+        "hate_speech18",
+        "emo"
+    ],
+    "seed": 42,
+    "run_num": 5,
+    "run_baseline": false,
+    "metric": "acc",
+    "bs": 1,
+    "load_in_8bit": false,
+    "use_cache": true,
+    "example_separator": "\n",
+    "shot_per_class": 5,
+    "test_data_num": 500,
+    "sample_method": "uniform",
+    "add_extra_query": false,
+    "pt_config": {
+        "task_type": "CAUSAL_LM",
+        "num_virtual_tokens": 1,
+        "num_layers": 32
+    },
+    "epochs": 30,
+    "optim": "sgd",
+    "grad_bs": 1,
+    "lr": 0.001,
+    "wd": 0.001,
+    "rho": 0.0001,
+    "sharpness_aware": false,
+    "sharpness_aware_approx": true,
+    "additional_layernorm_layer": false,
+    "post_attention": false,
+    "input_attention": true,
+    "conver_bound": true,
+    "conver_loss_lambda": -1e-05,
+    "additional_layernorm_mode": "add",
+    "ce_loss_lambda": 1.0
+}
