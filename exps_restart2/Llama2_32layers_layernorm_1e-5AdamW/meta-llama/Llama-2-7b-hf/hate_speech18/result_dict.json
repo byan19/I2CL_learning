@@ -1,0 +1,67 @@
+{
+    "demon": {
+        "run_0": [
+            "Text: Depending on which part of Scotland you 're going to I might have some bad news for you about the Kaffirs .\nLabel: hate\nText: Who said we invented literally EVERYTHING useful ?\nLabel: neutral\nText: My Home Town is overran with spics and sec 8 coons at this junction .\nLabel: hate\nText: No wonder we are in such bad shape with this tribe in charge of the White House and Congress .\nLabel: hate\nText: From Norway to the Fareo Islands and then onto Iceland .\nLabel: neutral\nText: Come to Bromsgrove and I 'll be more than happy to give you a tour of the West Midlands and the History of Heavy Metal We have the Malvern Hills one of Englands most beautiful places\nLabel: neutral\nText: If it 's brown , flush it down .\nLabel: hate\nText: A man in charge of an organization that is so hated like the KKK should have been more careful .\nLabel: neutral\nText: I would love to hear her do this song today .\nLabel: neutral\nText: Who the hell cares if its not kosher ...\nLabel: hate\n"
+        ],
+        "run_1": [
+            "Text: -- Palatka police said a woman is recovering after two men brutally attacked her inside her home early Wednesday morning .\nLabel: neutral\nText: A puppet in the hands of the Jews were Zionist Jewish States of America and the Bolshevik Soviet Union .\nLabel: hate\nText: JAPs are a total hoot , each the center of the universe , loud , brash , vain , arrogant . . .\nLabel: hate\nText: no, no. the immigrants stayed out of the ROI until taoiseach charlie haughey opened up our economy in the early 1990s .\nLabel: neutral\nText: Teacher caught selling drugs at school .\nLabel: neutral\nText: If you want to hear what a black `` intellectual '' ( lol ) sounds like , check out the woman in this video trying to debate Dr. William Shockley .\nLabel: hate\nText: I 've gone through corn mazes as well .\nLabel: neutral\nText: Ethnic crime never ends it seems .\nLabel: hate\nText: When I watch things like this I pray God will have vengeance on these sub humans even if they have asked for forgiveness .\nLabel: hate\nText: Here is another view of this very thing : Song of Albion There are some really good words of advice for White Nationalists in the last chapter ... should get some people talking .\nLabel: neutral\n"
+        ],
+        "run_2": [
+            "Text: No the truth 88-----WHITE POWER------WHITE VICTORY------WHITE PRIDE-----88\nLabel: hate\nText: Here is your logic : some whites are corrupt whores for Jewish supremacists , therefore Whites should not oppose Jewish supremacist extermination of all Whites and JS efforts to control humanity 's future .\nLabel: hate\nText: I 'm not a nig and need a day off to smoke blunts and drink 40 ouncers .\nLabel: hate\nText: Now I 'm motivated !\nLabel: neutral\nText: There are things we can do to stop the rapes that occur when blacks and other non whites con white women and girls into getting in cars with them etc For a start teach our women to respect themselves .\nLabel: hate\nText: A Government of Wolves : The Emerging American Police State A Government of Wolves : The Emerging American Police State\nLabel: neutral\nText: Considering this is stormfront I 'd say we are all in agreement that we highly prefer white children to anything else ....\nLabel: neutral\nText: THANKS AGAIN !\nLabel: neutral\nText: Be sure to make note of the new address to buy things from The Knights !\nLabel: neutral\nText: If it 's black , send it back .\nLabel: hate\n"
+        ],
+        "run_3": [
+            "Text: Holding up signs that say `` God hates fags '' is a bit much .\nLabel: neutral\nText: To hell with making a stand , i think we should all go to the southwest and go on the offenceive and drive every race down into Mexico .\nLabel: hate\nText: WE GOT MONEY AROUND HERE TOO Compton Crips Pt.1 - YouTube These negroes are in the middle of the street , seems like something of a zoo , playing with their cheap lowriders .\nLabel: hate\nText: Which is why you build them far away from silos , cities and targets of interest to a 1st world nuclear adversary .\nLabel: neutral\nText: Get over watching monkeys throw a ball around and get a real hobby for God 's sake .\nLabel: hate\nText: Aragorn\nLabel: neutral\nText: A 750 lb boat with a 280 hp motor .\nLabel: neutral\nText: I'm young and viciously angry I 'm not going to lie or apologize for my actions i treat non whites like utter crap and i always have and always will they are n't human in my eyes Anyone who tries to wipe out my race and culture will be met by hostility by me any race who rape and abuse their and my women will be met by hostility and contempt by me WPWW\nLabel: hate\nText: Once the negros start coming in bunches it will be a hellhole and the whites will have to leave again and start a new community .\nLabel: hate\nText: When I was at school my classmates thought it would be hilarious if they took Hitlers Body and put my head on top of it , then give them out to all the teachers .\nLabel: neutral\n"
+        ],
+        "run_4": [
+            "Text: This is unforgivable .\nLabel: neutral\nText: I have to help I WILL NOT see these animals go free !!\nLabel: hate\nText: But if White people find a user for a plant native to Africa , the negroes want a royalty .\nLabel: hate\nText: If I feel threatened especially by these fools you can bet I 'll be just as quick to kill as they are .\nLabel: hate\nText: They mutilate their own , and they do their best to see to it that those whom they see as their goyim slaves are also marked ....\nLabel: hate\nText: YouTube - Ukraine in WW2\nLabel: neutral\nText: If that Nigerian bitch thinks she will be elected in Tallaght , she is in for a rude awakening .\nLabel: hate\nText: All in all , it was a good day .\nLabel: neutral\nText: `` Final fried chicken delivery truck leaves for Detroit ( never to be seen again ) . ''\nLabel: neutral\nText: Welcome, its always great to see new members on .\nLabel: neutral\n"
+        ]
+    },
+    "test_result": {
+        "zero_shot": [],
+        "few_shot": [],
+        "ours": [
+            {
+                "acc": 0.762,
+                "macro_f1": 0.7618847522200745
+            },
+            {
+                "acc": 0.702,
+                "macro_f1": 0.6962147129942627
+            },
+            {
+                "acc": 0.798,
+                "macro_f1": 0.7979021846573742
+            },
+            {
+                "acc": 0.712,
+                "macro_f1": 0.7014479773100464
+            },
+            {
+                "acc": 0.746,
+                "macro_f1": 0.7431136246869829
+            },
+            {
+                "acc_mean": 0.744,
+                "acc_std": 0.03473326935374788,
+                "macro_f1_mean": 0.7401126503737482,
+                "macro_f1_std": 0.038064803658104045
+            }
+        ]
+    },
+    "time": {
+        "calibrate": [
+            40.61290097236633,
+            50.278510332107544,
+            42.656927824020386,
+            54.76754331588745,
+            42.51663422584534
+        ],
+        "evaluate": [
+            38.321770668029785,
+            38.28778290748596,
+            38.26321220397949,
+            38.28478002548218,
+            38.31538987159729
+        ]
+    }
+}
