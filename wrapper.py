@@ -626,7 +626,7 @@ class ModelWrapper(nn.Module):
 
                     conver_loss = 0.0
                     weight_scale = [hold for hold in range(1, len(hidden_states)-1)]
-                    weight_scale = torch.softmax(torch.from_numpy(np.asarray(weight_scale)/config['conver_loss_regular_temp']))
+                    weight_scale = torch.softmax(torch.from_numpy(np.asarray(weight_scale)/config['conver_loss_regular_temp']), dim =0)
                     
                     
                     if config['conver_loss']:
