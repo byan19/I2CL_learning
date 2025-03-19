@@ -625,11 +625,11 @@ class ModelWrapper(nn.Module):
                     epoch_loss.append(loss.item())
 
                     conver_loss = 0.0
-                    if config['conv_loss']:
+                    if config['conver_loss']:
                         for  i in range(1, len(hidden_states)-1):
                             conver_loss += torch.nn.functional.mse_loss(hidden_states[i][torch.arange(logits.size(0)), pred_loc]
                                                                         ,hidden_states[i+1][torch.arange(logits.size(0)), pred_loc] )
-                    elif config['conv_loss_regular']:
+                    elif config['conver_loss_regular']:
                         for  i in range(2, len(hidden_states)-1):
                             numerator = torch.nn.functional.mse_loss(hidden_states[i][torch.arange(logits.size(0)), pred_loc]
                                                                         ,hidden_states[i+1][torch.arange(logits.size(0)), pred_loc] )
