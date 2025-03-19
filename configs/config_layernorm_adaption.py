@@ -46,6 +46,6 @@ config['additional_layernorm_layer'] = False
 config['post_attention'] = False
 config['input_attention'] = True
 config['conver_bound'] = True
-config['conver_loss_lambda'] = -1e-5
+config['conver_loss_lambda'] = 1e-5
 config['additional_layernorm_mode'] = 'add'
 config['ce_loss_lambda'] = 1.0
