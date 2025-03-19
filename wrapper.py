@@ -661,7 +661,7 @@ class ModelWrapper(nn.Module):
 
                 # update strength params
                 optimizer.zero_grad()
-                pdb.set_trace()
+                '''
                 loss.backward(retain_graph= True, create_graph= True)
                 gradient_holder= {}
                 with torch.no_grad():
@@ -674,6 +674,8 @@ class ModelWrapper(nn.Module):
                         if param.requires_grad:
                             print((gradient_holder[name] - param.grad.norm(2)) **2 )
                 pdb.set_trace()
+                '''
+                loss.backward()
 
                 optimizer.step()
                 scheduler.step()
