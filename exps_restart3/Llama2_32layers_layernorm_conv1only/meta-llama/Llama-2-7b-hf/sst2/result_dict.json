@@ -1,0 +1,67 @@
+{
+    "demon": {
+        "run_0": [
+            "Review: ca n't miss it . \nSentiment: positive\nReview: bolado credit for good intentions \nSentiment: positive\nReview: with serious ideas \nSentiment: positive\nReview: , stop eric schaeffer before he makes another film . \nSentiment: negative\nReview: a college keg party \nSentiment: negative\nReview: a paint-by-numbers picture \nSentiment: negative\nReview: even the filmmakers did n't know what kind of movie they were making \nSentiment: negative\nReview: easily accessible stories \nSentiment: positive\nReview: just about the surest bet \nSentiment: positive\nReview: uncompromising , difficult \nSentiment: negative\n"
+        ],
+        "run_1": [
+            "Review: , that 'll be much funnier than anything in the film ... \nSentiment: negative\nReview: non-stop funny feast \nSentiment: positive\nReview: an artful yet depressing film that makes a melodramatic mountain out of the molehill of a missing bike \nSentiment: negative\nReview: it 's not too much of anything . \nSentiment: negative\nReview: with a lighthearted glow , some impudent snickers , and a glorious dose of humankind 's liberating ability \nSentiment: positive\nReview: as a detailed personal portrait and as a rather frightening examination of modern times \nSentiment: positive\nReview: his own infinite insecurity is a work of outstanding originality \nSentiment: positive\nReview: many conclusive answers in the film \nSentiment: positive\nReview: offers no new insight on the matter , \nSentiment: negative\nReview: deserve better \nSentiment: negative\n"
+        ],
+        "run_2": [
+            "Review: as gamely as the movie tries to make sense of its title character , there remains a huge gap between the film 's creepy \nSentiment: negative\nReview: all over the map thematically and stylistically , and borrows heavily from lynch , jeunet , and von trier while failing to find a spark of its own \nSentiment: negative\nReview: enjoyment to be had from films crammed with movie references \nSentiment: positive\nReview: meyjes ' provocative film might be called an example of the haphazardness of evil . \nSentiment: positive\nReview: when he goes out into public , to avoid being recognized as the man who bilked unsuspecting moviegoers \nSentiment: negative\nReview: even more predictable , cliche-ridden \nSentiment: negative\nReview: insightful \nSentiment: positive\nReview: put to perfect use in the breathtakingly beautiful outer-space documentary space station 3d \nSentiment: positive\nReview: you 'll love it and probably want to see it twice . \nSentiment: positive\nReview: that no amount of earnest textbook psychologizing can bridge \nSentiment: negative\n"
+        ],
+        "run_3": [
+            "Review: labors as storytelling . \nSentiment: negative\nReview: infidelity and \nSentiment: negative\nReview: a good deal \nSentiment: positive\nReview: its oh-so-hollywood rejiggering and its conventional direction to give the film a soul and an unabashed sense of good old-fashioned escapism \nSentiment: positive\nReview: make the film more silly than scary \nSentiment: negative\nReview: oftentimes funny , yet \nSentiment: positive\nReview: turn down a big bowl of that \nSentiment: negative\nReview: been any easier to sit through than this hastily dubbed disaster \nSentiment: negative\nReview: of color , music , and dance that only the most practiced curmudgeon could fail to crack a smile at \nSentiment: positive\nReview: a zany mix of saturday night live-style parody , '70s blaxploitation films and goofball action comedy gone wild \nSentiment: positive\n"
+        ],
+        "run_4": [
+            "Review: surprisingly similar \nSentiment: negative\nReview: to mention leaving you with some laughs and a smile on your face \nSentiment: positive\nReview: eloquent ( meditation ) on death \nSentiment: positive\nReview: speaks volumes , offering up a hallucinatory dreamscape that frustrates and captivates \nSentiment: positive\nReview: what an idea , what a thrill ride \nSentiment: positive\nReview: an equally miserable film the following year \nSentiment: negative\nReview: with talent \nSentiment: positive\nReview: poky \nSentiment: negative\nReview: a movie with no reason for being \nSentiment: negative\nReview: bogs down in insignificance \nSentiment: negative\n"
+        ]
+    },
+    "test_result": {
+        "zero_shot": [],
+        "few_shot": [],
+        "ours": [
+            {
+                "acc": 0.5,
+                "macro_f1": 0.3333333333333333
+            },
+            {
+                "acc": 0.5,
+                "macro_f1": 0.3333333333333333
+            },
+            {
+                "acc": 0.5,
+                "macro_f1": 0.3333333333333333
+            },
+            {
+                "acc": 0.5,
+                "macro_f1": 0.3333333333333333
+            },
+            {
+                "acc": 0.5,
+                "macro_f1": 0.3333333333333333
+            },
+            {
+                "acc_mean": 0.5,
+                "acc_std": 0.0,
+                "macro_f1_mean": 0.3333333333333333,
+                "macro_f1_std": 0.0
+            }
+        ]
+    },
+    "time": {
+        "calibrate": [
+            34.65410327911377,
+            35.751819133758545,
+            36.083935022354126,
+            35.742618560791016,
+            34.203933238983154
+        ],
+        "evaluate": [
+            29.87906503677368,
+            29.97943639755249,
+            30.074381828308105,
+            30.00972843170166,
+            30.006794214248657
+        ]
+    }
+}
