@@ -645,7 +645,8 @@ class ModelWrapper(nn.Module):
                             if config['conver_loss_regular_expo']:
                                 conver_loss += weight_scale[i].item() * numerator/demoninator
                             else:
-                                conver_loss += numerator/demoninator
+                                conver_loss += torch.log(numerator/demoninator)
+                                
                     
                     
                     
