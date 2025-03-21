@@ -54,5 +54,5 @@ config['additional_layernorm_mode'] = 'add'
 config['conver_loss'] = False
 config['conver_loss_regular'] = True
 config['conver_loss_regular_expo'] = True
-config['conver_loss_regular_temp'] = 100
+config['conver_loss_regular_temp'] = 1000
 
