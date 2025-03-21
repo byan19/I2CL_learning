@@ -31,8 +31,8 @@ Tunning=${Tunning_list[$idx]}
 
 sessionname=I2CL_contextlearning_dyt_learning
 sessionname=I2CL_contextlearning_layernorm_regular_convloss
-sessionname=I2CL_contextlearning_alllayernorm_convregular1e-2
-sessionname=I2CL_alllayernorm_convregular1e-2only
+sessionname=I2CL_contextlearning_alllayernorm_convregular1e-3
+sessionname=I2CL_alllayernorm_convregular1e-3
 File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
 
 MultiRun ${sessionname} ${File} ${Param} ${Tunning}
