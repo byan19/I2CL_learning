@@ -582,6 +582,7 @@ class ModelWrapper(nn.Module):
         # get all data
         all_data = dataset.all_data
 
+        pdb.set_trace()
         # init lr_scheduler
         epochs, batch_size = config['epochs'], config['grad_bs']
         total_steps = epochs * len(all_data) // batch_size
