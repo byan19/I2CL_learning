@@ -612,55 +612,77 @@ class ModelWrapper(nn.Module):
                 input_ids = input_tok['input_ids'].to(self.device)
                 attn_mask = input_tok['attention_mask'].to(self.device)
                 pred_loc = utils.last_one_indices(attn_mask).to(self.device)
+                
+                ######################
                 # forward
-                if config['conver_bound']:
-                    print('working on the convergence bound and sharp approxy')
-                    output = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
-                    logits = output.logits
-                    hidden_states = output.hidden_states
-                    pred_logits = logits[torch.arange(logits.size(0)), pred_loc]
-                    # get loss
-                    gt_label = torch.tensor([label_map[label] for label in batch_label]).to(self.device)
-                    #loss = F.cross_entropy(pred_logits, gt_label, reduction='mean')
-                    
-                    loss = utils.entropy_from_logits(pred_logits).mean()
-                    #loss = torch.tensor(0.0)
-                    #epoch_loss.append(loss.item())
-
-                    conver_loss = 0.0
-                    weight_scale = [hold for hold in range(1, len(hidden_states))]
-                    weight_scale = torch.softmax(torch.from_numpy(np.asarray(weight_scale)/config['conver_loss_regular_temp']), dim =0)
-                    
-                    
-                    if config['conver_loss']:
-                        for  i in range(1, len(hidden_states)-1):
-                            conver_loss += torch.nn.functional.mse_loss(hidden_states[i][torch.arange(logits.size(0)), pred_loc]
-                                                                        ,hidden_states[i+1][torch.arange(logits.size(0)), pred_loc] )
-                    elif config['conver_loss_regular']:
-                        for  i in range(2, len(hidden_states)-1):
-                            numerator = torch.nn.functional.mse_loss(hidden_states[i][torch.arange(logits.size(0)), pred_loc]
-                                                                        ,hidden_states[i+1][torch.arange(logits.size(0)), pred_loc] )
-                            
-                            demoninator =  torch.nn.functional.mse_loss(hidden_states[i][torch.arange(logits.size(0)), pred_loc]
-                                                                        ,hidden_states[i-1][torch.arange(logits.size(0)), pred_loc] )
-                            
-                            if config['conver_loss_regular_expo']:
-                                conver_loss += weight_scale[i].item() * numerator/demoninator
-                            else:
-                                #conver_loss += torch.log(numerator/demoninator)
-                                conver_loss += numerator/demoninator
-
-                    epoch_conv_loss.append(conver_loss.item())
-                    loss = config['ce_loss_lambda'] * loss + config['conver_loss_lambda'] * conver_loss
-
-                else:
-                    logits = self.model(input_ids=input_ids, attention_mask=attn_mask).logits
-                    # get prediction logits
-                    pred_logits = logits[torch.arange(logits.size(0)), pred_loc]
-                    # get loss
-                    gt_label = torch.tensor([label_map[label] for label in batch_label]).to(self.device)
+                ######################
+                print('working on the convergence bound and sharp approxy')
+                output = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
+                logits = output.logits
+                hidden_states = output.hidden_states
+                pred_logits = logits[torch.arange(logits.size(0)), pred_loc]
+                # get loss
+                gt_label = torch.tensor([label_map[label] for label in batch_label]).to(self.device)
+                if not config['entropy_loss']:
                     loss = F.cross_entropy(pred_logits, gt_label, reduction='mean')
-                    epoch_loss.append(loss.item())
+                else:
+                    loss = utils.entropy_from_logits(pred_logits).mean()
+                #loss = torch.tensor(0.0)
+                #epoch_loss.append(loss.item())
+
+                conver_loss = 0.0
+                weight_scale = [hold for hold in range(1, len(hidden_states))]
+                weight_scale = torch.softmax(torch.from_numpy(np.asarray(weight_scale)/config['conver_loss_regular_temp']), dim =0)
+                
+                
+                if config['conver_loss']:
+                    for  i in range(1, len(hidden_states)-1):
+                        conver_loss += torch.nn.functional.mse_loss(hidden_states[i][torch.arange(logits.size(0)), pred_loc]
+                                                                    ,hidden_states[i+1][torch.arange(logits.size(0)), pred_loc] )
+                        
+                    loss = config['ce_loss_lambda'] * loss + config['conver_loss_lambda'] * conver_loss
+                    epoch_conv_loss.append(conver_loss.item())
+                elif config['conver_loss_regular']:
+                    for  i in range(2, len(hidden_states)-1):
+                        numerator = torch.nn.functional.mse_loss(hidden_states[i][torch.arange(logits.size(0)), pred_loc]
+                                                                    ,hidden_states[i+1][torch.arange(logits.size(0)), pred_loc] )
+                        
+                        demoninator =  torch.nn.functional.mse_loss(hidden_states[i][torch.arange(logits.size(0)), pred_loc]
+                                                                    ,hidden_states[i-1][torch.arange(logits.size(0)), pred_loc] )
+                        
+                        if config['conver_loss_regular_expo']:
+                            conver_loss += weight_scale[i].item() * numerator/demoninator
+                        else:
+                            #conver_loss += torch.log(numerator/demoninator)
+                            conver_loss += numerator/demoninator
+                
+                    loss = config['ce_loss_lambda'] * loss + config['conver_loss_lambda'] * conver_loss
+                    epoch_conv_loss.append(conver_loss.item())
+                
+                if config['pushing_loss']:
+                    pushing_loss = 0.0
+                    for i in range(2, len(hidden_states) - 1):
+                        numerator = torch.nn.functional.mse_loss(
+                            hidden_states[i][torch.arange(logits.size(0)), pred_loc]
+                            , hidden_states[1][torch.arange(logits.size(0)), pred_loc])
+                        
+                        demoninator = torch.nn.functional.mse_loss(
+                            hidden_states[i+1][torch.arange(logits.size(0)), pred_loc]
+                            , hidden_states[1][torch.arange(logits.size(0)), pred_loc])
+                        pushing_loss += numerator / demoninator
+                    
+                    loss += config['pushing_loss_lambda'] * pushing_loss
+                    
+                
+                '''
+                logits = self.model(input_ids=input_ids, attention_mask=attn_mask).logits
+                # get prediction logits
+                pred_logits = logits[torch.arange(logits.size(0)), pred_loc]
+                # get loss
+                gt_label = torch.tensor([label_map[label] for label in batch_label]).to(self.device)
+                loss = F.cross_entropy(pred_logits, gt_label, reduction='mean')
+                epoch_loss.append(loss.item())
+                '''
 
                 # update strength params
                 optimizer.zero_grad()
@@ -685,7 +707,7 @@ class ModelWrapper(nn.Module):
 
             epoch_loss = np.mean(epoch_loss)
             loss_list.append(epoch_loss)
-            if config['conver_bound']:
+            if config['conver_bound'] or config['conver_loss_regular']:
                 epoch_conv_loss = np.mean(epoch_conv_loss)
                 conv_loss_list.append(epoch_conv_loss)
 
@@ -697,7 +719,8 @@ class ModelWrapper(nn.Module):
         self.model.eval()
         # plot loss curve and save it
         utils.plot_loss_curve(loss_list, save_dir + f'/{run_name}_loss_curve.png')
-        utils.plot_loss_curve(conv_loss_list, save_dir + f'/{run_name}_conv_loss_curve.png')
+        if config['conver_bound'] or config['conver_loss_regular']:
+            utils.plot_loss_curve(conv_loss_list, save_dir + f'/{run_name}_conv_loss_curve.png')
 
     def layernorm_adaptation_additional_learn(self, config, dataset, save_dir=None, run_name=None):
         print(inspect.currentframe().f_code.co_name)
