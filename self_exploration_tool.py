@@ -111,19 +111,18 @@ def override_rmsnorm_with_dyt_forward(module, alpha=1.0):
     module.register_parameter("dyt_alpha", nn.Parameter(torch.ones(1) * alpha))
     '''
     module.register_parameter("dyt_gamma", nn.Parameter(torch.ones_like(module.weight)))
-    module.register_parameter("dyt_beta", nn.Parameter(torch.zeros_like(module.weight)))
     module.register_parameter("dyt_alpha", nn.Parameter(torch.tensor(alpha)))
 
     # Define the DyT-style forward
     def dyt_forward(self, hidden_states):
         # Normalize input (same as original LlamaRMSNorm)
-        variance = hidden_states.pow(2).mean(-1, keepdim=True)
-        normed = hidden_states / torch.sqrt(variance + self.variance_epsilon)
+        #variance = hidden_states.pow(2).mean(-1, keepdim=True)
+        #normed = hidden_states / torch.sqrt(variance + self.variance_epsilon)
 
         # Apply DyT transform: tanh(α * x), then affine γ, β
         #print('in myself dyt implementation')
-        transformed = torch.tanh(self.dyt_alpha * normed)
-        return self.dyt_gamma * transformed + self.dyt_beta
+        transformed = torch.tanh(self.dyt_alpha * hidden_states)
+        return self.dyt_gamma * transformed
 
     # Replace the forward function
     module.forward = MethodType(dyt_forward, module)
