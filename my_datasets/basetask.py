@@ -103,6 +103,7 @@ class BaseTask(Dataset):
         if hasattr(self, 'class_num') and self.class_num is not None:  # if class number is provided
             assert shot_num == -1 or shot_num == 0 or shot_num >= self.class_num, "Shot number should be at least larger than the number of classes!"
             class_num = self.class_num
+            print(f'the number of categories is {class_num}')
             # get label dict
             label_dict = {label: [] for label in range(class_num)}
             for index, data in enumerate(self.all_data):

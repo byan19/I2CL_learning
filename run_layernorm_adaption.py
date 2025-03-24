@@ -99,6 +99,8 @@ def main(args):
                                                  add_extra_query=args.config['add_extra_query'],
                                                  example_separator=args.config['example_separator'],
                                                  return_data_index=True, seed=random.randint(0, 1e6))
+        
+        pdb.set_trace()
 
         if args.config['add_extra_query']:
             first_format_anchor = train_dataset.get_dmonstration_template()['format'][0]
@@ -129,6 +131,7 @@ def main(args):
 
         # prepare peft_train_dataset
         cali_dataset = copy.deepcopy(train_dataset)
+        pdb.set_trace()
         cali_dataset.all_data = [train_dataset.all_data[i] for i in demon_data_index]
 
         # train sharpness_aware
