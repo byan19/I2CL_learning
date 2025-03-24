@@ -25,6 +25,7 @@ Param=${Target_Para_List[$idx]}
 Tunning=${Tunning_list[$idx]}
 
 sessionname=I2CL_contextlearning_layernorm_entropy
+sessionname=I2CL_contextlearning_layernorm_pusingloss
 File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
 
 CHECK=${sessionname}
