@@ -622,8 +622,9 @@ class ModelWrapper(nn.Module):
                     # get loss
                     gt_label = torch.tensor([label_map[label] for label in batch_label]).to(self.device)
                     loss = F.cross_entropy(pred_logits, gt_label, reduction='mean')
+                    loss = utils.entropy_from_logits(logits).mean()
                     #loss = torch.tensor(0.0)
-                    epoch_loss.append(loss.item())
+                    #epoch_loss.append(loss.item())
 
                     conver_loss = 0.0
                     weight_scale = [hold for hold in range(1, len(hidden_states))]

@@ -27,6 +27,12 @@ def set_device(gpu_id):
     torch.cuda.set_device(device)
     return device
 
+def entropy_from_logits(logits, dim=-1):
+    probs = F.softmax(logits, dim=dim)  # convert logits to probabilities
+    log_probs = F.log_softmax(logits, dim=dim)  # log of softmax for numerical stability
+    entropy = -torch.sum(probs * log_probs, dim=dim)
+    return entropy
+
 
 def init_exp_path(args, exp_name, separate_dataset=True):
     if separate_dataset:
