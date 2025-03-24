@@ -9,7 +9,7 @@ config = {}
 #config['exp_name'] = 'exps_restart/Llama2_32layers_layernorm_conv_ratio_normaliser_debug'
 #config['exp_name'] = 'exps_restart2/Llama2_32layers_layernorm_1e-5AdamW'
 #config['exp_name'] = 'exps_restart3/Llama2_32layers_allLN_convregular1e-2_trajcontroltmp10'
-config['exp_name'] = 'exps_restart3/Llama2_32layers_allLN_convregular1e-2_log'
+config['exp_name'] = 'exps_restart4/Llama2_32layers_allLN_convregular1e-2_tmp100_epoch50'
 config['gpus'] = ['0']
 config['models'] = ['meta-llama/Llama-2-7b-hf'] # 'meta-llama/Meta-Llama-3-8B', 'gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
 config['datasets'] = list(md.target_datasets.keys())
@@ -37,7 +37,7 @@ config['pt_config'] = pt_config
 
 
 # optimization
-config['epochs'] = 30
+config['epochs'] = 50
 config['optim'] = 'adamW'  # 'adam', 'adamW', 'sgd'
 config['grad_bs'] = 1
 config['lr'] = 0.001
@@ -54,6 +54,6 @@ config['conver_loss_lambda'] = 1e-2
 config['additional_layernorm_mode'] = 'add'
 config['conver_loss'] = False
 config['conver_loss_regular'] = True
-config['conver_loss_regular_expo'] = False
-config['conver_loss_regular_temp'] = 10
+config['conver_loss_regular_expo'] = True
+config['conver_loss_regular_temp'] = 100
 
