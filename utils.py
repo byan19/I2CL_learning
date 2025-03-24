@@ -12,7 +12,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, AutoConfig
 import matplotlib.pyplot as plt
 import wrapper
 import my_datasets as md 
-
+import torch.nn.functional as F
 
 def set_seed(seed):
     random.seed(seed)
