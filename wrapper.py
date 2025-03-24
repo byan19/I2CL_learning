@@ -629,7 +629,6 @@ class ModelWrapper(nn.Module):
                     loss = utils.entropy_from_logits(pred_logits).mean()
                 #loss = torch.tensor(0.0)
                 #epoch_loss.append(loss.item())
-
                 conver_loss = 0.0
                 weight_scale = [hold for hold in range(1, len(hidden_states))]
                 weight_scale = torch.softmax(torch.from_numpy(np.asarray(weight_scale)/config['conver_loss_regular_temp']), dim =0)
@@ -660,6 +659,7 @@ class ModelWrapper(nn.Module):
                     epoch_conv_loss.append(conver_loss.item())
                 
                 if config['pushing_loss']:
+                    print('pushing_loss')
                     pushing_loss = 0.0
                     for i in range(2, len(hidden_states) - 1):
                         numerator = torch.nn.functional.mse_loss(
