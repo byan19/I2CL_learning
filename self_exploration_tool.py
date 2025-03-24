@@ -137,7 +137,6 @@ def patch_layernorm_with_dyt_by_name(model, alpha=1.0, mode="add", match_key="in
 	for name, module in model.named_modules():
 		print(name)
 		# if isinstance(module, nn.LayerNorm) and any(k in name.lower() for k in match_keywords):
-		pdb.set_trace()
 		if match_key in name:
 			# Identify the parent module
 			override_rmsnorm_with_dyt_forward(module, alpha = alpha)
