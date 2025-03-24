@@ -129,7 +129,7 @@ def main(args):
 
         # prepare peft_train_dataset
         cali_dataset = copy.deepcopy(train_dataset)
-        pdb.set_trace()
+        #pdb.set_trace()
         cali_dataset.all_data = [train_dataset.all_data[i] for i in demon_data_index]
 
         # train sharpness_aware
