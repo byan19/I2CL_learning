@@ -725,9 +725,9 @@ class ModelWrapper(nn.Module):
     
     def layernorm_adaptation_additional_learnDyT(self, config, dataset, save_dir=None, run_name=None):
         print(inspect.currentframe().f_code.co_name)
-        pt_config = LNTuningConfig(task_type=TaskType.CAUSAL_LM)
-        peft_model = get_peft_model(self.model, pt_config)
-        #peft_model = self.model
+        #pt_config = LNTuningConfig(task_type=TaskType.CAUSAL_LM)
+        #peft_model = get_peft_model(self.model, pt_config)
+        peft_model = self.model
 
         tuning_param_list = []
         tuning_name_list = []
@@ -758,13 +758,15 @@ class ModelWrapper(nn.Module):
                     param.requires_grad = True
         
         else:
-            for name, param in peft_model.named_parameters():
-                if param.requires_grad:
-                    tuning_name_list.append(name)
-                    tuning_param_list.append(param)
-            print('DYT setup')
             patch_layernorm_with_dyt_by_name(peft_model, alpha=0.1, trainable_alpha=True, match_key="layernorm", mode=config['additional_layernorm_mode'])
-        
+            
+            for param in peft_model.parameters():
+                param.requires_grad = False
+                
+            for name, param in peft_model.named_parameters():
+                if 'layernorm' in name:
+                    param.requires_grad = True
+            print('DYT setup')
         
         for name, param in peft_model.named_parameters():
             if param.requires_grad:
