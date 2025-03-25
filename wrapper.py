@@ -780,6 +780,7 @@ class ModelWrapper(nn.Module):
         #peft_model.print_trainable_parameters()
         #print(f'PEFT model:\n {peft_model}')
         # set model to peft model
+        pdb.set_trace()
         self.model = peft_model
         
         # init optimizer
