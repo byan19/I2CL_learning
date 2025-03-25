@@ -858,6 +858,7 @@ class ModelWrapper(nn.Module):
                     torch.from_numpy(np.asarray(weight_scale) / config['conver_loss_regular_temp']), dim=0)
                 
                 if config['conver_loss']:
+                    print('conver loss ')
                     for i in range(1, len(hidden_states) - 1):
                         conver_loss += torch.nn.functional.mse_loss(
                             hidden_states[i][torch.arange(logits.size(0)), pred_loc]
@@ -885,7 +886,7 @@ class ModelWrapper(nn.Module):
                     
                     loss = config['ce_loss_lambda'] * loss + config['conver_loss_lambda'] * conver_loss
                     epoch_conv_loss.append(conver_loss.item())
-                
+                    
                 if config['pushing_loss']:
                     print('pushing_loss')
                     pushing_loss = 0.0
