@@ -770,6 +770,7 @@ class ModelWrapper(nn.Module):
             if param.requires_grad:
                 print(name)
         # prepare label dict
+        pdb.set_trace()
         label_map = {}
         ans_txt_list = dataset.get_dmonstration_template()['options']
         for label, ans_txt in enumerate(ans_txt_list):
