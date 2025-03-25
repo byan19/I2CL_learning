@@ -122,7 +122,6 @@ def override_rmsnorm_with_dyt_forward(module, alpha=1.0):
 
         # Apply DyT transform: tanh(α * x), then affine γ, β
         #print('in myself dyt implementation')
-        print('DyT operation')
         transformed = torch.tanh(self.dyt_alpha * hidden_states)
         return self.weight * transformed
 
