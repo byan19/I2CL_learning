@@ -35,7 +35,7 @@ sessionname=I2CL_contextlearning_alllayernorm_convregular1e-3
 sessionname=I2CL_alllayernorm_convregular1e-3
 sessionname=I2CL_allLN_convregular1e-2_log
 sessionname=I2CL_allLN_convregular1e-2_entropy
-sessionname=I2CL_allLN_convregular1e-2_DYTlearning
+sessionname=I2CL_allLN_convregular1e-2_DYTlearning_alphachecking
 File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
 
 MultiRun ${sessionname} ${File} ${Param} ${Tunning}
