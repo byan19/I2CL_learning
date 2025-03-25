@@ -860,7 +860,7 @@ class ModelWrapper(nn.Module):
                     loss = config['ce_loss_lambda'] * loss + config['conver_loss_lambda'] * conver_loss
                     epoch_conv_loss.append(conver_loss.item())
                 elif config['conver_loss_regular']:
-                    print('conver loss')
+                    print('conver regular loss')
                     
                     for i in range(2, len(hidden_states) - 1):
                         numerator = torch.nn.functional.mse_loss(
