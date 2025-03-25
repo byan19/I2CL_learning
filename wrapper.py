@@ -707,7 +707,7 @@ class ModelWrapper(nn.Module):
 
             epoch_loss = np.mean(epoch_loss)
             loss_list.append(epoch_loss)
-            if config['conver_bound'] or config['conver_loss_regular']:
+            if config['conver_loss'] or config['conver_loss_regular']:
                 epoch_conv_loss = np.mean(epoch_conv_loss)
                 conv_loss_list.append(epoch_conv_loss)
 
@@ -719,7 +719,7 @@ class ModelWrapper(nn.Module):
         self.model.eval()
         # plot loss curve and save it
         utils.plot_loss_curve(loss_list, save_dir + f'/{run_name}_loss_curve.png')
-        if config['conver_bound'] or config['conver_loss_regular']:
+        if config['conver_loss'] or config['conver_loss_regular']:
             utils.plot_loss_curve(conv_loss_list, save_dir + f'/{run_name}_conv_loss_curve.png')
             
     
@@ -934,7 +934,7 @@ class ModelWrapper(nn.Module):
             
             epoch_loss = np.mean(epoch_loss)
             loss_list.append(epoch_loss)
-            if config['conver_bound'] or config['conver_loss_regular']:
+            if config['conver_loss'] or config['conver_loss_regular']:
                 epoch_conv_loss = np.mean(epoch_conv_loss)
                 conv_loss_list.append(epoch_conv_loss)
         
@@ -945,7 +945,7 @@ class ModelWrapper(nn.Module):
         self.model.eval()
         # plot loss curve and save it
         utils.plot_loss_curve(loss_list, save_dir + f'/{run_name}_loss_curve.png')
-        if config['conver_bound'] or config['conver_loss_regular']:
+        if config['conver_loss'] or config['conver_loss_regular']:
             utils.plot_loss_curve(conv_loss_list, save_dir + f'/{run_name}_conv_loss_curve.png')
     
     def layernorm_adaptation_additional_learn(self, config, dataset, save_dir=None, run_name=None):
