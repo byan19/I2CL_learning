@@ -101,8 +101,8 @@ def override_rmsnorm_with_dyt_forward(module, alpha=1.0):
     #hidden_size = module.weight.shape[0]
 
     # Freeze the original weight (if needed)
-    module.register_buffer("original_weight", module.weight.data.clone())
-    module.weight.requires_grad = False  # Make sure original γ is frozen
+    #module.register_buffer("original_weight", module.weight.data.clone())
+    #module.weight.requires_grad = False  # Make sure original γ is frozen
 
     # Register new trainable parameters
     '''
@@ -110,7 +110,8 @@ def override_rmsnorm_with_dyt_forward(module, alpha=1.0):
     module.register_parameter("dyt_beta", nn.Parameter(torch.zeros(hidden_size)))
     module.register_parameter("dyt_alpha", nn.Parameter(torch.ones(1) * alpha))
     '''
-    module.register_parameter("dyt_gamma", nn.Parameter(torch.ones_like(module.weight)))
+    #module.register_parameter("dyt_gamma", module.weight)
+    #module.register_parameter("dyt_gamma", nn.Parameter(torch.ones_like(module.weight)))
     module.register_parameter("dyt_alpha", nn.Parameter(torch.tensor(alpha)))
 
     # Define the DyT-style forward
@@ -122,7 +123,7 @@ def override_rmsnorm_with_dyt_forward(module, alpha=1.0):
         # Apply DyT transform: tanh(α * x), then affine γ, β
         #print('in myself dyt implementation')
         transformed = torch.tanh(self.dyt_alpha * hidden_states)
-        return self.dyt_gamma * transformed
+        return self.weight * transformed
 
     # Replace the forward function
     module.forward = MethodType(dyt_forward, module)
