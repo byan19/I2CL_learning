@@ -51,12 +51,12 @@ config['input_attention'] = False
 config['entropy_loss'] = False
 config['ce_loss_lambda'] = 1.0
 config['conver_bound'] = False
-config['pushing_loss'] = True
+config['pushing_loss'] = False
 config['pushing_loss_lambda'] = 1e-2
 config['conver_loss_lambda'] = 1e-2
 config['additional_layernorm_mode'] = 'add'
 config['conver_loss'] = False
-config['conver_loss_regular'] = False
+config['conver_loss_regular'] = True
 config['conver_loss_regular_expo'] = False
 config['conver_loss_regular_temp'] = 100
 
