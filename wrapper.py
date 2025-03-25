@@ -764,7 +764,11 @@ class ModelWrapper(nn.Module):
                     tuning_param_list.append(param)
             print('DYT setup')
             patch_layernorm_with_dyt_by_name(peft_model, alpha=0.1, trainable_alpha=True, match_key="layernorm", mode=config['additional_layernorm_mode'])
-
+        
+        
+        for name, param in peft_model.named_parameters():
+            if param.requires_grad:
+                print(name)
         # prepare label dict
         label_map = {}
         ans_txt_list = dataset.get_dmonstration_template()['options']
