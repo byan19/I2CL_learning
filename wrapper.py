@@ -630,7 +630,7 @@ class ModelWrapper(nn.Module):
                 #loss = torch.tensor(0.0)
                 #epoch_loss.append(loss.item())
                 print('entropy flat')
-                loss += 0.01 * utils.entropy_from_logits(pred_logits).mean()
+                loss -= 0.01 * utils.entropy_from_logits(pred_logits).mean()
                 
                 conver_loss = 0.0
                 weight_scale = [hold for hold in range(1, len(hidden_states))]
