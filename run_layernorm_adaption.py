@@ -50,7 +50,6 @@ def main(args):
     test_dataset = md.get_dataset(args.dataset_name, split='test', 
                                   max_data_num=args.config['test_data_num'],
                                   sample_mode=args.config['sample_method'])
-    pdb.set_trace()
     # load tokenizer and model
     model, tokenizer, model_config = utils.load_model_tokenizer(args.model_name, args.device)
     # get model_wrapper
