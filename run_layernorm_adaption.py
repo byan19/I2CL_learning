@@ -53,6 +53,7 @@ def main(args):
 
     # load tokenizer and model
     model, tokenizer, model_config = utils.load_model_tokenizer(args.model_name, args.device)
+    pdb.set_trace()
 
     # get model_wrapper
     model_wrapper = utils.get_model_wrapper(args.model_name, model,
