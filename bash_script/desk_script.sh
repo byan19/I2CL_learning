@@ -19,6 +19,7 @@ Tunning=1
 
 Target_Para_List=(o_proj q_proj k_proj v_proj)
 Target_Para_List=(o_proj)
+
 Tunning_list=(0 )
 for ((idx=0; idx<${#Target_Para_List[@]}; idx++)); do
 Param=${Target_Para_List[$idx]}
