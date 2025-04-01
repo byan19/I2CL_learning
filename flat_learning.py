@@ -11,7 +11,6 @@ class ToggleableNoisyLlamaDecoderLayer(LlamaDecoderLayer):
 
     def forward(self, hidden_states, *args, **kwargs):
         if self.add_noise:
-            pdb.set_trace()
             noise = torch.randn_like(hidden_states) * self.noise_scale
             self.noise_storage = noise
             hidden_states = hidden_states + noise
