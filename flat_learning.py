@@ -2,8 +2,8 @@ from transformers import LlamaForCausalLM
 from transformers.models.llama.modeling_llama import LlamaDecoderLayer
 import torch
 class ToggleableNoisyLlamaDecoderLayer(LlamaDecoderLayer):
-    def __init__(self, config):
-        super().__init__(config)
+    def __init__(self, config, layer_idx):
+        super().__init__(config,layer_idx)
         self.add_noise = False  # Toggle noise
         self.noise_scale = config.noise_scale if hasattr(config, "noise_scale") else 0.01  # Default scale
         self.noise_storage = None  # Store noise
@@ -24,7 +24,7 @@ class NoisyLlamaForCausalLM(LlamaForCausalLM):
 
         # Replace all layers with the custom noisy layer
         for i in range(len(self.model.layers)):
-            self.model.layers[i] = ToggleableNoisyLlamaDecoderLayer(config)
+            self.model.layers[i] = ToggleableNoisyLlamaDecoderLayer(config, layer_idx=i)
 
     def set_noise(self, add_noise=True):
         """Toggle noise injection on/off for all layers."""
