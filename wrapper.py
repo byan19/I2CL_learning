@@ -840,6 +840,7 @@ class ModelWrapper(nn.Module):
                 # forward
                 ######################
                 print('working on the convergence bound and sharp approxy')
+                pdb.set_trace()
                 self.model.set_noise(False)
                 output, _ = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
                 logits = output.logits
