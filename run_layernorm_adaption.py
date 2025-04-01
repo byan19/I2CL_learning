@@ -22,6 +22,7 @@ def run_task(gpu_id, config, model_name, dataset_name):
     input_args.gpu = gpu_id
     input_args.config = cur_config
     try:
+        pdb.set_trace()
         main(input_args)
         gc.collect()
         torch.cuda.empty_cache()
@@ -36,6 +37,7 @@ def run_task(gpu_id, config, model_name, dataset_name):
 
 def main(args):
     # set global seed
+    pdb.set_trace()
     utils.set_seed(args.config['seed'])
     # set device
     args.device = utils.set_device(args.gpu)
@@ -198,6 +200,7 @@ def get_args():
 
 if __name__ == "__main__":
     # get args
+    pdb.set_trace()
     start_time = time.time()
     args = get_args()
     # load config
@@ -207,7 +210,6 @@ if __name__ == "__main__":
     # Queue to hold tasks
     print('all the experiments')
     print(combinations)
-
 
     for model_name, dataset_name in combinations:
         run_task('0', config, model_name, dataset_name)  # without parallelisation
