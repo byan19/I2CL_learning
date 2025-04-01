@@ -860,6 +860,7 @@ class ModelWrapper(nn.Module):
                 weight_scale = torch.softmax(
                     torch.from_numpy(np.asarray(weight_scale) / config['conver_loss_regular_temp']), dim=0)
                 
+                pdb.set_trace()
                 self.model.set_noise(True)
                 noise_injector.set_noise(False)
                 output2 = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
