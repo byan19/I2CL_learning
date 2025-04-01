@@ -14,7 +14,6 @@ import my_datasets as md
 import pdb
 
 def run_task(gpu_id, config, model_name, dataset_name):
-    pdb.set_trace()
     print(f"Running {model_name} on {dataset_name} with GPU {gpu_id}")
     input_args = argparse.Namespace()
     cur_config = copy.deepcopy(config)
@@ -37,7 +36,6 @@ def run_task(gpu_id, config, model_name, dataset_name):
 
 def main(args):
     # set global seed
-    pdb.set_trace()
     utils.set_seed(args.config['seed'])
     # set device
     args.device = utils.set_device(args.gpu)
@@ -52,7 +50,7 @@ def main(args):
     test_dataset = md.get_dataset(args.dataset_name, split='test', 
                                   max_data_num=args.config['test_data_num'],
                                   sample_mode=args.config['sample_method'])
-
+    pdb.set_trace()
     # load tokenizer and model
     model, tokenizer, model_config = utils.load_model_tokenizer(args.model_name, args.device)
     # get model_wrapper
@@ -192,7 +190,6 @@ def main(args):
 
 # get args
 def get_args():
-    pdb.set_trace()
     parser = argparse.ArgumentParser()
     parser.add_argument('--config_path', type=str, default='configs/config_layernorm_adaption.py', help='path to config file')
     return parser.parse_args()
