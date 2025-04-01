@@ -49,3 +49,38 @@ class NoisyLlamaForCausalLM(LlamaForCausalLM):
                 self.noise_outputs.append(layer.noise_storage)
 
         return outputs, self.noise_outputs  # Return noise along with model output
+
+
+class NoiseInjector:
+    def __init__(self, noise_scale=0.01):
+        self.add_noise = False  # Toggle noise injection
+        self.noise_scale = noise_scale  # Default noise scale
+        self.noise_outputs = []  # Store noise tensors per layer
+
+    def hook_fn(self, module, input):
+        """Function to add noise and store it."""
+        if self.add_noise:
+            noise = torch.randn_like(input[0]) * self.noise_scale
+            self.noise_outputs.append(noise)  # Store noise per layer
+            return (input[0] + noise,)
+        return input
+
+    def set_noise(self, status: bool):
+        """Enable/disable noise injection and reset stored noise."""
+        self.add_noise = status
+        self.noise_outputs = []  # Reset stored noise when toggling
+
+    def set_noise_scale(self, scale: float):
+        """Dynamically adjust noise scale."""
+        self.noise_scale = scale
+    
+    def remove_noise(self):
+        self.noise_outputs = []
+
+model = LlamaForCausalLM.from_pretrained("meta-llama/Llama-2-7b-hf").to("cuda")
+noise_injector = NoiseInjector(noise_scale=0.01)
+
+hooks = []
+for layer in model.model.layers:
+    hook = layer.register_forward_pre_hook(noise_injector.hook_fn)
+    hooks.append(hook)

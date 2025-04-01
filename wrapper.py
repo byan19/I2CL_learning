@@ -728,16 +728,16 @@ class ModelWrapper(nn.Module):
     
     
     def layernorm_adaptation_sharpness_encoding(self, config, dataset, save_dir=None, run_name=None):
-        pdb.set_trace()
         pt_config = LNTuningConfig(task_type=TaskType.CAUSAL_LM)
         peft_model = get_peft_model(self.model, pt_config)
         print('in sharpness encoding')
-        local_config = self.model.config
-        local_config.noise_scale = 0.01
-        noisy_model = flat_learning.NoisyLlamaForCausalLM(local_config)
-        noisy_model.load_state_dict(self.model.state_dict(), strict=True)
-        pdb.set_trace()
-        peft_model = noisy_model
+        
+        noise_injector = flat_learning.NoiseInjector(noise_scale= 0.01)
+        hooks = []
+        
+        for layer in peft_model.layers:
+            hook = layer.register_forward_pre_hook(noise_injector.hook_fn)
+            hooks.append(hook)
         
         tuning_param_list = []
         tuning_name_list = []
@@ -842,9 +842,8 @@ class ModelWrapper(nn.Module):
                 # forward
                 ######################
                 print('working on the convergence bound and sharp approxy')
-                pdb.set_trace()
-                self.model.set_noise(False)
-                output, _ = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
+                noise_injector.set_noise(False)
+                output = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
                 logits = output.logits
                 hidden_states = output.hidden_states
                 pred_logits = logits[torch.arange(logits.size(0)), pred_loc]
@@ -862,9 +861,10 @@ class ModelWrapper(nn.Module):
                     torch.from_numpy(np.asarray(weight_scale) / config['conver_loss_regular_temp']), dim=0)
                 
                 self.model.set_noise(True)
-                output, noise = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
-
+                noise_injector.set_noise(False)
+                output2 = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
                 pdb.set_trace()
+                
                 if config['conver_loss']:
                     for i in range(1, len(hidden_states) - 1):
                         conver_loss += torch.nn.functional.mse_loss(
