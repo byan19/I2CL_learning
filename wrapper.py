@@ -734,7 +734,8 @@ class ModelWrapper(nn.Module):
         local_config = self.model.config
         local_config.noise_scale = 0.01
         noisy_model = flat_learning.NoisyLlamaForCausalLM(local_config)
-        noisy_model.load_state_dict(self.model.state_dict(), strict=False)
+        noisy_model.load_state_dict(self.model.state_dict(), strict=True)
+        pdb.set_trace()
         peft_model = noisy_model
         
         tuning_param_list = []
