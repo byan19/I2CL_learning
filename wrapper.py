@@ -735,7 +735,7 @@ class ModelWrapper(nn.Module):
         noise_injector = flat_learning.NoiseInjector(noise_scale= 0.01)
         hooks = []
         
-        for layer in peft_model.layers:
+        for layer in peft_model.model.layers:
             hook = layer.register_forward_pre_hook(noise_injector.hook_fn)
             hooks.append(hook)
         
@@ -861,7 +861,6 @@ class ModelWrapper(nn.Module):
                     torch.from_numpy(np.asarray(weight_scale) / config['conver_loss_regular_temp']), dim=0)
                 
                 pdb.set_trace()
-                self.model.set_noise(True)
                 noise_injector.set_noise(False)
                 output2 = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
                 pdb.set_trace()
