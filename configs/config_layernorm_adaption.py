@@ -43,9 +43,13 @@ config['grad_bs'] = 1
 config['lr'] = 0.001
 config['wd'] = 0.001
 config['rho'] = 1e-4
-config['sharpness_aware'] = False
-config['sharpness_aware_approx'] = True
-config['layernorm_DyT'] = False
+
+#config['sharpness_aware'] = False
+#config['sharpness_aware_approx'] = True
+#config['layernorm_DyT'] = False
+
+config['learning_type'] = 'sharpness_encoding' # 'sharpness_aware' 'sharpness_aware_approx' 'layernorm_DyT'
+
 config['post_attention'] = False
 config['input_attention'] = False
 config['entropy_loss'] = False

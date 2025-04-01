@@ -134,15 +134,18 @@ def main(args):
 
         # train sharpness_aware
         s_t = time.time()
-        if args.config['sharpness_aware']:
+        if args.config['learning_type'] == 'sharpness_aware':
             model_wrapper.layernorm_adaptation_sharpness_aware(args.config, cali_dataset, save_dir=args.save_dir, run_name=run_name)
-        elif args.config['sharpness_aware_approx']:
+        elif args.config['learning_type'] == 'sharpness_aware_approx':
             model_wrapper.layernorm_adaptation_sharpness_aware_approx(args.config, cali_dataset, save_dir=args.save_dir,
                                                                    run_name=run_name)
         #elif args.config['additional_layernorm_layer']:
-        elif args.config['layernorm_DyT']:
+        elif args.config['learning_type'] == 'layernorm_DyT':
             model_wrapper.layernorm_adaptation_additional_learnDyT(args.config, cali_dataset, save_dir=args.save_dir,
                                                                       run_name=run_name)
+        elif args.config['learning_type'] == 'sharpness_encoding':
+            model_wrapper.layernorm_adaptation_sharpness_encoding(args.config, cali_dataset, save_dir=args.save_dir,
+                                                                   run_name=run_name)
         else:
             model_wrapper.layernorm_adaptation(args.config, cali_dataset, save_dir=args.save_dir, run_name=run_name)
         e_t = time.time()

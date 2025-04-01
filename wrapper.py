@@ -12,6 +12,7 @@ import global_vars as gv
 from peft import get_peft_model, PromptTuningConfig, LNTuningConfig, TaskType
 import pdb
 from self_exploration_tool import *
+import flat_learning
 import inspect
 class ModelWrapper(nn.Module):
     def __init__(self, model, tokenizer, model_config, device):
@@ -725,16 +726,16 @@ class ModelWrapper(nn.Module):
         if config['conver_loss'] or config['conver_loss_regular']:
             utils.plot_loss_curve(conv_loss_list, save_dir + f'/{run_name}_conv_loss_curve.png')
     
-    def layernorm_adaptation_sharpness_encode(self, config, dataset, save_dir=None, run_name=None):
-        
-        def differentiable_flatness_proxy(model, inputs):
-            model.train()
-            loss = model(**inputs).loss
-            grads = torch.autograd.grad(loss, model.parameters(), create_graph=True)
-            return sum(torch.norm(g, p=2) ** 2 for g in grads if g is not None)
-        
-        pt_config = LNTuningConfig(task_type=TaskType.CAUSAL_LM)
-        peft_model = get_peft_model(self.model, pt_config)
+    
+    def layernorm_adaptation_sharpness_encoding(self, config, dataset, save_dir=None, run_name=None):
+        #pt_config = LNTuningConfig(task_type=TaskType.CAUSAL_LM)
+        #peft_model = get_peft_model(self.model, pt_config)
+        print('in sharpness encoding')
+        local_config = self.model.config
+        local_config.noise_scale = 0.01
+        noisy_model = flat_learning.NoisyLlamaForCausalLM(local_config)
+        noisy_model.load_state_dict(self.model.state_dict(), strict=False)
+        peft_model = noisy_model
         
         tuning_param_list = []
         tuning_name_list = []
@@ -851,6 +852,9 @@ class ModelWrapper(nn.Module):
                     loss = utils.entropy_from_logits(pred_logits).mean()
                 # loss = torch.tensor(0.0)
                 # epoch_loss.append(loss.item())
+                print('entropy flat')
+                loss -= 0.01 * utils.entropy_from_logits(pred_logits).mean()
+                
                 conver_loss = 0.0
                 weight_scale = [hold for hold in range(1, len(hidden_states))]
                 weight_scale = torch.softmax(

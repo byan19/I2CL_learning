@@ -1,0 +1,49 @@
+from transformers import LlamaForCausalLM
+from transformers.models.llama.modeling_llama import LlamaDecoderLayer
+import torch
+class ToggleableNoisyLlamaDecoderLayer(LlamaDecoderLayer):
+    def __init__(self, config):
+        super().__init__(config)
+        self.add_noise = False  # Toggle noise
+        self.noise_scale = config.noise_scale if hasattr(config, "noise_scale") else 0.01  # Default scale
+        self.noise_storage = None  # Store noise
+
+    def forward(self, hidden_states, *args, **kwargs):
+        if self.add_noise:
+            noise = torch.randn_like(hidden_states) * self.noise_scale
+            self.noise_storage = noise
+            hidden_states = hidden_states + noise
+        else:
+            self.noise_storage = None  # Reset when noise is off
+        return super().forward(hidden_states, *args, **kwargs)
+class NoisyLlamaForCausalLM(LlamaForCausalLM):
+    def __init__(self, config):
+        super().__init__(config)
+        self.noise_outputs = []  # Store per-layer noise
+        self.noise_scale = config.noise_scale if hasattr(config, "noise_scale") else 0.01
+
+        # Replace all layers with the custom noisy layer
+        for i in range(len(self.model.layers)):
+            self.model.layers[i] = ToggleableNoisyLlamaDecoderLayer(config)
+
+    def set_noise(self, add_noise=True):
+        """Toggle noise injection on/off for all layers."""
+        for layer in self.model.layers:
+            layer.add_noise = add_noise
+
+    def set_noise_scale(self, scale):
+        """Adjust noise scale dynamically."""
+        self.noise_scale = scale
+        for layer in self.model.layers:
+            layer.noise_scale = scale  # Update noise scale for all layers
+
+    def forward(self, *args, **kwargs):
+        self.noise_outputs = []  # Reset stored noise
+        outputs = super().forward(*args, **kwargs)
+
+        # Collect noise from all layers
+        for layer in self.model.layers:
+            if layer.noise_storage is not None:
+                self.noise_outputs.append(layer.noise_storage)
+
+        return outputs, self.noise_outputs  # Return noise along with model output
