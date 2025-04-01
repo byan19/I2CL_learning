@@ -14,6 +14,7 @@ import my_datasets as md
 import pdb
 
 def run_task(gpu_id, config, model_name, dataset_name):
+    pdb.set_trace()
     print(f"Running {model_name} on {dataset_name} with GPU {gpu_id}")
     input_args = argparse.Namespace()
     cur_config = copy.deepcopy(config)
@@ -22,7 +23,6 @@ def run_task(gpu_id, config, model_name, dataset_name):
     input_args.gpu = gpu_id
     input_args.config = cur_config
     try:
-        pdb.set_trace()
         main(input_args)
         gc.collect()
         torch.cuda.empty_cache()
@@ -192,6 +192,7 @@ def main(args):
 
 # get args
 def get_args():
+    pdb.set_trace()
     parser = argparse.ArgumentParser()
     parser.add_argument('--config_path', type=str, default='configs/config_layernorm_adaption.py', help='path to config file')
     return parser.parse_args()
