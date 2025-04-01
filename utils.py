@@ -13,6 +13,7 @@ import matplotlib.pyplot as plt
 import wrapper
 import my_datasets as md 
 import torch.nn.functional as F
+import pdb
 
 def set_seed(seed):
     random.seed(seed)
@@ -61,6 +62,7 @@ def load_model_tokenizer(model_name, device, output_hidden_states=True, load_in_
                                                  torch_dtype=torch.float32,
                                                     #torch_dtype = torch.bfloat16,
                                                  )
+    pdb.set_trace()
     if not load_in_8bit:
         model = model.to(device)
     config = AutoConfig.from_pretrained(model_name)
