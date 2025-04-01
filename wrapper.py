@@ -728,8 +728,9 @@ class ModelWrapper(nn.Module):
     
     
     def layernorm_adaptation_sharpness_encoding(self, config, dataset, save_dir=None, run_name=None):
-        #pt_config = LNTuningConfig(task_type=TaskType.CAUSAL_LM)
-        #peft_model = get_peft_model(self.model, pt_config)
+        pdb.set_trace()
+        pt_config = LNTuningConfig(task_type=TaskType.CAUSAL_LM)
+        peft_model = get_peft_model(self.model, pt_config)
         print('in sharpness encoding')
         local_config = self.model.config
         local_config.noise_scale = 0.01
