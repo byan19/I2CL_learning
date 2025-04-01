@@ -76,11 +76,3 @@ class NoiseInjector:
     
     def remove_noise(self):
         self.noise_outputs = []
-
-model = LlamaForCausalLM.from_pretrained("meta-llama/Llama-2-7b-hf").to("cuda")
-noise_injector = NoiseInjector(noise_scale=0.01)
-
-hooks = []
-for layer in model.model.layers:
-    hook = layer.register_forward_pre_hook(noise_injector.hook_fn)
-    hooks.append(hook)
