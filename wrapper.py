@@ -784,8 +784,8 @@ class ModelWrapper(nn.Module):
         print(f"label_map: {label_map}")
         
         # print trainable parameters
-        peft_model.print_trainable_parameters()
-        print(f'PEFT model:\n {peft_model}')
+        #peft_model.print_trainable_parameters()
+        #print(f'PEFT model:\n {peft_model}')
         # set model to peft model
         self.model = peft_model
         
@@ -840,7 +840,8 @@ class ModelWrapper(nn.Module):
                 # forward
                 ######################
                 print('working on the convergence bound and sharp approxy')
-                output = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
+                self.model.set_noise(False)
+                output, _ = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
                 logits = output.logits
                 hidden_states = output.hidden_states
                 pred_logits = logits[torch.arange(logits.size(0)), pred_loc]
@@ -852,14 +853,15 @@ class ModelWrapper(nn.Module):
                     loss = utils.entropy_from_logits(pred_logits).mean()
                 # loss = torch.tensor(0.0)
                 # epoch_loss.append(loss.item())
-                print('entropy flat')
-                loss -= 0.01 * utils.entropy_from_logits(pred_logits).mean()
-                
                 conver_loss = 0.0
                 weight_scale = [hold for hold in range(1, len(hidden_states))]
                 weight_scale = torch.softmax(
                     torch.from_numpy(np.asarray(weight_scale) / config['conver_loss_regular_temp']), dim=0)
                 
+                self.model.set_noise(True)
+                output, noise = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
+
+                pdb.set_trace()
                 if config['conver_loss']:
                     for i in range(1, len(hidden_states) - 1):
                         conver_loss += torch.nn.functional.mse_loss(
