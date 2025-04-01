@@ -197,7 +197,6 @@ def get_args():
 
 if __name__ == "__main__":
     # get args
-    pdb.set_trace()
     start_time = time.time()
     args = get_args()
     # load config
