@@ -737,12 +737,6 @@ class ModelWrapper(nn.Module):
         
         pdb.set_trace()
         
-        '''
-        for layer in peft_model.model.layers:
-            hook = layer.register_forward_pre_hook(noise_injector.hook_fn)
-            hooks.append(hook)
-        '''
-        
         for layer in peft_model.model.model.layers:
             hook = layer.register_forward_pre_hook(noise_injector.hook_fn)
             hooks.append(hook)
