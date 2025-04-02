@@ -864,7 +864,7 @@ class ModelWrapper(nn.Module):
                     """Function to add noise and store it."""
                     print('add noise inside')
                     noise = torch.randn_like(input[0]) * noise_scale
-                    input = (input[0] + noise, )
+                    input = (input[0] + noise * module.post_attention_layernorm.weight, )
                     noise_holder.append(noise)
                     return input
                 
@@ -880,6 +880,9 @@ class ModelWrapper(nn.Module):
                 print(f'loss value 2: {loss_noise.item()}')
                 pdb.set_trace()
                 
+                # remove the
+                for ele in hooks:
+                    ele.remove()
                 # convergence loss computation
                 conver_loss = 0.0
                 weight_scale = [hold for hold in range(1, len(hidden_states))]
