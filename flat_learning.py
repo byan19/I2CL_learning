@@ -95,5 +95,5 @@ def hook_fn_test(module, input ):
     """Function to add noise and store it."""
     print('add noise inside')
     noise = torch.randn_like(input[0])
-    input = torch.zeros_like(input[0])
+    input = input[0] + noise
     return (input,)
