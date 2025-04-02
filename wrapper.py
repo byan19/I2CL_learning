@@ -735,11 +735,13 @@ class ModelWrapper(nn.Module):
         noise_injector = flat_learning.NoiseInjector(noise_scale= 0.01)
         hooks = []
         
+        '''
         for layer in peft_model.model.model.layers:
             #hook = layer.register_forward_pre_hook(noise_injector.hook_fn)
             #hook = layer.register_forward_hook(noise_injector.hook_fn)
             hook = layer.register_forward_pre_hook(flat_learning.hook_fn_test)
             hooks.append(hook)
+        '''
 
         tuning_param_list = []
         tuning_name_list = []
@@ -862,7 +864,13 @@ class ModelWrapper(nn.Module):
                 weight_scale = torch.softmax(
                     torch.from_numpy(np.asarray(weight_scale) / config['conver_loss_regular_temp']), dim=0)
                 
-                noise_injector.set_noise(True)
+                #noise_injector.set_noise(True)
+                hooks = []
+                for layer in peft_model.model.model.layers:
+                    # hook = layer.register_forward_pre_hook(noise_injector.hook_fn)
+                    # hook = layer.register_forward_hook(noise_injector.hook_fn)
+                    hook = layer.register_forward_pre_hook(flat_learning.hook_fn_test)
+                    hooks.append(hook)
                 output2 = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
                 logits2 = output2.logits
                 pred_logits2 = logits[torch.arange(logits2.size(0)), pred_loc]
