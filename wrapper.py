@@ -853,13 +853,7 @@ class ModelWrapper(nn.Module):
                     loss = F.cross_entropy(pred_logits, gt_label, reduction='mean')
                 else:
                     loss = utils.entropy_from_logits(pred_logits).mean()
-                # loss = torch.tensor(0.0)
-                # epoch_loss.append(loss.item())
-                print(f'loss value: {loss.item()}')
-                #noise_injector.set_noise(True)
-                
-                # remove the
-                # convergence loss computation
+                    
                 conver_loss = 0.0
                 weight_scale = [hold for hold in range(1, len(hidden_states))]
                 weight_scale = torch.softmax(
@@ -953,6 +947,7 @@ class ModelWrapper(nn.Module):
                     grad = hidden_states[i+1][torch.arange(logits.size(0)), pred_loc] - hidden_states[i][torch.arange(logits.size(0)), pred_loc]
                     flat_loss += post_layer_norm_holder[i] @ (grad_noise - grad).t()/noise_scale
                     
+                pdb.set_trace()
                 loss += 0.001 * flat_loss
                 
                 '''
