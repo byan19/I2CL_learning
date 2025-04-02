@@ -872,7 +872,7 @@ class ModelWrapper(nn.Module):
                     noise = torch.randn_like(input[0]) * noise_scale
                     noise_holder.append(noise.detach().clone())
                     input = input[0] + noise
-                    input = torch.zeros_like(input[0])
+                    input = torch.zeros_like(input)
                     return (input,)
                 
                 for layer in self.model.model.model.layers:
