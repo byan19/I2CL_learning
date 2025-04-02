@@ -864,6 +864,7 @@ class ModelWrapper(nn.Module):
                     """Function to add noise and store it."""
                     print('add noise inside')
                     noise = torch.randn_like(input[0]) * noise_scale
+                    print()
                     input = (input[0] + noise * module.post_attention_layernorm.weight, )
                     noise_holder.append(noise)
                     return input
