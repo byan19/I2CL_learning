@@ -901,7 +901,7 @@ class ModelWrapper(nn.Module):
                     loss += config['pushing_loss_lambda'] * pushing_loss
                 
                 # flatness approximation
-                noise_scale = 0.001
+                noise_scale = config['noise_sclae_hess']
                 noise_holder = []
                 post_layer_norm_holder = []
                 hooks = []
@@ -936,7 +936,7 @@ class ModelWrapper(nn.Module):
                 '''
 
                 flat_loss = 0.0
-                for i in range(0, len(hidden_states) - 1):
+                for i in range(1, len(hidden_states) - 1):
                     '''
                     conver_loss += torch.nn.functional.mse_loss(
                         hidden_states[i][torch.arange(logits.size(0)), pred_loc]
@@ -947,7 +947,7 @@ class ModelWrapper(nn.Module):
                     flat_loss += post_layer_norm_holder[i] @ (grad_noise - grad).t()/noise_scale
                     #flat_loss += torch.nn.functional.softplus(post_layer_norm_holder[i] @ (grad_noise - grad).t()/noise_scale)
                 
-                loss += 0.001 * flat_loss.mean()
+                loss += config['flat_loss_lambda'] * flat_loss.mean()
                 
                 '''
                 logits = self.model(input_ids=input_ids, attention_mask=attn_mask).logits
