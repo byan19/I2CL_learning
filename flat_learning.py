@@ -86,3 +86,4 @@ def hook_fn_test(module, input ):
     print('add noise inside')
     noise = torch.randn_like(input[0])
     input = torch.zeros_like(input[0])
+    return (input,)
