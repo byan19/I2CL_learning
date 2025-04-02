@@ -63,8 +63,9 @@ class NoiseInjector:
             noise = torch.randn_like(input[0]) * self.noise_scale
             self.noise_outputs.append(noise)  # Store noise per layer
             #input = input[0].detach().data +  noise
-            print('add noise zeros')
+            #print('add noise zeros')
             input = torch.zeros_like(input[0])
+            print(input.shape)
         else:
             print('no noise inside')
 
@@ -80,13 +81,8 @@ class NoiseInjector:
     def remove_noise(self):
         self.noise_outputs = []
         
-'''
-def hook_fn(module, input, output):
+def hook_fn_test(module, input ):
     """Function to add noise and store it."""
     print('add noise inside')
-    noise = torch.randn_like(input[0]) * self.noise_scale
-    #input = input[0].detach().data +  noise
-        input = torch.zeros_like(input[0])
-    else:
-        print('no noise inside')
-'''
+    noise = torch.randn_like(input[0])
+    input = torch.zeros_like(input[0])
