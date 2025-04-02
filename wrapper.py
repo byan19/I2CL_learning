@@ -944,8 +944,8 @@ class ModelWrapper(nn.Module):
                     '''
                     grad_noise =  noise_hidden_states[i+1][torch.arange(logits.size(0)), pred_loc] - noise_hidden_states[i][torch.arange(logits.size(0)), pred_loc]
                     grad = hidden_states[i+1][torch.arange(logits.size(0)), pred_loc] - hidden_states[i][torch.arange(logits.size(0)), pred_loc]
-                    flat_loss += post_layer_norm_holder[i] @ (grad_noise - grad).t()/noise_scale
-                    #flat_loss += torch.nn.functional.softplus(post_layer_norm_holder[i] @ (grad_noise - grad).t()/noise_scale)
+                    #flat_loss += post_layer_norm_holder[i] @ (grad_noise - grad).t()/noise_scale
+                    flat_loss += torch.nn.functional.softplus(post_layer_norm_holder[i] @ (grad_noise - grad).t()/noise_scale)
                 
                 loss += config['flat_loss_lambda'] * flat_loss.mean()
                 
