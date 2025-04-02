@@ -735,8 +735,6 @@ class ModelWrapper(nn.Module):
         noise_injector = flat_learning.NoiseInjector(noise_scale= 0.01)
         hooks = []
         
-        pdb.set_trace()
-        
         for layer in peft_model.model.model.layers:
             hook = layer.register_forward_pre_hook(noise_injector.hook_fn)
             hooks.append(hook)
