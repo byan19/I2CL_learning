@@ -59,11 +59,13 @@ class NoiseInjector:
     def hook_fn(self, module, input):
         """Function to add noise and store it."""
         if self.add_noise:
-            print('inside')
+            print('add noise inside')
             noise = torch.randn_like(input[0]) * self.noise_scale
             self.noise_outputs.append(noise)  # Store noise per layer
             return (input[0] + noise,)
-        return input
+        else:
+            print('no noise inside')
+            return input
 
     def set_noise(self, status: bool):
         """Enable/disable noise injection and reset stored noise."""
