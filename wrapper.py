@@ -952,10 +952,10 @@ class ModelWrapper(nn.Module):
                     '''
                     grad_noise =  noise_hidden_states[i+1][torch.arange(logits.size(0)), pred_loc] - noise_hidden_states[i][torch.arange(logits.size(0)), pred_loc]
                     grad = hidden_states[i+1][torch.arange(logits.size(0)), pred_loc] - hidden_states[i][torch.arange(logits.size(0)), pred_loc]
-                    pdb.set_trace()
-                    flat_loss += post_layer_norm_holder[i] @ (grad_noise - grad)/noise_scale
+                    flat_loss += post_layer_norm_holder[i] @ (grad_noise - grad).t()/noise_scale
                     
                 pdb.set_trace()
+                    
                 '''
                 logits = self.model(input_ids=input_ids, attention_mask=attn_mask).logits
                 # get prediction logits
