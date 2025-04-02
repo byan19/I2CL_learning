@@ -38,7 +38,7 @@ sessionname=I2CL_allLN_convregular1e-2_entropy
 sessionname=I2CL_allLN_convregular1e-2_DYTlearning_alphachecking
 sessionname=I2CL_allLN_convregular1e-2_MinuesentropyFlatness
 sessionname=I2CL_allLN_convregular_testagain
-sessionname=I2CL_allLN_convregular_sharpnessencoding
+sessionname=I2CL_allLN_convregular_sharpnessencoding_softplus
 File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
 
 MultiRun ${sessionname} ${File} ${Param} ${Tunning}
