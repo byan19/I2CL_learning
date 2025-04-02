@@ -866,14 +866,15 @@ class ModelWrapper(nn.Module):
                 print(f'loss value: {loss.item()}')
                 #noise_injector.set_noise(True)
                 noise_scale = 1.0
+                noise_holder = []
                 def hook_fn_local(module, input):
                     """Function to add noise and store it."""
                     print('add noise inside')
                     noise = torch.randn_like(input[0]) * noise_scale
+                    noise_holder.append(noise.detach().clone())
                     input = input[0] + noise
                     return (input,)
                 
-                hooks = []
                 for layer in peft_model.model.model.layers:
                     # hook = layer.register_forward_pre_hook(noise_injector.hook_fn)
                     # hook = layer.register_forward_hook(noise_injector.hook_fn)
