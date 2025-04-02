@@ -927,23 +927,36 @@ class ModelWrapper(nn.Module):
                     # hook = layer.register_forward_hook(noise_injector.hook_fn)
                     hook = layer.register_forward_pre_hook(hook_fn_local)
                     hooks.append(hook)
-                output_noise = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
-                noise_logits = output_noise.logits
+                noise_output = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
+                #noise_logits = output_noise.logits
+                noise_hidden_states = noise_output.hidden_states
                 
+                '''
+                logits = output.logits
+                hidden_states = output.hidden_states
+                pred_logits = logits[torch.arange(logits.size(0)), pred_loc]
+                # get loss
+                gt_label = torch.tensor([label_map[label] for label in batch_label]).to(self.device)
+                if not config['entropy_loss']:
+                    loss = F.cross_entropy(pred_logits, gt_label, reduction='mean')
+                else:
+                    loss = utils.entropy_from_logits(pred_logits).mean()
+                '''
+
                 flat_loss = 0.0
-                pdb.set_trace()
-                for i in range(1, len(hidden_states) - 1):
+                for i in range(0, len(hidden_states) - 1):
                     
+                    '''
                     conver_loss += torch.nn.functional.mse_loss(
                         hidden_states[i][torch.arange(logits.size(0)), pred_loc]
                         , hidden_states[i + 1][torch.arange(logits.size(0)), pred_loc])
-                
-                for ele in hooks:
-                    ele.remove()
-
-                
-                
-                
+                    '''
+                    grad_noise =  noise_hidden_states[i+1][torch.arange(logits.size(0)), pred_loc] - noise_hidden_states[i][torch.arange(logits.size(0)), pred_loc]
+                    grad = hidden_states[i+1][torch.arange(logits.size(0)), pred_loc] - hidden_states[i][torch.arange(logits.size(0)), pred_loc]
+                    pdb.set_trace()
+                    flat_loss += post_layer_norm_holder[i] @ (grad_noise - grad)/noise_scale
+                    
+                pdb.set_trace()
                 '''
                 logits = self.model(input_ids=input_ids, attention_mask=attn_mask).logits
                 # get prediction logits
@@ -974,7 +987,10 @@ class ModelWrapper(nn.Module):
                 
                 optimizer.step()
                 scheduler.step()
-            
+                
+                for ele in hooks:
+                    ele.remove()
+
             epoch_loss = np.mean(epoch_loss)
             loss_list.append(epoch_loss)
             if config['conver_loss'] or config['conver_loss_regular']:
