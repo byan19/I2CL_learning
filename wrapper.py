@@ -855,13 +855,9 @@ class ModelWrapper(nn.Module):
                     loss = utils.entropy_from_logits(pred_logits).mean()
                 # loss = torch.tensor(0.0)
                 # epoch_loss.append(loss.item())
-                conver_loss = 0.0
-                weight_scale = [hold for hold in range(1, len(hidden_states))]
-                weight_scale = torch.softmax(
-                    torch.from_numpy(np.asarray(weight_scale) / config['conver_loss_regular_temp']), dim=0)
                 print(f'loss value: {loss.item()}')
                 #noise_injector.set_noise(True)
-                noise_scale = 100.0
+                noise_scale = 0.1
                 noise_holder = []
                 hooks = []
                 def hook_fn_local(module, input):
@@ -877,13 +873,18 @@ class ModelWrapper(nn.Module):
                     # hook = layer.register_forward_hook(noise_injector.hook_fn)
                     hook =  layer.register_forward_pre_hook(hook_fn_local)
                     hooks.append(hook)
-                output2 = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
-                logits2 = output2.logits
-                pred_logits2 = logits[torch.arange(logits2.size(0)), pred_loc]
-                loss2 = F.cross_entropy(pred_logits2, gt_label, reduction='mean')
-                print(f'loss value 2: {loss.item()}')
+                output_noise = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
+                logits_noise = output_noise.logits
+                pred_logits_noise = logits_noise[torch.arange(logits_noise.size(0)), pred_loc]
+                loss_noise = F.cross_entropy(pred_logits_noise, gt_label, reduction='mean')
+                print(f'loss value 2: {loss_noise.item()}')
                 pdb.set_trace()
-
+                
+                # convergence loss computation
+                conver_loss = 0.0
+                weight_scale = [hold for hold in range(1, len(hidden_states))]
+                weight_scale = torch.softmax(
+                    torch.from_numpy(np.asarray(weight_scale) / config['conver_loss_regular_temp']), dim=0)
                 if config['conver_loss']:
                     for i in range(1, len(hidden_states) - 1):
                         conver_loss += torch.nn.functional.mse_loss(
