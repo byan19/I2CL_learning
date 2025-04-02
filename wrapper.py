@@ -914,7 +914,6 @@ class ModelWrapper(nn.Module):
                 
                 def hook_fn_local(module, input):
                     """Function to add noise and store it."""
-                    print('add noise inside')
                     noise = torch.randn_like(input[0]) * noise_scale
                     print()
                     post_layer_norm_holder.append(module.post_attention_layernorm.weight)
@@ -954,8 +953,8 @@ class ModelWrapper(nn.Module):
                     grad = hidden_states[i+1][torch.arange(logits.size(0)), pred_loc] - hidden_states[i][torch.arange(logits.size(0)), pred_loc]
                     flat_loss += post_layer_norm_holder[i] @ (grad_noise - grad).t()/noise_scale
                     
-                pdb.set_trace()
-                    
+                loss += 0.001 * flat_loss
+                
                 '''
                 logits = self.model(input_ids=input_ids, attention_mask=attn_mask).logits
                 # get prediction logits
