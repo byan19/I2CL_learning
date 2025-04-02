@@ -865,8 +865,9 @@ class ModelWrapper(nn.Module):
                     torch.from_numpy(np.asarray(weight_scale) / config['conver_loss_regular_temp']), dim=0)
                 
                 #noise_injector.set_noise(True)
+                pdb.set_trace()
                 noise_scale = 1.0
-                def hook_fn_test(module, input):
+                def hook_fn_local(module, input):
                     """Function to add noise and store it."""
                     print('add noise inside')
                     noise = torch.randn_like(input[0]) * noise_scale
@@ -877,7 +878,7 @@ class ModelWrapper(nn.Module):
                 for layer in peft_model.model.model.layers:
                     # hook = layer.register_forward_pre_hook(noise_injector.hook_fn)
                     # hook = layer.register_forward_hook(noise_injector.hook_fn)
-                    hook = layer.register_forward_pre_hook(flat_learning.hook_fn_test)
+                    hook = layer.register_forward_pre_hook(hook_fn_local())
                     hooks.append(hook)
                 output2 = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
                 logits2 = output2.logits
