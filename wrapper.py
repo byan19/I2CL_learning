@@ -861,7 +861,7 @@ class ModelWrapper(nn.Module):
                     torch.from_numpy(np.asarray(weight_scale) / config['conver_loss_regular_temp']), dim=0)
                 
                 pdb.set_trace()
-                noise_injector.set_noise(False)
+                noise_injector.set_noise(True)
                 output2 = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
                 pdb.set_trace()
                 logits2 = output2.logits
