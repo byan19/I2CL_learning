@@ -846,7 +846,6 @@ class ModelWrapper(nn.Module):
                 # forward
                 ######################
                 print('working on the convergence bound and sharp approxy')
-                noise_injector.set_noise(False)
                 output = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
                 logits = output.logits
                 hidden_states = output.hidden_states
@@ -865,7 +864,7 @@ class ModelWrapper(nn.Module):
                     torch.from_numpy(np.asarray(weight_scale) / config['conver_loss_regular_temp']), dim=0)
                 print(f'loss value: {loss.item()}')
                 #noise_injector.set_noise(True)
-                noise_scale = 10.
+                noise_scale = 10.0
                 noise_holder = []
                 def hook_fn_local(module, input):
                     """Function to add noise and store it."""
@@ -875,7 +874,7 @@ class ModelWrapper(nn.Module):
                     input = input[0] + noise
                     return (input,)
                 
-                for layer in peft_model.model.model.layers:
+                for layer in self.model.model.model.layers:
                     # hook = layer.register_forward_pre_hook(noise_injector.hook_fn)
                     # hook = layer.register_forward_hook(noise_injector.hook_fn)
                     hook = layer.register_forward_pre_hook(hook_fn_local)
