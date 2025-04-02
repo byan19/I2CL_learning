@@ -866,6 +866,17 @@ class ModelWrapper(nn.Module):
                 pred_logits2 = logits[torch.arange(logits2.size(0)), pred_loc]
                 loss2 = F.cross_entropy(pred_logits2, gt_label, reduction='mean')
                 pdb.set_trace()
+                
+                noise_injector.set_noise(True)
+                
+                noise_injector.set_noise_scale(1)
+                output2 = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
+                logits2 = output2.logits
+                pred_logits2 = logits[torch.arange(logits2.size(0)), pred_loc]
+                loss2 = F.cross_entropy(pred_logits2, gt_label, reduction='mean')
+
+
+
 
                 if config['conver_loss']:
                     for i in range(1, len(hidden_states) - 1):
