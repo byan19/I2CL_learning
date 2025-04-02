@@ -732,9 +732,6 @@ class ModelWrapper(nn.Module):
         peft_model = get_peft_model(self.model, pt_config)
         print('in sharpness encoding')
         
-        noise_injector = flat_learning.NoiseInjector(noise_scale= 0.01)
-        hooks = []
-        
         '''
         for layer in peft_model.model.model.layers:
             #hook = layer.register_forward_pre_hook(noise_injector.hook_fn)
@@ -866,19 +863,19 @@ class ModelWrapper(nn.Module):
                 #noise_injector.set_noise(True)
                 noise_scale = 100.0
                 noise_holder = []
+                hooks = []
                 def hook_fn_local(module, input):
                     """Function to add noise and store it."""
                     print('add noise inside')
                     noise = torch.randn_like(input[0]) * noise_scale
-                    noise_holder.append(noise.detach().clone())
-                    input = input[0] + noise
-                    input = torch.zeros_like(input)
-                    return (input,)
+                    input = (input[0] + noise, )
+                    noise_holder.append(noise)
+                    return input
                 
                 for layer in self.model.model.model.layers:
                     # hook = layer.register_forward_pre_hook(noise_injector.hook_fn)
                     # hook = layer.register_forward_hook(noise_injector.hook_fn)
-                    hook = layer.register_forward_pre_hook(hook_fn_local)
+                    hook =  layer.register_forward_pre_hook(hook_fn_local)
                     hooks.append(hook)
                 output2 = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
                 logits2 = output2.logits
