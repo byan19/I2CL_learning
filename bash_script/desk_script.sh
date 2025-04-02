@@ -28,7 +28,8 @@ Tunning=${Tunning_list[$idx]}
 sessionname=I2CL_contextlearning_layernorm_entropy
 sessionname=I2CL_contextlearning_layernorm_debugging
 sessionname=I2CL_contextlearning_layernorm_entropyflatness
-sessionname=I2CL_contextlearning_layernorm_flatencoding
+sessionname=I2CL_contextlearning_laypernorm_flatencoding
+sessionname=I2CL_allLN_convregular_sharpnessencoding_softplu
 File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
 
 CHECK=${sessionname}
