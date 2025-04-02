@@ -947,7 +947,6 @@ class ModelWrapper(nn.Module):
                     grad = hidden_states[i+1][torch.arange(logits.size(0)), pred_loc] - hidden_states[i][torch.arange(logits.size(0)), pred_loc]
                     flat_loss += post_layer_norm_holder[i] @ (grad_noise - grad).t()/noise_scale
                     
-                pdb.set_trace()
                 loss += 0.001 * flat_loss.mean()
                 
                 '''
