@@ -63,6 +63,7 @@ class NoiseInjector:
             noise = torch.randn_like(input[0]) * self.noise_scale
             self.noise_outputs.append(noise)  # Store noise per layer
             #input = input[0].detach().data +  noise
+            print('add noise zeros')
             input = torch.zeros_like(input[0])
         else:
             print('no noise inside')
