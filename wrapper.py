@@ -901,7 +901,7 @@ class ModelWrapper(nn.Module):
                     loss += config['pushing_loss_lambda'] * pushing_loss
                 
                 # flatness approximation
-                noise_scale = 0.1
+                noise_scale = 0.001
                 noise_holder = []
                 post_layer_norm_holder = []
                 hooks = []
