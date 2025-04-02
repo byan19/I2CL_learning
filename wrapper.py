@@ -865,7 +865,7 @@ class ModelWrapper(nn.Module):
                     torch.from_numpy(np.asarray(weight_scale) / config['conver_loss_regular_temp']), dim=0)
                 print(f'loss value: {loss.item()}')
                 #noise_injector.set_noise(True)
-                noise_scale = 1.0
+                noise_scale = 10.
                 noise_holder = []
                 def hook_fn_local(module, input):
                     """Function to add noise and store it."""
