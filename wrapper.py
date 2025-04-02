@@ -863,9 +863,8 @@ class ModelWrapper(nn.Module):
                 weight_scale = [hold for hold in range(1, len(hidden_states))]
                 weight_scale = torch.softmax(
                     torch.from_numpy(np.asarray(weight_scale) / config['conver_loss_regular_temp']), dim=0)
-                
+                print(f'loss value: {loss.item()}')
                 #noise_injector.set_noise(True)
-                pdb.set_trace()
                 noise_scale = 1.0
                 def hook_fn_local(module, input):
                     """Function to add noise and store it."""
@@ -884,6 +883,7 @@ class ModelWrapper(nn.Module):
                 logits2 = output2.logits
                 pred_logits2 = logits[torch.arange(logits2.size(0)), pred_loc]
                 loss2 = F.cross_entropy(pred_logits2, gt_label, reduction='mean')
+                print(f'loss value 2: {loss.item()}')
                 pdb.set_trace()
 
                 if config['conver_loss']:
