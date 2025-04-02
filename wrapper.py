@@ -948,7 +948,7 @@ class ModelWrapper(nn.Module):
                     flat_loss += post_layer_norm_holder[i] @ (grad_noise - grad).t()/noise_scale
                     
                 pdb.set_trace()
-                loss += 0.001 * flat_loss
+                loss += 0.001 * flat_loss.mean()
                 
                 '''
                 logits = self.model(input_ids=input_ids, attention_mask=attn_mask).logits
