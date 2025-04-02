@@ -866,7 +866,10 @@ class ModelWrapper(nn.Module):
                 noise_injector.set_noise(False)
                 output2 = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
                 pdb.set_trace()
-                
+                logits2 = output2.logits
+                pred_logits2 = logits[torch.arange(logits2.size(0)), pred_loc]
+                loss2 = F.cross_entropy(pred_logits2, gt_label, reduction='mean')
+
                 if config['conver_loss']:
                     for i in range(1, len(hidden_states) - 1):
                         conver_loss += torch.nn.functional.mse_loss(
