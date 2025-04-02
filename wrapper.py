@@ -736,7 +736,8 @@ class ModelWrapper(nn.Module):
         hooks = []
         
         for layer in peft_model.model.model.layers:
-            hook = layer.register_forward_pre_hook(noise_injector.hook_fn)
+            #hook = layer.register_forward_pre_hook(noise_injector.hook_fn)
+            hook = layer.register_forward_hook(noise_injector.hook_fn)
             hooks.append(hook)
 
         tuning_param_list = []
