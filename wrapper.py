@@ -878,7 +878,7 @@ class ModelWrapper(nn.Module):
                 for layer in peft_model.model.model.layers:
                     # hook = layer.register_forward_pre_hook(noise_injector.hook_fn)
                     # hook = layer.register_forward_hook(noise_injector.hook_fn)
-                    hook = layer.register_forward_pre_hook(hook_fn_local())
+                    hook = layer.register_forward_pre_hook(hook_fn_local)
                     hooks.append(hook)
                 output2 = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
                 logits2 = output2.logits
