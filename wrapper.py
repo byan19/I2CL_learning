@@ -857,33 +857,8 @@ class ModelWrapper(nn.Module):
                 # epoch_loss.append(loss.item())
                 print(f'loss value: {loss.item()}')
                 #noise_injector.set_noise(True)
-                noise_scale = 0.1
-                noise_holder = []
-                hooks = []
-                def hook_fn_local(module, input):
-                    """Function to add noise and store it."""
-                    print('add noise inside')
-                    noise = torch.randn_like(input[0]) * noise_scale
-                    print()
-                    input = (input[0] + noise * module.post_attention_layernorm.weight, )
-                    noise_holder.append(noise)
-                    return input
-                
-                for layer in self.model.model.model.layers:
-                    # hook = layer.register_forward_pre_hook(noise_injector.hook_fn)
-                    # hook = layer.register_forward_hook(noise_injector.hook_fn)
-                    hook =  layer.register_forward_pre_hook(hook_fn_local)
-                    hooks.append(hook)
-                output_noise = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
-                logits_noise = output_noise.logits
-                pred_logits_noise = logits_noise[torch.arange(logits_noise.size(0)), pred_loc]
-                loss_noise = F.cross_entropy(pred_logits_noise, gt_label, reduction='mean')
-                print(f'loss value 2: {loss_noise.item()}')
-                pdb.set_trace()
                 
                 # remove the
-                for ele in hooks:
-                    ele.remove()
                 # convergence loss computation
                 conver_loss = 0.0
                 weight_scale = [hold for hold in range(1, len(hidden_states))]
@@ -930,6 +905,44 @@ class ModelWrapper(nn.Module):
                         pushing_loss += numerator / demoninator
                     
                     loss += config['pushing_loss_lambda'] * pushing_loss
+                
+                # flatness approximation
+                noise_scale = 0.1
+                noise_holder = []
+                post_layer_norm_holder = []
+                hooks = []
+                
+                def hook_fn_local(module, input):
+                    """Function to add noise and store it."""
+                    print('add noise inside')
+                    noise = torch.randn_like(input[0]) * noise_scale
+                    print()
+                    post_layer_norm_holder.append(module.post_attention_layernorm.weight)
+                    input = (input[0] + noise * module.post_attention_layernorm.weight,)
+                    noise_holder.append(noise)
+                    return input
+                
+                for layer in self.model.model.model.layers:
+                    # hook = layer.register_forward_pre_hook(noise_injector.hook_fn)
+                    # hook = layer.register_forward_hook(noise_injector.hook_fn)
+                    hook = layer.register_forward_pre_hook(hook_fn_local)
+                    hooks.append(hook)
+                output_noise = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
+                noise_logits = output_noise.logits
+                
+                flat_loss = 0.0
+                pdb.set_trace()
+                for i in range(1, len(hidden_states) - 1):
+                    
+                    conver_loss += torch.nn.functional.mse_loss(
+                        hidden_states[i][torch.arange(logits.size(0)), pred_loc]
+                        , hidden_states[i + 1][torch.arange(logits.size(0)), pred_loc])
+                
+                for ele in hooks:
+                    ele.remove()
+
+                
+                
                 
                 '''
                 logits = self.model(input_ids=input_ids, attention_mask=attn_mask).logits
