@@ -10,6 +10,7 @@ config = {}
 #config['exp_name'] = 'exps_restart2/Llama2_32layers_layernorm_1e-5AdamW'
 #config['exp_name'] = 'exps_restart3/Llama2_32layers_allLN_convregular1e-2_trajcontroltmp10'
 config['exp_name'] = 'exps_apr3/Llama2_32layers_sharpnessencoding_softplushdeskalone'
+config['exp_name'] = 'exps_apr3/Llama2_32layers_sharpnessencoding_softplushdesknoisealone'
 config['gpus'] = ['0']
 config['models'] = ['meta-llama/Llama-2-7b-hf'] # 'meta-llama/Meta-Llama-3-8B', 'gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
 config['datasets'] = list(md.target_datasets.keys())
