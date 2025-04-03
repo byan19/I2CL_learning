@@ -945,8 +945,9 @@ class ModelWrapper(nn.Module):
                     grad_noise =  noise_hidden_states[i+1][torch.arange(logits.size(0)), pred_loc] - noise_hidden_states[i][torch.arange(logits.size(0)), pred_loc]
                     grad = hidden_states[i+1][torch.arange(logits.size(0)), pred_loc] - hidden_states[i][torch.arange(logits.size(0)), pred_loc]
                     #flat_loss += post_layer_norm_holder[i] @ (grad_noise - grad).t()/noise_scale
-                    flat_loss += torch.nn.functional.softplus(post_layer_norm_holder[i] @ (grad_noise - grad).t()/noise_scale)
-                
+                    #flat_loss += torch.nn.functional.softplus(post_layer_norm_holder[i] @ (grad_noise - grad).t()/noise_scale)
+                    flat_loss += torch.nn.functional.softplus(noise_holder[i] @ (grad_noise - grad).t()/noise_scale)
+
                 loss += config['flat_loss_lambda'] * flat_loss.mean()
                 
                 '''
@@ -1264,8 +1265,7 @@ class ModelWrapper(nn.Module):
         for label, ans_txt in enumerate(ans_txt_list):
             if 'gpt' in self.tokenizer.__class__.__name__.lower():
                 ans_txt = ' ' + ans_txt  # add space to the beginning of answer
-            ans_tok = self.tokenizer.encode(ans_txt, add_special_tokens=False)[
-                0]  # use the first token if more than one token
+            ans_tok = self.tokenizer.encode(ans_txt, add_special_tokens=False)[0]  # use the first token if more than one token
             print(f"ans_txt: {ans_txt}, ans_tok: {ans_tok}")
             label_map[label] = ans_tok  # index is the label
         print(f"label_map: {label_map}")
