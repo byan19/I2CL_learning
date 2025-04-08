@@ -1111,6 +1111,7 @@ class ModelWrapper(nn.Module):
                 batch_input, batch_label = [], []
                 # construct the demonstration here.
                 instruct = ""
+                pdb.set_trace()
                 demonstration = ""
                 for sub_index in range(batch_size):
                     input_str, ans_str, label = dataset.apply_template(batch_data[sub_index])
@@ -1145,7 +1146,7 @@ class ModelWrapper(nn.Module):
                                                            for t in tup) for tup in demon_outputs.past_key_values)
                     sp_demon_attn_mask = demon_attn_mask[-(len(batch_input) % sub_batch_size):]
                 
-                
+                 
                ###############################
                 if len(batch_input) != sub_batch_size:
                     demon_past_key_values = sp_demon_past_key_values
