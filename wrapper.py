@@ -1170,7 +1170,7 @@ class ModelWrapper(nn.Module):
                 ######################
                 print('working on the convergence bound and sharp approxy')
                 attn_mask = torch.cat([demon_attn_mask, attn_mask], dim=1)
-                output = self.model(input_ids=input_ids, attention_mask=attn_mask, past_key_values=demon_past_key_values, use_cache=use_cache)
+                output = self.model(input_ids=input_ids, attention_mask=attn_mask, past_key_values=demon_past_key_values, use_cache=use_cache, output_hidden_states=True)
                 logits = output.logits
                 hidden_states = output.hidden_states
                 pred_logits = logits[torch.arange(logits.size(0)), pred_loc]
@@ -1246,7 +1246,8 @@ class ModelWrapper(nn.Module):
                     # hook = layer.register_forward_hook(noise_injector.hook_fn)
                     hook = layer.register_forward_pre_hook(hook_fn_local)
                     hooks.append(hook)
-                noise_output = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
+                #noise_output = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
+                noise_output = self.model(input_ids=input_ids, attention_mask=attn_mask, past_key_values=demon_past_key_values, use_cache=use_cache, output_hidden_states=True)
                 #noise_logits = output_noise.logits
                 noise_hidden_states = noise_output.hidden_states
                 
