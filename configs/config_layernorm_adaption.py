@@ -68,7 +68,7 @@ config['flat_loss_lambda'] = 1e-3
 config['additional_layernorm_mode'] = 'add'
 config['noise_scale_hess'] = 1e-3
 config['conver_loss'] = False
-config['conver_loss_regular'] = False
+config['conver_loss_regular'] = True
 config['conver_loss_regular_expo'] = False
 config['conver_loss_regular_temp'] = 100
 

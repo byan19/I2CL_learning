@@ -40,7 +40,7 @@ sessionname=I2CL_allLN_convregular1e-2_MinuesentropyFlatness
 sessionname=I2CL_allLN_convregular_testagain
 sessionname=I2CL_allLN_convregular_sharpnessencoding_softplu
 sessionname=I2CL_convregular_sharpnessencoding_N1e-2C_flat1e-3
-sessionname=I2CL_adding_demonstration_epoch50
+sessionname=I2CL_adding_demonstration_epoch50_conver_regular
 File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
 
 MultiRun ${sessionname} ${File} ${Param} ${Tunning}
