@@ -52,8 +52,7 @@ class Evaluator(nn.Module):
                 demon_outputs = model(**demon_token, use_cache=True)
             demon_past_key_values = demon_outputs.past_key_values
             demon_attn_mask = demon_token['attention_mask']
-            pdb.set_trace()
-            demon_past_key_values = tuple(tuple(t.repeat(self.batch_size, 1, 1, 1) for 
+            demon_past_key_values = tuple(tuple(t.repeat(self.batch_size, 1, 1, 1) for
                                                 t in tup) for tup in demon_past_key_values)
             demon_attn_mask = demon_attn_mask.repeat(self.batch_size, 1)
             if len(all_inputs) % self.batch_size != 0:  # last batch
@@ -84,10 +83,8 @@ class Evaluator(nn.Module):
                 gv.ATTN_MASK_START = torch.zeros_like(pred_loc)
                 gv.ATTN_MASK_END = pred_loc
                 if use_cache:
-                    pdb.set_trace()
                     attn_mask = torch.cat([demon_attn_mask, attn_mask], dim=1)
-                    output = model(input_ids=input_ids, attention_mask=attn_mask,
-                                   past_key_values=demon_past_key_values, use_cache=use_cache)
+                    output = model(input_ids=input_ids, attention_mask=attn_mask, past_key_values=demon_past_key_values, use_cache=use_cache)
                 else:
                     output = model(input_ids=input_ids, attention_mask=attn_mask)
                 logits = output.logits
