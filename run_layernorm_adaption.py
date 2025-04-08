@@ -91,13 +91,14 @@ def main(args):
             print(f'Test zero-shot result: {test_zeroshot_result}\n')
         #pdb.set_trace()
         # sample demonstration
-        demon, _, demon_data_index = \
-        train_dataset.gen_few_shot_demonstration(tokenizer=tokenizer, shot_num=args.shot_num, 
+        demon, _, demon_data_index = train_dataset.gen_few_shot_demonstration(tokenizer=tokenizer, shot_num=args.shot_num,
                                                  max_demonstration_tok_len=args.test_max_token,
                                                  add_extra_query=args.config['add_extra_query'],
                                                  example_separator=args.config['example_separator'],
                                                  return_data_index=True, seed=random.randint(0, 1e6))
         
+        
+        pdb.set_trace()
         if args.config['add_extra_query']:
             first_format_anchor = train_dataset.get_dmonstration_template()['format'][0]
             # remove all contents after the last first_format_anchor including the anchor
