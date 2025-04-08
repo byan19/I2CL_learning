@@ -1099,7 +1099,7 @@ class ModelWrapper(nn.Module):
         example_separator = dataset.example_separator
         # init lr_scheduler
         epochs, batch_size = config['epochs'], config['grad_bs']
-        batch_size += 2
+        batch_size += config['demon_bs']
         sub_batch_size =  config['grad_bs']
         
         total_steps = epochs * len(all_data) // batch_size
