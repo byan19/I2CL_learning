@@ -1141,7 +1141,7 @@ class ModelWrapper(nn.Module):
                                                     t in tup) for tup in demon_past_key_values)
                 demon_attn_mask = demon_attn_mask.repeat(sub_batch_size, 1)
                 
-                if len(batch_input) % self.batch_size != 0:  # last batch
+                if len(batch_input) % sub_batch_size != 0:  # last batch
                     sp_demon_past_key_values = tuple(tuple(t.repeat(len(batch_input) % sub_batch_size, 1, 1, 1)
                                                            for t in tup) for tup in demon_outputs.past_key_values)
                     sp_demon_attn_mask = demon_attn_mask[-(len(batch_input) % sub_batch_size):]
