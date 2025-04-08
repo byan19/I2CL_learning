@@ -1116,7 +1116,7 @@ class ModelWrapper(nn.Module):
             epoch_loss = []
             epoch_conv_loss = []
             np.random.shuffle(all_data_index)
-            for i in range(0, len(all_data), batch_size):
+            for i in range(0, len(all_data) - (len(all_data) % batch_size), batch_size):
                 batch_index = all_data_index[i: i + batch_size]
                 batch_data = [all_data[idx] for idx in batch_index]
                 batch_input, batch_label = [], []
