@@ -821,6 +821,7 @@ class ModelWrapper(nn.Module):
         
         # construct the demonstration here.
         for sub_index in range(len(batch_index)-1):
+            pass
         
         
         
