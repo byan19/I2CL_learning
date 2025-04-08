@@ -1006,10 +1006,12 @@ class ModelWrapper(nn.Module):
             utils.plot_loss_curve(conv_loss_list, save_dir + f'/{run_name}_conv_loss_curve.png')
     
     def layernorm_adaptation_sharpness_encoding(self, config, dataset, save_dir=None, run_name=None):
-        #pt_config = LNTuningConfig(task_type=TaskType.CAUSAL_LM)
-        #peft_model = get_peft_model(self.model, pt_config)
+        pt_config = LNTuningConfig(task_type=TaskType.CAUSAL_LM)
+        peft_model = get_peft_model(self.model, pt_config)
+        '''
         peft_model = self.model
         print('in sharpness encoding')
+        '''
         
         '''
         for layer in peft_model.model.model.layers:
@@ -1047,19 +1049,19 @@ class ModelWrapper(nn.Module):
                 if name in tuning_name_list:
                     param.requires_grad = True
         else:
+            '''
             for param in peft_model.parameters():
                 param.requires_grad = False
             
             for name, param in peft_model.named_parameters():
                 if 'layernorm' in name:
                     param.requires_grad = True
-            
             '''
+            
             for name, param in peft_model.named_parameters():
                 if param.requires_grad:
                     tuning_name_list.append(name)
                     tuning_param_list.append(param)
-            '''
         
         # prepare label dict
         label_map = {}
@@ -1097,7 +1099,7 @@ class ModelWrapper(nn.Module):
         example_separator = dataset.example_separator
         # init lr_scheduler
         epochs, batch_size = config['epochs'], config['grad_bs']
-        batch_size += 3
+        batch_size += 2
         sub_batch_size =  config['grad_bs']
         
         total_steps = epochs * len(all_data) // batch_size
