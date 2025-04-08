@@ -53,6 +53,7 @@ class Evaluator(nn.Module):
                 demon_outputs = model(**demon_token, use_cache=True)
             demon_past_key_values = demon_outputs.past_key_values
             demon_attn_mask = demon_token['attention_mask']
+            pdb.set_trace()
             demon_past_key_values = tuple(tuple(t.repeat(self.batch_size, 1, 1, 1) for 
                                                 t in tup) for tup in demon_past_key_values)
             demon_attn_mask = demon_attn_mask.repeat(self.batch_size, 1)
