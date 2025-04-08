@@ -90,11 +90,5 @@ class NoiseInjector:
     def remove_noise(self):
         self.noise_outputs = []
         
-def hook_fn_test(module, input ):
-    """Function to add noise and store it."""
-    print('add noise inside')
-    noise = torch.randn_like(input[0]) * noise_scale
-    input = input[0] + noise
-    return (input,)
 
 
