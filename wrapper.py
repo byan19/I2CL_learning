@@ -1145,11 +1145,11 @@ class ModelWrapper(nn.Module):
                 demon_token = self.tokenizer(demonstration, return_tensors="pt", padding=True).to(self.model.device)
                 with torch.no_grad():
                     demon_outputs = self.model(**demon_token, use_cache=True)
-                demon_past_key_values = demon_outputs.past_key_values
+                #demon_past_key_values = demon_outputs.past_key_values
                 demon_attn_mask = demon_token['attention_mask']
                 # pdb.set_trace()
                 demon_past_key_values = tuple(tuple(t.repeat(sub_batch_size, 1, 1, 1) for
-                                                    t in tup) for tup in demon_past_key_values)
+                                                    t in tup) for tup in demon_outputs.past_key_values)
                 demon_attn_mask = demon_attn_mask.repeat(sub_batch_size, 1)
                 if len(batch_input) % sub_batch_size != 0:  # last batch
                     sp_demon_past_key_values = tuple(tuple(t.repeat(len(batch_input) % sub_batch_size, 1, 1, 1)
