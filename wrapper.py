@@ -1122,7 +1122,6 @@ class ModelWrapper(nn.Module):
                 batch_input, batch_label = [], []
                 # construct the demonstration here.
                 instruct = ""
-                pdb.set_trace()
                 demonstration = ""
                 for sub_index in range(batch_size):
                     input_str, ans_str, label = dataset.apply_template(batch_data[sub_index])
