@@ -97,6 +97,7 @@ class BaseTask(Dataset):
         This function is used to generate few-shot demonstration.
         """
         # set random seed
+        self.example_separator = example_separator
         random.seed(seed)
         assert self.all_data is not None, "Please load data first!"
         assert shot_num <= len(self.all_data), "Shot number should be smaller than the number of data!"

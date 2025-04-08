@@ -774,7 +774,6 @@ class ModelWrapper(nn.Module):
                     tuning_name_list.append(name)
                     tuning_param_list.append(param)
         
-        pdb.set_trace()
         # prepare label dict
         label_map = {}
         ans_txt_list = dataset.get_dmonstration_template()['options']
@@ -811,11 +810,20 @@ class ModelWrapper(nn.Module):
         
         # init lr_scheduler
         epochs, batch_size = config['epochs'], config['grad_bs']
+        batch_size += 3
+        
         total_steps = epochs * len(all_data) // batch_size
         warmup_steps = int((0.05 * epochs) * (len(all_data) // batch_size))
         lr_lambda = lambda step: min(1.0, step / warmup_steps) * (1 + math.cos(math.pi * step / total_steps)) / 2 \
             if step > warmup_steps else step / warmup_steps
         scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lr_lambda)
+        pdb.set_trace()
+        
+        # construct the demonstration here.
+        for sub_index in range(len(batch_index)-1):
+        
+        
+        
         
         # train
         loss_list = []

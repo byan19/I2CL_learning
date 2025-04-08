@@ -112,7 +112,6 @@ def main(args):
         print(f'Baseline demonstration:\n{baseline_demon}\n')
         print(f'Query demonstration:\n{query_demon}\n')
         
-        pdb.set_trace()
         # few-shot baseline
         #pdb.set_trace()
         if args.config['run_baseline']:
