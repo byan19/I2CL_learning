@@ -9,7 +9,7 @@ echo "${sessionname}"
 screen -dmS "$sessionname"
 
 screen -S $sessionname -X stuff "cd /home/engs2575/project/I2CL_learning^M"
-screen -S $sessionname -X stuff "source activate lm_eval^M"
+screen -S $sessionname -X stuff "source activate i2cl_env^M"
 sleep 1.0s
 echo ${File}
 screen -S $sessionname -X stuff "bash ${File} ${Param} ${sessionname} ${Tunning}^M"
