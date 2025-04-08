@@ -1006,8 +1006,9 @@ class ModelWrapper(nn.Module):
             utils.plot_loss_curve(conv_loss_list, save_dir + f'/{run_name}_conv_loss_curve.png')
     
     def layernorm_adaptation_sharpness_encoding(self, config, dataset, save_dir=None, run_name=None):
-        pt_config = LNTuningConfig(task_type=TaskType.CAUSAL_LM)
-        peft_model = get_peft_model(self.model, pt_config)
+        #pt_config = LNTuningConfig(task_type=TaskType.CAUSAL_LM)
+        #peft_model = get_peft_model(self.model, pt_config)
+        peft_model = self.model
         print('in sharpness encoding')
         
         '''
@@ -1045,12 +1046,20 @@ class ModelWrapper(nn.Module):
             for name, param in peft_model.named_parameters():
                 if name in tuning_name_list:
                     param.requires_grad = True
-        
         else:
+            for param in peft_model.parameters():
+                param.requires_grad = False
+            
+            for name, param in peft_model.named_parameters():
+                if 'layernorm' in name:
+                    param.requires_grad = True
+            
+            '''
             for name, param in peft_model.named_parameters():
                 if param.requires_grad:
                     tuning_name_list.append(name)
                     tuning_param_list.append(param)
+            '''
         
         # prepare label dict
         label_map = {}
@@ -1140,12 +1149,11 @@ class ModelWrapper(nn.Module):
                 demon_past_key_values = tuple(tuple(t.repeat(sub_batch_size, 1, 1, 1) for
                                                     t in tup) for tup in demon_past_key_values)
                 demon_attn_mask = demon_attn_mask.repeat(sub_batch_size, 1)
-                
                 if len(batch_input) % sub_batch_size != 0:  # last batch
                     sp_demon_past_key_values = tuple(tuple(t.repeat(len(batch_input) % sub_batch_size, 1, 1, 1)
                                                            for t in tup) for tup in demon_outputs.past_key_values)
                     sp_demon_attn_mask = demon_attn_mask[-(len(batch_input) % sub_batch_size):]
-                
+                use_cache = True
                  
                ###############################
                 if len(batch_input) != sub_batch_size:
@@ -1161,7 +1169,7 @@ class ModelWrapper(nn.Module):
                 ######################
                 print('working on the convergence bound and sharp approxy')
                 attn_mask = torch.cat([demon_attn_mask, attn_mask], dim=1)
-                output = self.model(input_ids=input_ids, attention_mask=attn_mask, past_key_values=demon_past_key_values, use_cache=True)
+                output = self.model(input_ids=input_ids, attention_mask=attn_mask, past_key_values=demon_past_key_values, use_cache=use_cache)
                 logits = output.logits
                 hidden_states = output.hidden_states
                 pred_logits = logits[torch.arange(logits.size(0)), pred_loc]
