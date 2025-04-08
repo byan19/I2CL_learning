@@ -41,7 +41,7 @@ config['pt_config'] = pt_config
 
 
 # optimization
-config['epochs'] = 30
+config['epochs'] = 50
 config['optim'] = 'adamW'  # 'adam', 'adamW', 'sgd'
 config['grad_bs'] = 2
 config['lr'] = 0.001
