@@ -111,10 +111,8 @@ class BaseTask(Dataset):
         else:
             class_num = None
 
-        pdb.set_trace()
         # get task instruction
         instruct = self.get_task_instruction() if self.use_instruction else ""
-        pdb.set_trace()
         if len(instruct) > 0:
             demonstration_expample_list = [instruct]
             demonstration  = instruct + example_separator

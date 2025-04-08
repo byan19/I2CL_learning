@@ -84,13 +84,11 @@ def main(args):
         # zero-shot baseline
         zero_shot_prompt = 'classify the type of the given sentence. '
         zero_shot_prompt = ''
-        '''
         if run_id == 0 and args.config['run_baseline']:
             test_zeroshot_result = test_evaluator.evaluate(model_wrapper, tokenizer, demonstration=zero_shot_prompt,
                                                            use_cache=args.config['use_cache'])
             result_dict['test_result']['zero_shot'].append(test_zeroshot_result)
             print(f'Test zero-shot result: {test_zeroshot_result}\n')
-        '''
         
         #pdb.set_trace()
         # sample demonstration
