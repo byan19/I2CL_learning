@@ -98,7 +98,6 @@ def main(args):
                                                  return_data_index=True, seed=random.randint(0, 1e6))
         
         
-        pdb.set_trace()
         if args.config['add_extra_query']:
             first_format_anchor = train_dataset.get_dmonstration_template()['format'][0]
             # remove all contents after the last first_format_anchor including the anchor
