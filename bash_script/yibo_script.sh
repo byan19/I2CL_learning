@@ -8,7 +8,7 @@ echo "${sessionname}"
 
 screen -dmS $sessionname
 
-screen -S $sessionname -X stuff "source activate /ibex/user/yangy0o/by_g/by_g_env/lm_eval^M"
+screen -S $sessionname -X stuff "source activate /ibex/user/yangy0o/by_g/by_g_env/i2cl_env^M"
 screen -S $sessionname -X stuff "export HF_HOME=/ibex/user/yangy0o/by_g/huggingface_cache^M"
 screen -S $sessionname -X stuff "export HF_HUB_CACHE=/ibex/user/yangy0o/by_g/huggingface_cache^M"
 
