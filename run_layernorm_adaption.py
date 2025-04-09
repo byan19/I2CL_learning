@@ -143,8 +143,13 @@ def main(args):
             model_wrapper.layernorm_adaptation_additional_learnDyT(args.config, cali_dataset, save_dir=args.save_dir,
                                                                       run_name=run_name)
         elif args.config['learning_type'] == 'sharpness_encoding':
+            '''
             model_wrapper.layernorm_adaptation_sharpness_encoding(args.config, cali_dataset, save_dir=args.save_dir,
                                                                    run_name=run_name)
+            '''
+            
+            model_wrapper.layernorm_adaptation_sharpness_encoding(args.config, cali_dataset, save_dir=args.save_dir,
+                                                                  run_name=run_name)
         else:
             model_wrapper.layernorm_adaptation(args.config, cali_dataset, save_dir=args.save_dir, run_name=run_name)
         e_t = time.time()
