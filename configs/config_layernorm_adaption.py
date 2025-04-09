@@ -12,7 +12,7 @@ config = {}
 config['exp_name'] = 'exps_apr3/Llama2_32layers_sharpnessencoding_softplushdeskalone'
 config['exp_name'] = 'exps_apr7/Llama2_sharpnessencoding_softplusN1e-3C_flatlam1e-3'
 config['exp_name'] = 'exps_apr7/debugging_with_adding_demonstration'
-config['exp_name'] = 'exps_apr9/adding_demonstration_epoch50'
+config['exp_name'] = 'exps_apr9/adding_demonstration_epoch50_no_convergenloss'
 config['gpus'] = ['0']
 config['models'] = ['meta-llama/Llama-2-7b-hf'] # 'meta-llama/Meta-Llama-3-8B', 'gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
 config['datasets'] = list(md.target_datasets.keys())
@@ -68,7 +68,7 @@ config['flat_loss_lambda'] = 1e-3
 config['additional_layernorm_mode'] = 'add'
 config['noise_scale_hess'] = 1e-3
 config['conver_loss'] = False
-config['conver_loss_regular'] = True
+config['conver_loss_regular'] = False
 config['conver_loss_regular_expo'] = False
 config['conver_loss_regular_temp'] = 100
 
