@@ -158,8 +158,9 @@ def main(args):
 
         # evaluate sharpness_aware
         s_t = time.time()
-        test_ours_result = test_evaluator.evaluate(model_wrapper, tokenizer, demonstration='',
-                                                   use_cache=args.config['use_cache'])
+        #test_ours_result = test_evaluator.evaluate(model_wrapper, tokenizer, demonstration='', use_cache=args.config['use_cache'])
+        
+        test_ours_result = test_evaluator.evaluate(model_wrapper, tokenizer, demonstration=baseline_demon, use_cache=args.config['use_cache'])
         print(f'Test Soft Prompt result: {test_ours_result}\n')
         result_dict['test_result']['ours'].append(test_ours_result)
         e_t = time.time()
