@@ -1108,7 +1108,7 @@ class ModelWrapper(nn.Module):
                 batch_data = [all_data[idx] for idx in batch_index]
                 batch_input, batch_label = [], []
                 # construct the demonstration here.
-                print(f'epoch{_}/{epochs}: iter: {i}/{len(all_data)/batch_size}')
+                #print(f'epoch{_}/{epochs}: iter: {i}/{len(all_data)/batch_size}')
                 instruct = ""
                 demonstration = ""
                 if config['demon_bs'] == 0:
