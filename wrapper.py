@@ -1105,29 +1105,22 @@ class ModelWrapper(nn.Module):
             epoch_loss = []
             epoch_conv_loss = []
             np.random.shuffle(all_data_index)
-            for i in range(0, len(all_data), batch_size):
+            for i in range(0, len(all_data) - (len(all_data) % batch_size), batch_size):
                 batch_index = all_data_index[i: i + batch_size]
                 batch_data = [all_data[idx] for idx in batch_index]
                 batch_input, batch_label = [], []
                 # construct the demonstration here.
                 instruct = ""
                 demonstration = ""
-                for i in range(0, len(all_data) - (len(all_data) % batch_size), batch_size):
-                    batch_index = all_data_index[i: i + batch_size]
-                    batch_data = [all_data[idx] for idx in batch_index]
-                    batch_input, batch_label = [], []
-                    # construct the demonstration here.
-                    instruct = ""
-                    demonstration = ""
-                    for sub_index in range(batch_size):
-                        input_str, ans_str, label = dataset.apply_template(batch_data[sub_index])
-                        if sub_index < batch_size - sub_batch_size:
-                            ans = ans_str[label]
-                            new_example = input_str + ' ' + ans
-                            demonstration = demonstration + new_example + example_separator
-                        else:
-                            batch_input.append(input_str)
-                            batch_label.append(label)
+                for sub_index in range(batch_size):
+                    input_str, ans_str, label = dataset.apply_template(batch_data[sub_index])
+                    if sub_index < batch_size - sub_batch_size:
+                        ans = ans_str[label]
+                        new_example = input_str + ' ' + ans
+                        demonstration = demonstration + new_example + example_separator
+                    else:
+                        batch_input.append(demonstration + input_str)
+                        batch_label.append(label)
                 
                 # first round
                 input_tok = self.tokenizer(batch_input, return_tensors='pt', padding=True)
