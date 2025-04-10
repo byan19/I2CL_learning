@@ -1,0 +1,7 @@
+model_name: meta-llama/Llama-2-7b-hf
+dataset_name: sst2
+gpu: 0
+config: {'exp_name': 'exps_apr10/version4_1sample_1demon', 'gpus': ['0'], 'models': ['meta-llama/Llama-2-7b-hf'], 'datasets': ['agnews', 'dbpedia', 'sst5', 'trec', 'sst2', 'subj', 'mr', 'hate_speech18', 'emo'], 'seed': 42, 'run_num': 5, 'run_baseline': False, 'metric': 'acc', 'bs': 1, 'load_in_8bit': False, 'use_cache': True, 'example_separator': '\n', 'shot_per_class': 5, 'test_data_num': 500, 'sample_method': 'uniform', 'add_extra_query': False, 'pt_config': {'task_type': 'CAUSAL_LM', 'num_virtual_tokens': 1, 'num_layers': 32}, 'epochs': 60, 'optim': 'adamW', 'lr': 0.001, 'wd': 0.001, 'rho': 0.0001, 'learning_type': 'version4', 'eval_type': 'eval_with_demonstration', 'grad_bs': 1, 'demon_bs': 1, 'layernorm_type': 'all', 'entropy_loss': False, 'ce_loss_lambda': 1.0, 'pushing_loss': False, 'pushing_loss_lambda': 0.01, 'flatness_loss': False, 'flat_loss_lambda': 0.001, 'conver_loss_lambda': 0.01, 'noise_scale_hess': 0.001, 'conver_loss': False, 'conver_loss_regular': False, 'conver_loss_regular_expo': False, 'conver_loss_regular_temp': 100, 'additional_layernorm_mode': 'add'}
+device: cuda:0
+metric: acc
+save_dir: exps_apr10/version4_1sample_1demon/meta-llama/Llama-2-7b-hf/sst2
