@@ -12,7 +12,7 @@ config = {}
 config['exp_name'] = 'exps_apr3/Llama2_32layers_sharpnessencoding_softplushdeskalone'
 config['exp_name'] = 'exps_apr7/Llama2_sharpnessencoding_softplusN1e-3C_flatlam1e-3'
 config['exp_name'] = 'exps_apr7/debugging_with_adding_demonstration'
-config['exp_name'] = 'exps_apr10/adding_demonstration_epoch60_nocache_demonevalue'
+config['exp_name'] = 'exps_apr10/version4_test'
 config['gpus'] = ['0']
 config['models'] = ['meta-llama/Llama-2-7b-hf'] # 'meta-llama/Meta-Llama-3-8B', 'gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
 config['datasets'] = list(md.target_datasets.keys())
@@ -53,7 +53,7 @@ config['rho'] = 1e-4
 #config['layernorm_DyT'] = False
 
 #config['learning_type'] = 'sharpness_aware_approx' #'sharpness_encoding' # 'sharpness_aware' 'sharpness_aware_approx' 'layernorm_DyT'
-config['learning_type'] = 'sharpness_encoding' #'sharpness_encoding' # 'sharpness_aware' 'sharpness_aware_approx' 'layernorm_DyT'
+config['learning_type'] = 'version4' #'sharpness_encoding' # 'sharpness_aware' 'sharpness_aware_approx' 'layernorm_DyT'
 
 config['demon_bs'] = 2
 config['post_attention'] = False
