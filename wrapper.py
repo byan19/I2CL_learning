@@ -1110,15 +1110,22 @@ class ModelWrapper(nn.Module):
                 # construct the demonstration here.
                 instruct = ""
                 demonstration = ""
-                for sub_index in range(batch_size):
-                    input_str, ans_str, label = dataset.apply_template(batch_data[sub_index])
-                    if sub_index < batch_size - sub_batch_size:
-                        ans = ans_str[label]
-                        new_example = input_str + ' ' + ans
-                        demonstration = demonstration + new_example + example_separator
-                    else:
-                        batch_input.append(demonstration + input_str)
+                if config['demon_bs'] == 0:
+                    for sub_index in range(batch_size):
+                        input_str, ans_str, label = dataset.apply_template(batch_data[sub_index])
+                        batch_input.append(input_str)
                         batch_label.append(label)
+                
+                else:
+                    for sub_index in range(batch_size):
+                        input_str, ans_str, label = dataset.apply_template(batch_data[sub_index])
+                        if sub_index < batch_size - sub_batch_size:
+                            ans = ans_str[label]
+                            new_example = input_str + ' ' + ans
+                            demonstration = demonstration + new_example + example_separator
+                        else:
+                            batch_input.append(demonstration + input_str)
+                            batch_label.append(label)
                 
                 # first round
                 input_tok = self.tokenizer(batch_input, return_tensors='pt', padding=True)

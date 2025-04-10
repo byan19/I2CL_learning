@@ -43,19 +43,15 @@ config['pt_config'] = pt_config
 # optimization
 config['epochs'] = 60
 config['optim'] = 'adamW'  # 'adam', 'adamW', 'sgd'
-config['grad_bs'] = 1
 config['lr'] = 0.001
 config['wd'] = 0.001
 config['rho'] = 1e-4
 
-#config['sharpness_aware'] = False
-#config['sharpness_aware_approx'] = True
-#config['layernorm_DyT'] = False
-
 #config['learning_type'] = 'sharpness_aware_approx' #'sharpness_encoding' # 'sharpness_aware' 'sharpness_aware_approx' 'layernorm_DyT'
 config['learning_type'] = 'version4' #'sharpness_encoding' # 'sharpness_aware' 'sharpness_aware_approx' 'layernorm_DyT'
 
-config['demon_bs'] = 2
+config['grad_bs'] = 1
+config['demon_bs'] = 1
 config['post_attention'] = False
 config['input_attention'] = False
 config['entropy_loss'] = False
