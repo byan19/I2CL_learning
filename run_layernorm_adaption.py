@@ -138,27 +138,14 @@ def main(args):
         elif args.config['learning_type'] == 'sharpness_aware_approx':
             model_wrapper.layernorm_adaptation_sharpness_aware_approx(args.config, cali_dataset, save_dir=args.save_dir,
                                                                    run_name=run_name)
-        #elif args.config['additional_layernorm_layer']:
         elif args.config['learning_type'] == 'layernorm_DyT':
             model_wrapper.layernorm_adaptation_additional_learnDyT(args.config, cali_dataset, save_dir=args.save_dir,
                                                                       run_name=run_name)
         elif args.config['learning_type'] == 'sharpness_encoding':
-            '''
-            model_wrapper.layernorm_adaptation_sharpness_encoding(args.config, cali_dataset, save_dir=args.save_dir,
-                                                                   run_name=run_name)
-            '''
-            
             model_wrapper.layernorm_adaptation_sharpness_encoding_nocache(args.config, cali_dataset, save_dir=args.save_dir,
                                                                   run_name=run_name)
         elif args.config['learning_type'] == 'version4':
-            '''
-			model_wrapper.layernorm_adaptation_sharpness_encoding(args.config, cali_dataset, save_dir=args.save_dir,
-																   run_name=run_name)
-			'''
-            
-            model_wrapper.layernorm_adaptation_verion4(args.config, cali_dataset,
-                                                                          save_dir=args.save_dir,
-                                                                          run_name=run_name)
+            model_wrapper.layernorm_adaptation_verion4(args.config, cali_dataset, save_dir=args.save_dir, run_name=run_name)
         else:
             model_wrapper.layernorm_adaptation(args.config, cali_dataset, save_dir=args.save_dir, run_name=run_name)
         e_t = time.time()
@@ -169,7 +156,11 @@ def main(args):
         s_t = time.time()
         #test_ours_result = test_evaluator.evaluate(model_wrapper, tokenizer, demonstration='', use_cache=args.config['use_cache'])
         
-        test_ours_result = test_evaluator.evaluate(model_wrapper, tokenizer, demonstration=baseline_demon, use_cache=args.config['use_cache'])
+        if args.config['eval_type'] == 'eval_with_demonstration':
+            test_ours_result = test_evaluator.evaluate(model_wrapper, tokenizer, demonstration=baseline_demon, use_cache=args.config['use_cache'])
+        elif args.config['eval_type'] == 'eval_with_empty':
+            test_ours_result = test_evaluator.evaluate(model_wrapper, tokenizer, demonstration='', use_cache=args.config['use_cache'])
+            
         print(f'Test Soft Prompt result: {test_ours_result}\n')
         result_dict['test_result']['ours'].append(test_ours_result)
         e_t = time.time()

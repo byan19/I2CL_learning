@@ -6,10 +6,6 @@ import my_datasets as md
 config = {}
 # general
 #config['exp_name'] = 'exps/Llama3_32layers_debug'
-#config['exp_name'] = 'exps_restart/Llama2_32layers_layernorm_conv_ratio_normaliser_debug'
-#config['exp_name'] = 'exps_restart2/Llama2_32layers_layernorm_1e-5AdamW'
-#config['exp_name'] = 'exps_restart3/Llama2_32layers_allLN_convregular1e-2_trajcontroltmp10'
-config['exp_name'] = 'exps_apr3/Llama2_32layers_sharpnessencoding_softplushdeskalone'
 config['exp_name'] = 'exps_apr7/Llama2_sharpnessencoding_softplusN1e-3C_flatlam1e-3'
 config['exp_name'] = 'exps_apr7/debugging_with_adding_demonstration'
 config['exp_name'] = 'exps_apr10/version4_test'
@@ -51,7 +47,7 @@ config['rho'] = 1e-4
 config['learning_type'] = 'version4' #'sharpness_encoding' # 'sharpness_aware' 'sharpness_aware_approx' 'layernorm_DyT'
 
 config['grad_bs'] = 1
-config['demon_bs'] = 1
+config['demon_bs'] = 0
 config['post_attention'] = False
 config['input_attention'] = False
 config['entropy_loss'] = False
