@@ -1131,7 +1131,7 @@ class ModelWrapper(nn.Module):
                 ######################
                 # forward
                 ######################
-                print('working on the convergence bound and sharp approxy no cache')
+                print('working on the convergence bound and sharp approxy no cache update version 2.4')
                 output = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
                 logits = output.logits
                 hidden_states = output.hidden_states
