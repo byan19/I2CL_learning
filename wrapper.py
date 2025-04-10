@@ -1030,6 +1030,7 @@ class ModelWrapper(nn.Module):
             for name, param in peft_model.named_parameters():
                 if name in tuning_name_list:
                     param.requires_grad = True
+                    
         elif config['layernorm_type'] == 'input_attention':
             for name, param in peft_model.named_parameters():
                 if param.requires_grad and 'input_layernorm' in name:
@@ -1054,8 +1055,7 @@ class ModelWrapper(nn.Module):
         for label, ans_txt in enumerate(ans_txt_list):
             if 'gpt' in self.tokenizer.__class__.__name__.lower():
                 ans_txt = ' ' + ans_txt  # add space to the beginning of answer
-            ans_tok = self.tokenizer.encode(ans_txt, add_special_tokens=False)[
-                0]  # use the first token if more than one token
+            ans_tok = self.tokenizer.encode(ans_txt, add_special_tokens=False)[0]  # use the first token if more than one token
             print(f"ans_txt: {ans_txt}, ans_tok: {ans_tok}")
             label_map[label] = ans_tok  # index is the label
         print(f"label_map: {label_map}")
@@ -1108,6 +1108,7 @@ class ModelWrapper(nn.Module):
                 batch_data = [all_data[idx] for idx in batch_index]
                 batch_input, batch_label = [], []
                 # construct the demonstration here.
+                print(f'epoch{_}/{epochs}: iter: {i}/{len(all_data)/batch_size}')
                 instruct = ""
                 demonstration = ""
                 if config['demon_bs'] == 0:
@@ -1146,6 +1147,8 @@ class ModelWrapper(nn.Module):
                     loss = F.cross_entropy(pred_logits, gt_label, reduction='mean')
                 else:
                     loss = utils.entropy_from_logits(pred_logits).mean()
+                
+                epoch_loss.append(loss.item())
                 
                 conver_loss = 0.0
                 weight_scale = [hold for hold in range(1, len(hidden_states))]
