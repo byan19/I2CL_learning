@@ -45,13 +45,15 @@ config['rho'] = 1e-4
 
 #config['learning_type'] = 'sharpness_aware_approx' #'sharpness_encoding' # 'sharpness_aware' 'sharpness_aware_approx' 'layernorm_DyT'
 config['learning_type'] = 'version4' #'sharpness_encoding' # 'sharpness_aware' 'sharpness_aware_approx' 'layernorm_DyT'
-
 config['eval_type'] = 'eval_with_demonstration' # 'eval_with_demonstration', 'eval_with_empty'
 
 config['grad_bs'] = 1
 config['demon_bs'] = 1
-config['post_attention'] = False
-config['input_attention'] = False
+
+#config['post_attention'] = False
+#config['input_attention'] = False
+
+config['layernorm_type'] = 'all' # 'post_attention', 'input_attention', 'all'
 config['entropy_loss'] = False
 config['ce_loss_lambda'] = 1.0
 config['conver_bound'] = False
