@@ -62,6 +62,7 @@ config['entropy_loss'] = False
 config['ce_loss_lambda'] = 1.0
 config['conver_bound'] = False
 config['pushing_loss'] = False
+config['flatness_loss'] = False
 config['pushing_loss_lambda'] = 1e-2
 config['conver_loss_lambda'] = 1e-2
 config['flat_loss_lambda'] = 1e-3
