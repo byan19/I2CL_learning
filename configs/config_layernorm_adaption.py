@@ -8,7 +8,7 @@ config = {}
 #config['exp_name'] = 'exps/Llama3_32layers_debug'
 config['exp_name'] = 'exps_apr7/Llama2_sharpnessencoding_softplusN1e-3C_flatlam1e-3'
 config['exp_name'] = 'exps_apr7/debugging_with_adding_demonstration'
-config['exp_name'] = 'exps_apr10/version4_test_debug'
+config['exp_name'] = 'exps_apr10/version4_test_debugging'
 config['gpus'] = ['0']
 config['models'] = ['meta-llama/Llama-2-7b-hf'] # 'meta-llama/Meta-Llama-3-8B', 'gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
 config['datasets'] = list(md.target_datasets.keys())
@@ -46,10 +46,10 @@ config['rho'] = 1e-4
 #config['learning_type'] = 'sharpness_aware_approx' #'sharpness_encoding' # 'sharpness_aware' 'sharpness_aware_approx' 'layernorm_DyT'
 config['learning_type'] = 'version4' #'sharpness_encoding' # 'sharpness_aware' 'sharpness_aware_approx' 'layernorm_DyT'
 
-config['eval_type'] = 'eval_with_empty' # 'eval_with_demonstration', 'eval_with_empty'
+config['eval_type'] = 'eval_with_demonstration' # 'eval_with_demonstration', 'eval_with_empty'
 
 config['grad_bs'] = 1
-config['demon_bs'] = 0
+config['demon_bs'] = 1
 config['post_attention'] = False
 config['input_attention'] = False
 config['entropy_loss'] = False
