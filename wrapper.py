@@ -1018,7 +1018,7 @@ class ModelWrapper(nn.Module):
         tuning_param_list = []
         tuning_name_list = []
         
-        if config['post_attention']:
+        if config['layernorm_type'] == 'post_attention' :
             for name, param in peft_model.named_parameters():
                 if param.requires_grad and 'post_layernorm' in name:
                     tuning_name_list.append(name)
@@ -1030,7 +1030,7 @@ class ModelWrapper(nn.Module):
             for name, param in peft_model.named_parameters():
                 if name in tuning_name_list:
                     param.requires_grad = True
-        elif config['input_attention']:
+        elif config['layernorm_type'] == 'input_attention':
             for name, param in peft_model.named_parameters():
                 if param.requires_grad and 'input_layernorm' in name:
                     tuning_name_list.append(name)

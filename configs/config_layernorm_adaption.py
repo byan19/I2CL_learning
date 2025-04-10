@@ -56,16 +56,18 @@ config['demon_bs'] = 1
 config['layernorm_type'] = 'all' # 'post_attention', 'input_attention', 'all'
 config['entropy_loss'] = False
 config['ce_loss_lambda'] = 1.0
-config['conver_bound'] = False
 config['pushing_loss'] = False
-config['flatness_loss'] = False
 config['pushing_loss_lambda'] = 1e-2
-config['conver_loss_lambda'] = 1e-2
+
+config['flatness_loss'] = False
 config['flat_loss_lambda'] = 1e-3
-config['additional_layernorm_mode'] = 'add'
+
+config['conver_loss_lambda'] = 1e-2
 config['noise_scale_hess'] = 1e-3
 config['conver_loss'] = False
 config['conver_loss_regular'] = False
+
 config['conver_loss_regular_expo'] = False
 config['conver_loss_regular_temp'] = 100
+config['additional_layernorm_mode'] = 'add'
 
