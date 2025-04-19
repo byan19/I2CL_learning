@@ -13,7 +13,7 @@ screen -S $sessionname -X stuff "source activate /ibex/user/yangy0o/by_g/by_g_en
 #screen -S $sessionname -X stuff "export HF_HUB_CACHE=/ibex/user/yangy0o/by_g/huggingface_cache^M"
 
 screen -S $sessionname -X stuff "export HF_DATASETS_CACHE=/ibex/user/yangy0o/huggingface_datasets^M"
-screen -S $sessionname -X stuff "export TRANSFORMERS_CACHE=/ibex/user/yangy0o/huggingface_models^M"
+screen -S $sessionname -X stuff "export HF_HOME=/ibex/user/yangy0o/huggingface_models^M"
 
 screen -S $sessionname -X stuff "cd /ibex/user/yangy0o/by_g/I2CL_learning^M"
 sleep 1.0s
