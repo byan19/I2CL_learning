@@ -205,7 +205,6 @@ def get_args():
 if __name__ == "__main__":
     # get args
     hf_token = "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"
-    
     # Log in using the token
     login(token=hf_token)
     start_time = time.time()
