@@ -19,7 +19,7 @@ screen -S $sessionname -X stuff "cd /ibex/user/yangy0o/by_g/I2CL_learning^M"
 sleep 1.0s
 echo ${File}
 #screen -S $sessionname -X stuff "salloc --job-name by_g --account conf-neurips-2025.05.22-ghanembs --gres=gpu:a100:1 --time=10:00:00 --cpus-per-task=10 srun bash ${File} ${Param} ${sessionname} > Z_${sessionname}_$(date +"T%H:%M:%S_D%d_%m_%Y").log 2>&1^M"
-screen -S $sessionname -X stuff "salloc --job-name by_g --account conf-neurips-2025.05.22-ghanembs --gres=gpu:a100:1 --mem=200G --time=10:00:00 --cpus-per-task=20 srun bash ${File} ${Param} ${sessionname} > Z_${sessionname}_$(date +"T%H:%M:%S_D%d_%m_%Y").log 2>&1^M"
+screen -S $sessionname -X stuff "salloc --job-name by_g --account conf-neurips-2025.05.22-ghanembs --gres=gpu:a100:1 --mem=200G --time=10:00:00 --cpus-per-task=10 srun bash ${File} ${Param} ${sessionname} > Z_${sessionname}_$(date +"T%H:%M:%S_D%d_%m_%Y").log 2>&1^M"
 
 }
 
