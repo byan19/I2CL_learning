@@ -35,6 +35,7 @@ Tunning=${Tunning_list[$idx]}
 
 sessionname=version4_test
 sessionname=version4_test_path_set
+sessionname=flatMinueconvR_demon3
 File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
 
 CHECK=${sessionname}
