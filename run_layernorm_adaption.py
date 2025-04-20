@@ -11,6 +11,7 @@ from multiprocessing import Process, Queue
 import utils
 import evaluator as ev
 import my_datasets as md
+from huggingface_hub import login
 import pdb
 
 def run_task(gpu_id, config, model_name, dataset_name):
@@ -203,6 +204,10 @@ def get_args():
 
 if __name__ == "__main__":
     # get args
+    hf_token = "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"
+    
+    # Log in using the token
+    login(token=hf_token)
     start_time = time.time()
     args = get_args()
     # load config
