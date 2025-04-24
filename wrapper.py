@@ -1238,9 +1238,13 @@ class ModelWrapper(nn.Module):
                             torch.arange(logits.size(0)), pred_loc]
                         # flat_loss += post_layer_norm_holder[i] @ (grad_noise - grad).t()/noise_scale
                         # flat_loss += torch.nn.functional.softplus(post_layer_norm_holder[i] @ (grad_noise - grad).t()/noise_scale)
-                        flat_loss += torch.nn.functional.softplus(
-                            -1 * noise_holder[i] @ (grad_noise - grad).t() / noise_scale)
-                    
+                        
+                        # worked version
+                        #flat_loss += torch.nn.functional.softplus( -1 * noise_holder[i] @ (grad_noise - grad).t() / noise_scale)
+                        
+                        # precised version
+                        flat_loss += torch.nn.functional.softplus( -1 * noise_holder[i][torch.arange(logits.size(0)), pred_loc] @ (grad_noise - grad).t() / noise_scale)
+
                     loss += config['flat_loss_lambda'] * flat_loss.mean()
                 
                 # update strength params

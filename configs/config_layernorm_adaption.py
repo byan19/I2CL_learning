@@ -10,12 +10,13 @@ config['exp_name'] = 'exps_apr7/Llama2_sharpnessencoding_softplusN1e-3C_flatlam1
 config['exp_name'] = 'exps_apr7/debugging_with_adding_demonstration'
 config['exp_name'] = 'exps_apr10/version4_1sample_1demon_epoch60_flatMinueconvR_demon3'
 config['exp_name'] = 'exps_apr24/version4_checking_loss_debugging'
+config['exp_name'] = 'exps_apr24/version4_fixedflatness'
 
 config['gpus'] = ['0']
 config['models'] = ['meta-llama/Llama-2-7b-hf'] # 'meta-llama/Meta-Llama-3-8B', 'gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
 config['datasets'] = list(md.target_datasets.keys())
 config['seed'] = 42
-config['run_num'] = 1
+config['run_num'] = 5
 config['run_baseline'] = False
 config['metric'] = 'acc'  # 'acc', 'macro_f1'
 config['bs'] = 1
@@ -60,7 +61,7 @@ config['entropy_loss'] = False
 config['ce_loss_lambda'] = 1.0
 config['pushing_loss'] = False
 config['pushing_loss_lambda'] = 1e-2
-config['learning_property_analysis'] = True
+config['learning_property_analysis'] = False
 
 config['flatness_loss'] = True
 config['flat_loss_lambda'] = 1e-3
