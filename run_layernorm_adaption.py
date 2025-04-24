@@ -157,11 +157,16 @@ def main(args):
         s_t = time.time()
         #test_ours_result = test_evaluator.evaluate(model_wrapper, tokenizer, demonstration='', use_cache=args.config['use_cache'])
         
+        if args.config['learning_property_analysis']:
+            model_wrapper.layernorm_adaptation_verion4_analysis(args.config, cali_dataset, test_dataset, save_dir=args.save_dir, run_name=run_name)
+            
         if args.config['eval_type'] == 'eval_with_demonstration':
             test_ours_result = test_evaluator.evaluate(model_wrapper, tokenizer, demonstration=baseline_demon, use_cache=args.config['use_cache'])
         elif args.config['eval_type'] == 'eval_with_empty':
             test_ours_result = test_evaluator.evaluate(model_wrapper, tokenizer, demonstration='', use_cache=args.config['use_cache'])
-            
+        
+        
+
         print(f'Test Soft Prompt result: {test_ours_result}\n')
         result_dict['test_result']['ours'].append(test_ours_result)
         e_t = time.time()

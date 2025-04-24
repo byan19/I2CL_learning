@@ -132,3 +132,4 @@ class Evaluator(nn.Module):
         macro_f1 = sum(f1) / num_classes
         acc = sum(acc) / len(acc)
         return {'acc': acc, 'macro_f1': macro_f1}
+    
