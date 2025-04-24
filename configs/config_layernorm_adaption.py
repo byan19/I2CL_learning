@@ -13,7 +13,11 @@ config['exp_name'] = 'exps_apr24/version4_checking_loss_debugging'
 config['exp_name'] = 'exps_apr24/version4_fixedflatness_1sample_1demon'
 
 config['gpus'] = ['0']
-config['models'] = ['meta-llama/Llama-2-7b-hf'] # 'meta-llama/Meta-Llama-3-8B', 'gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
+config['models'] = ['meta-llama/Llama-2-7b-hf'] # 'meta-llama/Meta-Llama-3-8B', 'openai-community/gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
+
+config['models'] = ['openai-community/gpt2-xl'] # 'meta-llama/Meta-Llama-3-8B', 'openai-community/gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
+
+
 config['datasets'] = list(md.target_datasets.keys())
 config['seed'] = 42
 config['run_num'] = 5
