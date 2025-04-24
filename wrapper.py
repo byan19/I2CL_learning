@@ -1496,8 +1496,7 @@ class ModelWrapper(nn.Module):
                             torch.arange(logits.size(0)), pred_loc]
                         # flat_loss += post_layer_norm_holder[i] @ (grad_noise - grad).t()/noise_scale
                         # flat_loss += torch.nn.functional.softplus(post_layer_norm_holder[i] @ (grad_noise - grad).t()/noise_scale)
-                        pdb.set_trace()
-                        tmp = torch.nn.functional.softplus(-1*noise_holder[i] @ (grad_noise - grad).t() / noise_scale)
+                        tmp = torch.nn.functional.softplus(-1*noise_holder[i][torch.arange(logits.size(0)), pred_loc] @ (grad_noise - grad).t() / noise_scale)
                         flat_loss += tmp
                         sub_indiv_flatness_holder.append(tmp.item())
                     
