@@ -1149,8 +1149,8 @@ class ModelWrapper(nn.Module):
                 output = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
                 logits = output.logits
                 hidden_states = output.hidden_states
-                pdb.set_trace()
                 pred_logits = logits[torch.arange(logits.size(0)), pred_loc]
+                
                 # get loss
                 gt_label = torch.tensor([label_map[label] for label in batch_label]).to(self.device)
                 if not config['entropy_loss']:
@@ -1589,9 +1589,10 @@ class ModelWrapper(nn.Module):
         demonstration =  demonstration
         with torch.no_grad():
             
-            pdb.set_trace()
-            train_x = [[] for tmp_holder in range( - 1)]
-            train_y = [[] for tmp_holder in range(config['32'] - 1)]
+            if 'Llama-2' in config['models'][0]:
+                number_layer = 32
+            train_x = [[] for tmp_holder in range(number_layer)]
+            train_y = [[] for tmp_holder in range(number_layer)]
             
             for batch_i in range(0, len(all_data), batch_size):
                 batch_index = all_data_index[batch_i: batch_i + batch_size]
@@ -1648,7 +1649,7 @@ class ModelWrapper(nn.Module):
                 # check the number of hidden states
                 
                 for i in range(len(train_x)):
-                    train_x[i].append(hidden_states[i+2][torch.arange(logits.size(0)), pred_loc].numpy())
+                    train_x[i].append(hidden_states[i+1][torch.arange(logits.size(0)), pred_loc].numpy())
                     train_y[i].append(gt_label.numpy())
             
             
@@ -1664,7 +1665,6 @@ class ModelWrapper(nn.Module):
                 clf = LogisticRegression(max_iter= 1000)
                 clf.fit(layer_train_x, layer_train_y)
                 prob_models.append(clf)
-            
             
             ####################################
             # generate the test samples
@@ -1727,7 +1727,7 @@ class ModelWrapper(nn.Module):
                 # check the number of hidden states
                 
                 for i in range(len(train_x)):
-                    test_x[i].append(hidden_states[i+2][torch.arange(logits.size(0)), pred_loc].numpy())
+                    test_x[i].append(hidden_states[i+1][torch.arange(logits.size(0)), pred_loc].numpy())
                     test_y[i].append(gt_label.numpy())
             
             acc_mean = []
@@ -1735,7 +1735,7 @@ class ModelWrapper(nn.Module):
             for task_i in range(len(train_x)):
                 y_pred = prob_models[task_i].predict(test_x[task_i])
                 y_probs = prob_models[task_i].predict_proba(test_x[task_i])
-                probe_acc = accuracy_scroe(test_y[task_i],y_pred)
+                probe_acc = accuracy_score(test_y[task_i],y_pred)
                 probe_loss = log_loss(test_y[task_i],y_probs)
                 acc_mean.append(probe_acc)
                 loss_mean.append(probe_loss)
