@@ -19,7 +19,7 @@ import inspect
 import os
 
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_scroe,log_loss
+from sklearn.metrics import accuracy_score,log_loss
 
 
 class ModelWrapper(nn.Module):
