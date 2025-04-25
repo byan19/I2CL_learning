@@ -10,7 +10,7 @@ config['exp_name'] = 'exps_apr7/Llama2_sharpnessencoding_softplusN1e-3C_flatlam1
 config['exp_name'] = 'exps_apr7/debugging_with_adding_demonstration'
 config['exp_name'] = 'exps_apr10/version4_1sample_1demon_epoch60_flatMinueconvR_demon3'
 config['exp_name'] = 'exps_apr24/version4_checking_loss_debugging'
-config['exp_name'] = 'exps_apr25/version4_fixedflatness_1sample_1demon_llama2'
+config['exp_name'] = 'exps_apr25/version4_fixedflatness_1sample_3demon_llama2'
 
 config['gpus'] = ['0']
 
@@ -56,7 +56,7 @@ config['learning_type'] = 'version4' #'sharpness_encoding' # 'sharpness_aware' '
 config['eval_type'] = 'eval_with_demonstration' # 'eval_with_demonstration', 'eval_with_empty'
 
 config['grad_bs'] = 1
-config['demon_bs'] = 1
+config['demon_bs'] = 3
 
 #config['post_attention'] = False
 #config['input_attention'] = False
