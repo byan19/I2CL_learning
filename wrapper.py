@@ -1664,7 +1664,6 @@ class ModelWrapper(nn.Module):
                 clf.fit(layer_train_x, layer_train_y)
                 prob_models.append(clf)
                 
-            pdb.set_trace()
             ####################################
             # generate the test samples
             # with or without demonstration
