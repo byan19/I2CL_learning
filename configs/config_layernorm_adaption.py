@@ -67,6 +67,8 @@ config['entropy_loss'] = False
 config['ce_loss_lambda'] = 1.0
 config['pushing_loss'] = False
 config['pushing_loss_lambda'] = 1e-2
+
+config['skip_training'] = True
 config['learning_property_analysis'] = False
 config['probe_analysis'] = True
 

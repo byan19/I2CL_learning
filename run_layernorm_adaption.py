@@ -134,21 +134,22 @@ def main(args):
 
         # train sharpness_aware
         s_t = time.time()
-        if args.config['learning_type'] == 'sharpness_aware':
-            model_wrapper.layernorm_adaptation_sharpness_aware(args.config, cali_dataset, save_dir=args.save_dir, run_name=run_name)
-        elif args.config['learning_type'] == 'sharpness_aware_approx':
-            model_wrapper.layernorm_adaptation_sharpness_aware_approx(args.config, cali_dataset, save_dir=args.save_dir,
-                                                                   run_name=run_name)
-        elif args.config['learning_type'] == 'layernorm_DyT':
-            model_wrapper.layernorm_adaptation_additional_learnDyT(args.config, cali_dataset, save_dir=args.save_dir,
+        if not config['skip_training']:
+            if args.config['learning_type'] == 'sharpness_aware':
+                model_wrapper.layernorm_adaptation_sharpness_aware(args.config, cali_dataset, save_dir=args.save_dir, run_name=run_name)
+            elif args.config['learning_type'] == 'sharpness_aware_approx':
+                model_wrapper.layernorm_adaptation_sharpness_aware_approx(args.config, cali_dataset, save_dir=args.save_dir,
+                                                                       run_name=run_name)
+            elif args.config['learning_type'] == 'layernorm_DyT':
+                model_wrapper.layernorm_adaptation_additional_learnDyT(args.config, cali_dataset, save_dir=args.save_dir,
+                                                                          run_name=run_name)
+            elif args.config['learning_type'] == 'sharpness_encoding':
+                model_wrapper.layernorm_adaptation_sharpness_encoding_nocache(args.config, cali_dataset, save_dir=args.save_dir,
                                                                       run_name=run_name)
-        elif args.config['learning_type'] == 'sharpness_encoding':
-            model_wrapper.layernorm_adaptation_sharpness_encoding_nocache(args.config, cali_dataset, save_dir=args.save_dir,
-                                                                  run_name=run_name)
-        elif args.config['learning_type'] == 'version4':
-            model_wrapper.layernorm_adaptation_verion4(args.config, cali_dataset, save_dir=args.save_dir, run_name=run_name)
-        else:
-            model_wrapper.layernorm_adaptation(args.config, cali_dataset, save_dir=args.save_dir, run_name=run_name)
+            elif args.config['learning_type'] == 'version4':
+                model_wrapper.layernorm_adaptation_verion4(args.config, cali_dataset, save_dir=args.save_dir, run_name=run_name)
+            else:
+                model_wrapper.layernorm_adaptation(args.config, cali_dataset, save_dir=args.save_dir, run_name=run_name)
         e_t = time.time()
         print(f'Calibration time: {e_t - s_t}')
         result_dict['time']['calibrate'].append(e_t - s_t)
