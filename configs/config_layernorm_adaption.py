@@ -57,7 +57,7 @@ config['learning_type'] = 'version4' #'sharpness_encoding' # 'sharpness_aware' '
 config['eval_type'] = 'eval_with_demonstration' # 'eval_with_demonstration', 'eval_with_empty'
 
 config['grad_bs'] = 1
-config['demon_bs'] = 3
+config['demon_bs'] = 1
 
 #config['post_attention'] = False
 #config['input_attention'] = False
