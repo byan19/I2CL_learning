@@ -1742,10 +1742,13 @@ class ModelWrapper(nn.Module):
                 
         pdb.set_trace()
         # plot loss curve and save it
-        
+        acc_mean = np.asarray(acc_mean)
+        loss_mean = np.asarray(loss_mean)
         if not os.path.exists(f'{save_dir}/probe_analysis/'):
             os.makedirs(f'{save_dir}/probe_analysis/')
-        
+        np.save(f'{save_dir}/probe_analysis/{run_name}_probe_acc.npy', acc_mean)
+        np.save(f'{save_dir}/probe_analysis/{run_name}_probe_loss.npy', loss_mean)
+
         '''
         np.save(f'{save_dir}/loss_analysis/indiv_condis_holder.npy', indiv_condis_holder)
         np.save(f'{save_dir}/loss_analysis/indiv_flatness_holder.npy', indiv_flatness_holder)
