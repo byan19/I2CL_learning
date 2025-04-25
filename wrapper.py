@@ -1654,7 +1654,6 @@ class ModelWrapper(nn.Module):
             ####################################
             # train models
             ####################################
-            pdb.set_trace()
             prob_models = []
             for i in range(len(train_x)):
                 print(f'training probe model {i}' )
@@ -1664,7 +1663,8 @@ class ModelWrapper(nn.Module):
                 clf = LogisticRegression(max_iter= 1000)
                 clf.fit(layer_train_x, layer_train_y)
                 prob_models.append(clf)
-            
+                
+            pdb.set_trace()
             ####################################
             # generate the test samples
             # with or without demonstration
@@ -1734,10 +1734,14 @@ class ModelWrapper(nn.Module):
             acc_mean = []
             loss_mean = []
             for task_i in range(len(train_x)):
-                y_pred = prob_models[task_i].predict(test_x[task_i])
-                y_probs = prob_models[task_i].predict_proba(test_x[task_i])
-                probe_acc = accuracy_score(test_y[task_i],y_pred)
-                probe_loss = log_loss(test_y[task_i],y_probs)
+                
+                layer_test_x = np.vstack(test_x[task_i])
+                layer_test_y = np.array(test_y[task_i])
+                
+                y_pred = prob_models[task_i].predict(layer_test_x)
+                y_probs = prob_models[task_i].predict_proba(layer_test_x)
+                probe_acc = accuracy_score(layer_test_y,y_pred)
+                probe_loss = log_loss(test_y[task_i], y_probs)
                 acc_mean.append(probe_acc)
                 loss_mean.append(probe_loss)
                 
