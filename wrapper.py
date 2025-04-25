@@ -1579,8 +1579,7 @@ class ModelWrapper(nn.Module):
         
         # set the batch_size for training
         epochs, batch_size = config['epochs'], config['grad_bs']
-        batch_size += config['demon_bs']
-        sub_batch_size = config['grad_bs']
+        #batch_size += config['demon_bs']
         
         # train
         all_data_index = list(range(len(all_data)))
@@ -1649,7 +1648,7 @@ class ModelWrapper(nn.Module):
                 # check the number of hidden states
                 for i in range(len(train_x)):
                     train_x[i].append(hidden_states[i+1][torch.arange(logits.size(0)), pred_loc].cpu().numpy())
-                    train_y[i].append(gt_label.cpu().numpy())
+                    train_y[i].append(label)
             
             
             ####################################
@@ -1729,7 +1728,7 @@ class ModelWrapper(nn.Module):
                 
                 for i in range(len(train_x)):
                     test_x[i].append(hidden_states[i+1][torch.arange(logits.size(0)), pred_loc].cpu().numpy())
-                    test_y[i].append(gt_label.cpu().numpy())
+                    test_y[i].append(label)
             
             acc_mean = []
             loss_mean = []
