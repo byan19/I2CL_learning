@@ -1672,6 +1672,7 @@ class ModelWrapper(nn.Module):
             test_y = [[] for tmp_holder in range(len(train_x))]
             
             all_data = test_dataset.all_data
+            all_data_index = list(range(len(all_data)))
             
             for batch_i in range(0, len(all_data), batch_size):
                 batch_index = all_data_index[batch_i: batch_i + batch_size]
@@ -1725,7 +1726,6 @@ class ModelWrapper(nn.Module):
                 '''
                 
                 # check the number of hidden states
-                
                 for i in range(len(train_x)):
                     test_x[i].append(hidden_states[i+1][torch.arange(logits.size(0)), pred_loc].cpu().numpy())
                     test_y[i].append(label)
