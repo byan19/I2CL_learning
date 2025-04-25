@@ -1649,8 +1649,8 @@ class ModelWrapper(nn.Module):
                 # check the number of hidden states
                 
                 for i in range(len(train_x)):
-                    train_x[i].append(hidden_states[i+1][torch.arange(logits.size(0)), pred_loc].numpy())
-                    train_y[i].append(gt_label.numpy())
+                    train_x[i].append(hidden_states[i+1][torch.arange(logits.size(0)), pred_loc].cpu().numpy())
+                    train_y[i].append(gt_label.cpu().numpy())
             
             
             ####################################
@@ -1672,7 +1672,9 @@ class ModelWrapper(nn.Module):
             ####################################
             test_x = [[] for tmp_holder in range(len(train_x))]
             test_y = [[] for tmp_holder in range(len(train_x))]
+            
             all_data = test_dataset.all_data
+            
             for batch_i in range(0, len(all_data), batch_size):
                 batch_index = all_data_index[batch_i: batch_i + batch_size]
                 batch_data = [all_data[idx] for idx in batch_index]
@@ -1708,7 +1710,7 @@ class ModelWrapper(nn.Module):
                 pred_loc = utils.last_one_indices(attn_mask).to(self.device)
                 
                 ####################################
-                # generate the training samples
+                # generate the test samples
                 ####################################
                 output = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
                 logits = output.logits
@@ -1727,8 +1729,8 @@ class ModelWrapper(nn.Module):
                 # check the number of hidden states
                 
                 for i in range(len(train_x)):
-                    test_x[i].append(hidden_states[i+1][torch.arange(logits.size(0)), pred_loc].numpy())
-                    test_y[i].append(gt_label.numpy())
+                    test_x[i].append(hidden_states[i+1][torch.arange(logits.size(0)), pred_loc].cpu().numpy())
+                    test_y[i].append(gt_label.cpu().numpy())
             
             acc_mean = []
             loss_mean = []
