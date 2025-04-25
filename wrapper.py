@@ -1657,6 +1657,7 @@ class ModelWrapper(nn.Module):
             pdb.set_trace()
             prob_models = []
             for i in range(len(train_x)):
+                print(f'training probe model {i}' )
                 layer_train_x = np.vstack(train_x[i])
                 layer_train_y = np.array(train_y[i])
             
