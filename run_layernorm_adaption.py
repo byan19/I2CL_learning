@@ -158,8 +158,11 @@ def main(args):
         #test_ours_result = test_evaluator.evaluate(model_wrapper, tokenizer, demonstration='', use_cache=args.config['use_cache'])
         
         if args.config['learning_property_analysis']:
-            model_wrapper.layernorm_adaptation_verion4_analysis(args.config, cali_dataset, test_dataset, save_dir=args.save_dir, run_name=run_name)
+            model_wrapper.layernorm_adaptation_verion4_analysis(args.config, cali_dataset, test_dataset, baseline_demon, save_dir=args.save_dir, run_name=run_name)
             
+        if args.config['probe_analysis']:
+            model_wrapper.layernorm_adaptation_verion4_probe(args.config, cali_dataset, test_dataset, baseline_demon, save_dir=args.save_dir, run_name=run_name)
+
         if args.config['eval_type'] == 'eval_with_demonstration':
             test_ours_result = test_evaluator.evaluate(model_wrapper, tokenizer, demonstration=baseline_demon, use_cache=args.config['use_cache'])
         elif args.config['eval_type'] == 'eval_with_empty':

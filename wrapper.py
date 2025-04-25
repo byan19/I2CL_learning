@@ -17,6 +17,11 @@ from self_exploration_tool import *
 import flat_learning
 import inspect
 import os
+
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_scroe,log_loss
+
+
 class ModelWrapper(nn.Module):
     def __init__(self, model, tokenizer, model_config, device):
         super().__init__()
@@ -1107,8 +1112,8 @@ class ModelWrapper(nn.Module):
             epoch_loss = []
             epoch_conv_loss = []
             np.random.shuffle(all_data_index)
-            for i in range(0, len(all_data) - (len(all_data) % batch_size), batch_size):
-                batch_index = all_data_index[i: i + batch_size]
+            for batch_i in range(0, len(all_data) - (len(all_data) % batch_size), batch_size):
+                batch_index = all_data_index[batch_i: batch_i + batch_size]
                 batch_data = [all_data[idx] for idx in batch_index]
                 batch_input, batch_label = [], []
                 # construct the demonstration here.
@@ -1274,7 +1279,7 @@ class ModelWrapper(nn.Module):
         if config['conver_loss'] or config['conver_loss_regular']:
             utils.plot_loss_curve(conv_loss_list, save_dir + f'/{run_name}_conv_loss_curve.png')
     
-    def layernorm_adaptation_verion4_analysis(self, config, dataset, test_dataset, save_dir=None, run_name=None):
+    def layernorm_adaptation_verion4_analysis(self, config, dataset, test_dataset, demonstration, save_dir=None, run_name=None):
         '''
         # learning for fast convergence
         # add demonstration in the inner loop to trigger the optimization in the inner loop
@@ -1379,8 +1384,8 @@ class ModelWrapper(nn.Module):
             epoch_loss = []
             epoch_conv_loss = []
             np.random.shuffle(all_data_index)
-            for i in range(0, len(all_data) - (len(all_data) % batch_size), batch_size):
-                batch_index = all_data_index[i: i + batch_size]
+            for batch_i in range(0, len(all_data) - (len(all_data) % batch_size), batch_size):
+                batch_index = all_data_index[batch_i: batch_i + batch_size]
                 batch_data = [all_data[idx] for idx in batch_index]
                 batch_input, batch_label = [], []
                 # construct the demonstration here.
@@ -1539,7 +1544,211 @@ class ModelWrapper(nn.Module):
         if config['conver_loss'] or config['conver_loss_regular']:
             utils.plot_loss_curve(conv_loss_list, save_dir + f'/{run_name}_conv_loss_curve.png')
         '''
+    
+    def layernorm_adaptation_verion4_probe(self, config, dataset, test_dataset, demonstration ,save_dir=None, run_name=None):
+        '''
+        # learning for fast convergence
+        # add demonstration in the inner loop to trigger the optimization in the inner loop
+        # Flatness learning
+        # cross entropy tuning
+        '''
+        print('Version 4 probing')
+        
+        # prepare label dict
+        label_map = {}
+        ans_txt_list = dataset.get_dmonstration_template()['options']
+        for label, ans_txt in enumerate(ans_txt_list):
+            if 'gpt' in self.tokenizer.__class__.__name__.lower():
+                ans_txt = ' ' + ans_txt  # add space to the beginning of answer
+            ans_tok = self.tokenizer.encode(ans_txt, add_special_tokens=False)[
+                0]  # use the first token if more than one token
+            print(f"ans_txt: {ans_txt}, ans_tok: {ans_tok}")
+            label_map[label] = ans_tok  # index is the label
+        print(f"label_map: {label_map}")
+        
+        # print trainable parameters
+        # set model to peft model
+        
+        # get all data
+       
+        # all_data is from the training set
+        all_data = dataset.all_data
+        example_separator = dataset.example_separator
+        
+        
+        # set the batch_size for training
+        epochs, batch_size = config['epochs'], config['grad_bs']
+        batch_size += config['demon_bs']
+        sub_batch_size = config['grad_bs']
+        
+        # train
+        all_data_index = list(range(len(all_data)))
+        indiv_condis_holder = []
+        indiv_flatness_holder = []
+        demonstration =  demonstration
+        with torch.no_grad():
             
+            pdb.set_trace()
+            train_x = [[] for tmp_holder in range( - 1)]
+            train_y = [[] for tmp_holder in range(config['32'] - 1)]
+            
+            for batch_i in range(0, len(all_data), batch_size):
+                batch_index = all_data_index[batch_i: batch_i + batch_size]
+                batch_data = [all_data[idx] for idx in batch_index]
+                batch_input, batch_label = [], []
+                # construct the demonstration here.
+                # print(f'epoch{_}/{epochs}: iter: {i}/{len(all_data)/batch_size}')
+                instruct = ""
+                if config['demon_bs'] == 0:
+                    for sub_index in range(batch_size):
+                        input_str, ans_str, label = dataset.apply_template(batch_data[sub_index])
+                        batch_input.append(input_str)
+                        batch_label.append(label)
+                
+                else:
+                    for sub_index in range(batch_size):
+                        input_str, ans_str, label = dataset.apply_template(batch_data[sub_index])
+                        batch_input.append(demonstration + input_str)
+                        batch_label.append(label)
+                        
+                        '''
+                        if sub_index < batch_size - sub_batch_size:
+                            ans = ans_str[label]
+                            new_example = input_str + ' ' + ans
+                            demonstration = demonstration + new_example + example_separator
+                        else:
+                            batch_input.append(demonstration + input_str)
+                            batch_label.append(label)
+                        '''
+                
+                # first round
+                input_tok = self.tokenizer(batch_input, return_tensors='pt', padding=True)
+                input_ids = input_tok['input_ids'].to(self.device)
+                attn_mask = input_tok['attention_mask'].to(self.device)
+                pred_loc = utils.last_one_indices(attn_mask).to(self.device)
+                
+                ####################################
+                # generate the training samples
+                ####################################
+                output = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
+                logits = output.logits
+                hidden_states = output.hidden_states
+                pred_logits = logits[torch.arange(logits.size(0)), pred_loc]
+                # get loss
+                gt_label = torch.tensor([label_map[label] for label in batch_label]).to(self.device)
+                '''
+                if not config['entropy_loss']:
+                    loss = F.cross_entropy(pred_logits, gt_label, reduction='mean')
+                else:
+                    loss = utils.entropy_from_logits(pred_logits).mean()
+                '''
+                
+                pdb.set_trace()
+                # check the number of hidden states
+                
+                for i in range(len(train_x)):
+                    train_x[i].append(hidden_states[i+2][torch.arange(logits.size(0)), pred_loc].numpy())
+                    train_y[i].append(gt_label.numpy())
+            
+            
+            ####################################
+            # build training samples
+            ####################################
+            pdb.set_trace()
+            prob_models = []
+            for i in range(len(train_x)):
+                layer_train_x = np.vstack(train_x[i])
+                layer_train_y = np.array(train_y[i])
+            
+                clf = LogisticRegression(max_iter= 1000)
+                clf.fit(layer_train_x, layer_train_y)
+                prob_models.append(clf)
+            
+            
+            ####################################
+            # generate the test samples
+            # with or without demonstration
+            ####################################
+            test_x = [[] for tmp_holder in range(len(train_x))]
+            test_y = [[] for tmp_holder in range(len(train_x))]
+            all_data = test_dataset.all_data
+            for batch_i in range(0, len(all_data), batch_size):
+                batch_index = all_data_index[batch_i: batch_i + batch_size]
+                batch_data = [all_data[idx] for idx in batch_index]
+                batch_input, batch_label = [], []
+                # construct the demonstration here.
+                # print(f'epoch{_}/{epochs}: iter: {i}/{len(all_data)/batch_size}')
+                instruct = ""
+                if config['demon_bs'] == 0:
+                    for sub_index in range(batch_size):
+                        input_str, ans_str, label = dataset.apply_template(batch_data[sub_index])
+                        batch_input.append(input_str)
+                        batch_label.append(label)
+                
+                else:
+                    for sub_index in range(batch_size):
+                        input_str, ans_str, label = dataset.apply_template(batch_data[sub_index])
+                        batch_input.append(demonstration + input_str)
+                        batch_label.append(label)
+                        
+                        '''
+                        if sub_index < batch_size - sub_batch_size:
+                            ans = ans_str[label]
+                            new_example = input_str + ' ' + ans
+                            demonstration = demonstration + new_example + example_separator
+                        else:
+                            batch_input.append(demonstration + input_str)
+                            batch_label.append(label)
+                        '''
+                
+                input_tok = self.tokenizer(batch_input, return_tensors='pt', padding=True)
+                input_ids = input_tok['input_ids'].to(self.device)
+                attn_mask = input_tok['attention_mask'].to(self.device)
+                pred_loc = utils.last_one_indices(attn_mask).to(self.device)
+                
+                ####################################
+                # generate the training samples
+                ####################################
+                output = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
+                logits = output.logits
+                hidden_states = output.hidden_states
+                pred_logits = logits[torch.arange(logits.size(0)), pred_loc]
+                # get loss
+                gt_label = torch.tensor([label_map[label] for label in batch_label]).to(self.device)
+                
+                '''
+                if not config['entropy_loss']:
+                    loss = F.cross_entropy(pred_logits, gt_label, reduction='mean')
+                else:
+                    loss = utils.entropy_from_logits(pred_logits).mean()
+                '''
+                
+                # check the number of hidden states
+                
+                for i in range(len(train_x)):
+                    test_x[i].append(hidden_states[i+2][torch.arange(logits.size(0)), pred_loc].numpy())
+                    test_y[i].append(gt_label.numpy())
+            
+            acc_mean = []
+            loss_mean = []
+            for task_i in range(len(train_x)):
+                y_pred = prob_models[task_i].predict(test_x[task_i])
+                y_probs = prob_models[task_i].predict_proba(test_x[task_i])
+                probe_acc = accuracy_scroe(test_y[task_i],y_pred)
+                probe_loss = log_loss(test_y[task_i],y_probs)
+                acc_mean.append(probe_acc)
+                loss_mean.append(probe_loss)
+                
+        pdb.set_trace()
+        # plot loss curve and save it
+        
+        if not os.path.exists(f'{save_dir}/probe_analysis/'):
+            os.makedirs(f'{save_dir}/probe_analysis/')
+        
+        '''
+        np.save(f'{save_dir}/loss_analysis/indiv_condis_holder.npy', indiv_condis_holder)
+        np.save(f'{save_dir}/loss_analysis/indiv_flatness_holder.npy', indiv_flatness_holder)
+        '''
         
     
     def layernorm_adaptation_sharpness_encoding_nocache(self, config, dataset, save_dir=None, run_name=None):
