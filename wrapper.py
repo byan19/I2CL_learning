@@ -1149,6 +1149,7 @@ class ModelWrapper(nn.Module):
                 output = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
                 logits = output.logits
                 hidden_states = output.hidden_states
+                pdb.set_trace()
                 pred_logits = logits[torch.arange(logits.size(0)), pred_loc]
                 # get loss
                 gt_label = torch.tensor([label_map[label] for label in batch_label]).to(self.device)
