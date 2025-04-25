@@ -1589,7 +1589,7 @@ class ModelWrapper(nn.Module):
         demonstration =  demonstration
         with torch.no_grad():
             
-            if 'Llama-2' in config['models'][0]:
+            if 'Llama-2' in config['models'][0] or 'Llama-3' in config['models'][0] :
                 number_layer = 32
             train_x = [[] for tmp_holder in range(number_layer)]
             train_y = [[] for tmp_holder in range(number_layer)]
@@ -1653,7 +1653,7 @@ class ModelWrapper(nn.Module):
             
             
             ####################################
-            # build training samples
+            # train models
             ####################################
             pdb.set_trace()
             prob_models = []
