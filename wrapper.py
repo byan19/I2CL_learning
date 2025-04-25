@@ -1645,9 +1645,8 @@ class ModelWrapper(nn.Module):
                     loss = utils.entropy_from_logits(pred_logits).mean()
                 '''
                 
-                pdb.set_trace()
-                # check the number of hidden states
                 
+                # check the number of hidden states
                 for i in range(len(train_x)):
                     train_x[i].append(hidden_states[i+1][torch.arange(logits.size(0)), pred_loc].cpu().numpy())
                     train_y[i].append(gt_label.cpu().numpy())
