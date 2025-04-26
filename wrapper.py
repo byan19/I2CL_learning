@@ -1227,8 +1227,8 @@ class ModelWrapper(nn.Module):
                         def hook_fn_local(module, input):
                             """Function to add noise and store it."""
                             noise = torch.randn_like(input[0]) * noise_scale
-                            post_layer_norm_holder.append(module.post_attention_layernorm.weight)
-                            input = (input[0] + noise * module.post_attention_layernorm.weight,)
+                            post_layer_norm_holder.append(module.ln_2.base_layer.weight)
+                            input = (input[0] + noise * module.ln_2.base_layer.weight,)
                             noise_holder.append(noise)
                             return input
                         for layer  in self.model.transformer.h:
