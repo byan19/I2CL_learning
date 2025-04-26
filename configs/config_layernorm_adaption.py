@@ -11,7 +11,7 @@ config['exp_name'] = 'exps_apr7/debugging_with_adding_demonstration'
 config['exp_name'] = 'exps_apr10/version4_1sample_1demon_epoch60_flatMinueconvR_demon3'
 config['exp_name'] = 'exps_apr24/version4_checking_loss_debugging'
 config['exp_name'] = 'exps_apr25/version4_fixedflatness_1sample_1demon_llama3-8b'
-config['exp_name'] = 'exps_apr26/debugging_gpt_saving'
+config['exp_name'] = 'exps_apr26/debugging_gpt_saving2'
 
 config['gpus'] = ['0']
 
