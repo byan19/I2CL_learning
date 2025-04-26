@@ -1733,7 +1733,7 @@ class ModelWrapper(nn.Module):
             acc_mean = []
             loss_mean = []
             for task_i in range(len(train_x)):
-                
+                print(f'Evaluating Model {task_i}')
                 layer_test_x = np.vstack(test_x[task_i])
                 layer_test_y = np.array(test_y[task_i])
                 
