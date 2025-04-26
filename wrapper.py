@@ -1474,7 +1474,7 @@ class ModelWrapper(nn.Module):
                     loss = config['ce_loss_lambda'] * loss + config['conver_loss_lambda'] * conver_loss
                     epoch_conv_loss.append(conver_loss.item())
                 
-                
+                pdb.set_trace()
                 ####################################
                 # flatness approximation
                 ####################################
