@@ -1154,6 +1154,7 @@ class ModelWrapper(nn.Module):
                 output = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
                 logits = output.logits
                 hidden_states = output.hidden_states
+                pdb.set_trace()
                 pred_logits = logits[torch.arange(logits.size(0)), pred_loc]
                 
                 # get loss
@@ -1621,6 +1622,8 @@ class ModelWrapper(nn.Module):
             
             if 'Llama-2' in config['models'][0] or 'Llama-3' in config['models'][0] :
                 number_layer = 32
+            elif 'gpt2-xl' in config['models'][0]:
+                number_layer = 48
             train_x = [[] for tmp_holder in range(number_layer)]
             train_y = [[] for tmp_holder in range(number_layer)]
             
