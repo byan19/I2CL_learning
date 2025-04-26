@@ -64,6 +64,9 @@ config['demon_bs'] = 1
 #config['post_attention'] = False
 #config['input_attention'] = False
 
+# lora
+config['lora_rank'] = 1 # 8, 32, 64, 128
+
 config['layernorm_type'] = 'all' # 'post_attention', 'input_attention', 'all'
 config['entropy_loss'] = False
 config['ce_loss_lambda'] = 1.0

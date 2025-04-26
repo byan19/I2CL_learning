@@ -147,6 +147,9 @@ def main(args):
                                                                   run_name=run_name)
         elif args.config['learning_type'] == 'version4':
             model_wrapper.layernorm_adaptation_verion4(args.config, cali_dataset, save_dir=args.save_dir, run_name=run_name)
+        elif args.config['learning_type'] == 'rola':
+            model_wrapper.layernorm_adaptation_verion4_basedrola(args.config, cali_dataset, save_dir=args.save_dir,
+                                                       run_name=run_name)
         else:
             model_wrapper.layernorm_adaptation(args.config, cali_dataset, save_dir=args.save_dir, run_name=run_name)
             
