@@ -12,6 +12,7 @@ config['exp_name'] = 'exps_apr10/version4_1sample_1demon_epoch60_flatMinueconvR_
 config['exp_name'] = 'exps_apr24/version4_checking_loss_debugging'
 config['exp_name'] = 'exps_apr25/version4_fixedflatness_1sample_1demon_llama3-8b'
 config['exp_name'] = 'exps_apr26/probe_ourmethod'
+config['exp_name'] = 'exps_apr26/probe_ce'
 
 config['gpus'] = ['0']
 
@@ -74,9 +75,14 @@ config['probe_analysis'] = True
 
 config['flatness_loss'] = True
 config['flat_loss_lambda'] = 1e-3
+config['flat_loss_lambda'] = 0.0
 
 config['conver_loss_lambda'] = 1e-2
+config['conver_loss_lambda'] = 0.0
+
 config['noise_scale_hess'] = 1e-3
+
+
 config['conver_loss'] = False
 config['conver_loss_regular'] = True
 
