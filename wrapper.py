@@ -1222,7 +1222,6 @@ class ModelWrapper(nn.Module):
                     post_layer_norm_holder = []
                     hooks = []
                     
-                    pdb.set_trace()
                     if 'gpt' in config['models'][0]:
                         def hook_fn_local(module, input):
                             """Function to add noise and store it."""
