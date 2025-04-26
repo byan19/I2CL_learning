@@ -1491,10 +1491,15 @@ class ModelWrapper(nn.Module):
                         input = (input[0] + noise * module.post_attention_layernorm.weight,)
                         noise_holder.append(noise)
                         return input
-                    
-                    for layer in self.model.model.model.layers:
-                        hook = layer.register_forward_pre_hook(hook_fn_local)
-                        hooks.append(hook)
+                    if 'gpt' in config['models']:
+                        for layer  in self.model.transformer.h:
+                            hook = layer.register_forward_pre_hook(hook_fn_local)
+                            hooks.append(hook)
+                    else:
+                        for layer in self.model.model.model.layers:
+                            hook = layer.register_forward_pre_hook(hook_fn_local)
+                            hooks.append(hook)
+                            
                     noise_output = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
                     noise_hidden_states = noise_output.hidden_states
                     sub_indiv_flatness_holder = []
