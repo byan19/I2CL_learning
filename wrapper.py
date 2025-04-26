@@ -1230,7 +1230,7 @@ class ModelWrapper(nn.Module):
                         noise_holder.append(noise)
                         return input
                     
-                    if 'gpt' in config['models']:
+                    if 'gpt' in config['models'][0]:
                         for layer  in self.model.transformer.h:
                             hook = layer.register_forward_pre_hook(hook_fn_local)
                             hooks.append(hook)
