@@ -1230,9 +1230,15 @@ class ModelWrapper(nn.Module):
                         noise_holder.append(noise)
                         return input
                     
-                    for layer in self.model.model.model.layers:
-                        hook = layer.register_forward_pre_hook(hook_fn_local)
-                        hooks.append(hook)
+                    if 'gpt' in config['models']:
+                        for layer  in self.model.transformer.h:
+                            hook = layer.register_forward_pre_hook(hook_fn_local)
+                            hooks.append(hook)
+                    else:
+                        for layer in self.model.model.model.layers:
+                            hook = layer.register_forward_pre_hook(hook_fn_local)
+                            hooks.append(hook)
+                            
                     noise_output = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
                     noise_hidden_states = noise_output.hidden_states
                     
@@ -1474,7 +1480,6 @@ class ModelWrapper(nn.Module):
                     loss = config['ce_loss_lambda'] * loss + config['conver_loss_lambda'] * conver_loss
                     epoch_conv_loss.append(conver_loss.item())
                 
-                pdb.set_trace()
                 ####################################
                 # flatness approximation
                 ####################################
