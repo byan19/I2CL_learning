@@ -1744,7 +1744,7 @@ class ModelWrapper(nn.Module):
                 acc_mean.append(probe_acc)
                 loss_mean.append(probe_loss)
                 
-        pdb.set_trace()
+        #pdb.set_trace()
         # plot loss curve and save it
         acc_mean = np.asarray(acc_mean)
         loss_mean = np.asarray(loss_mean)

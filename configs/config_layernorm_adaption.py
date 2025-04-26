@@ -11,7 +11,7 @@ config['exp_name'] = 'exps_apr7/debugging_with_adding_demonstration'
 config['exp_name'] = 'exps_apr10/version4_1sample_1demon_epoch60_flatMinueconvR_demon3'
 config['exp_name'] = 'exps_apr24/version4_checking_loss_debugging'
 config['exp_name'] = 'exps_apr25/version4_fixedflatness_1sample_1demon_llama3-8b'
-config['exp_name'] = 'exps_apr25/debugging_probe'
+config['exp_name'] = 'exps_apr26/probe_ourmethod'
 
 config['gpus'] = ['0']
 
@@ -68,8 +68,8 @@ config['ce_loss_lambda'] = 1.0
 config['pushing_loss'] = False
 config['pushing_loss_lambda'] = 1e-2
 
-config['skip_training'] = True
-config['learning_property_analysis'] = False
+config['skip_training'] = False
+config['learning_property_analysis'] = True
 config['probe_analysis'] = True
 
 config['flatness_loss'] = True
