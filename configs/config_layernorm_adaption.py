@@ -34,6 +34,8 @@ config['example_separator'] = '\n'
 
 # data
 config['shot_per_class'] = 5
+config['shot_per_class'] = 1
+
 config['test_data_num'] = 500
 config['sample_method'] = 'uniform'  # 'random', 'uniform'
 config['add_extra_query'] = False
