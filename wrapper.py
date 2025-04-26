@@ -1023,6 +1023,11 @@ class ModelWrapper(nn.Module):
         pt_config = LNTuningConfig(task_type=TaskType.CAUSAL_LM)
         peft_model = get_peft_model(self.model, pt_config)
         
+        if config['skip_training']:
+            for param in peft_model.parameters():
+                param.requires_grad = False
+            return
+
         tuning_param_list = []
         tuning_name_list = []
         
