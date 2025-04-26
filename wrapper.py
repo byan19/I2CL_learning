@@ -1496,22 +1496,31 @@ class ModelWrapper(nn.Module):
                     post_layer_norm_holder = []
                     hooks = []
                     
-                    def hook_fn_local(module, input):
-                        """Function to add noise and store it."""
-                        noise = torch.randn_like(input[0]) * noise_scale
-                        post_layer_norm_holder.append(module.post_attention_layernorm.weight)
-                        input = (input[0] + noise * module.post_attention_layernorm.weight,)
-                        noise_holder.append(noise)
-                        return input
                     if 'gpt' in config['models'][0]:
-                        for layer  in self.model.transformer.h:
+                        def hook_fn_local(module, input):
+                            """Function to add noise and store it."""
+                            noise = torch.randn_like(input[0]) * noise_scale
+                            post_layer_norm_holder.append(module.ln_2.base_layer.weight)
+                            input = (input[0] + noise * module.ln_2.base_layer.weight,)
+                            noise_holder.append(noise)
+                            return input
+                        
+                        for layer in self.model.transformer.h:
                             hook = layer.register_forward_pre_hook(hook_fn_local)
                             hooks.append(hook)
                     else:
+                        def hook_fn_local(module, input):
+                            """Function to add noise and store it."""
+                            noise = torch.randn_like(input[0]) * noise_scale
+                            post_layer_norm_holder.append(module.post_attention_layernorm.weight)
+                            input = (input[0] + noise * module.post_attention_layernorm.weight,)
+                            noise_holder.append(noise)
+                            return input
+                        
                         for layer in self.model.model.model.layers:
                             hook = layer.register_forward_pre_hook(hook_fn_local)
                             hooks.append(hook)
-                            
+                    
                     noise_output = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
                     noise_hidden_states = noise_output.hidden_states
                     sub_indiv_flatness_holder = []
