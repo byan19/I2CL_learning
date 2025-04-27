@@ -40,7 +40,7 @@ sessionname=flatMinueconvR_demon1_llama3_8b
 sessionname=probe_ours
 sessionname=llama3_ourmethod
 sessionname=probe_raw3
-sessionname=llama3_again
+sessionname=llama3_instruct
 File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
 
 CHECK=${sessionname}
