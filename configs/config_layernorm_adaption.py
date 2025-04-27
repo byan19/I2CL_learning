@@ -25,7 +25,7 @@ config['models'] = ['meta-llama/Meta-Llama-3-8B-Instruct'] # 'meta-llama/Meta-Ll
 
 config['datasets'] = list(md.target_datasets.keys())
 config['seed'] = 42
-config['run_num'] = 1
+config['run_num'] = 5
 config['run_baseline'] = False
 config['metric'] = 'acc'  # 'acc', 'macro_f1'
 config['bs'] = 1
@@ -36,7 +36,6 @@ config['example_separator'] = '\n'
 
 # data
 config['shot_per_class'] = 5
-config['shot_per_class'] = 1
 
 config['test_data_num'] = 500
 config['sample_method'] = 'uniform'  # 'random', 'uniform'
