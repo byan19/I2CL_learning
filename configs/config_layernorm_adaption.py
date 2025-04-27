@@ -14,6 +14,7 @@ config['exp_name'] = 'exps_apr25/version4_fixedflatness_1sample_1demon_llama3-8b
 config['exp_name'] = 'exps_apr27/llama3instruct_version4'
 config['exp_name'] = 'exps_apr27/llama3instruct_version4'
 config['exp_name'] = 'exps_apr26/lama3instruct_version4'
+config['exp_name'] = 'exps_apr26/gpt2_xl_again'
 
 config['gpus'] = ['0']
 
