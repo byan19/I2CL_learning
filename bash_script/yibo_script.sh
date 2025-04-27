@@ -3,7 +3,7 @@ MultiRun (){
 sessionname=$1
 File=$2
 Param=$3
-Tunning=$4
+Tunning=$e
 echo "${sessionname}"
 
 screen -dmS $sessionname
