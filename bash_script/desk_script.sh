@@ -26,8 +26,8 @@ Param=${Target_Para_List[$idx]}
 Tunning=${Tunning_list[$idx]}
 
 
-sessionname=raw_result_for_comparsion
 sessionname=lora_analysis
+sessionname=raw_result_for_comparsion
 File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
 
 CHECK=${sessionname}
