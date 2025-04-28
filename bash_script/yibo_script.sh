@@ -38,9 +38,9 @@ sessionname=version4_test_path_set
 sessionname=flatMinueconvR_demon3
 sessionname=flatMinueconvR_demon1_llama3_8b
 sessionname=probe_ours
-sessionname=llama3_ourmethod
 sessionname=probe_raw3
 sessionname=gpt2_xl_again
+sessionname=llama3_ourmethod
 File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
 
 CHECK=${sessionname}
