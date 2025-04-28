@@ -41,6 +41,7 @@ sessionname=probe_ours
 sessionname=probe_raw3
 sessionname=gpt2_xl_again
 sessionname=llama3_ourmethod_apr28
+sessionname=gpt_j_6b_version4_apr28
 File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
 
 CHECK=${sessionname}
