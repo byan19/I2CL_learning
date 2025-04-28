@@ -1024,7 +1024,7 @@ class ModelWrapper(nn.Module):
                               lora_alpha = 16,
                                target_modules= ['q_proj', 'v_proj', 'k_proj'],
                                lora_dropout=  0.05,
-                                bias = "none" ,
+                               bias = "none" ,
                                task_type="CAUSAL_LM"
                                )
         
