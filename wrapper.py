@@ -1335,6 +1335,7 @@ class ModelWrapper(nn.Module):
         # print trainable parameters
         peft_model.print_trainable_parameters()
         print(f'PEFT model:\n {peft_model}')
+        pdb.set_trace()
         # set model to peft model
         self.model = peft_model
         

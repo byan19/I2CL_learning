@@ -16,7 +16,7 @@ config['exp_name'] = 'exps_apr27/llama3instruct_version4'
 config['exp_name'] = 'exps_apr26/gpt2_xl_again'
 config['exp_name'] = 'exps_apr28/llama3_version4'
 config['exp_name'] = 'exps_apr28/gpt-j-6b'
-config['exp_name'] = 'exps_apr28/probe_raw_again'
+config['exp_name'] = 'exps_apr28/probe_raw_debugging'
 
 config['gpus'] = ['0']
 
