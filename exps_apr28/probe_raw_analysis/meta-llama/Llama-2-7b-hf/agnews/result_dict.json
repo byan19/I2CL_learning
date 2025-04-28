@@ -1,0 +1,31 @@
+{
+    "demon": {
+        "run_0": [
+            "News: Thunderbird is go Finally, and with less fanfare than the release of its sibling application, Firefox 1.0, a few weeks ago, the email client called Thunderbird has reached its coming of age.\nType: Technology\nNews: Running Revolution Started as Evolution Millions of years before headphone-wearing joggers clotted the streets of America, the development of the ability to run played a crucial role in the evolution of early humans, according to new research.\nType: Technology\nNews: Woman Moves in With 6,000 Scorpions KUALA LUMPUR, Malaysia - A Malaysian woman is trying to reclaim the world record for the longest stay in a room full of scorpions, news reports said Sunday.    Nur Malena Hassan, 27, moved Saturday into a locked glass box where she plans to live for 36 consecutive days with more than 6,000 of the poisonous arachnids in a shopping mall, the Malay-language Mingguan Malaysia newspaper reported...\nType: World\nNews: Purported al-Zarqawi tape boasts of humiliating U.S.-led forces in Iraq (Canadian Press) Canadian Press - CAIRO, Egypt (AP) - An audiotape purportedly from key terror suspect Abu Musab al-Zarqawi boasts in an apparently recent recording that Islamic holy warriors have humiliated the U.S.-led coalition in Iraq.\nType: World\nNews: Rebels to meet Mbeki again Johannesburg - Ivory Coast rebels were on Friday due to hold a second day of talks with South African leader and mediator Thabo Mbeki on their proposals for a new peace plan after a very encouraging start, according to Pretoria.\nType: World\nNews: GE Sees 2005 EPS Growth of 10-15 Percent  BOSTON (Reuters) - Diversified manufacturer General  Electric Co. &lt;A HREF=\"http://www.investor.reuters.com/FullQuote.aspx?ticker=GE.N target=/stocks/quickinfo/fullquote\"&gt;GE.N&lt;/A&gt; said on Tuesday it expects earnings to grow  between 10 percent and 15 percent in 2005, boosted by strong     growth from its financial and energy units.\nType: Business\nNews: Pfizer #39;s Celebrex is under a cloud Pfizer (PFE) said Friday that is has received new information about the cardiovascular safety of its popular arthritis drug Celebrex, based on an analysis of a long-term cancer trial.\nType: Business\nNews: Briefly: Macromedia offers Flash video tool roundup Plus: UTStarcom wins Indian IP gear contract...Microsoft tightens Windows-mainframes link...Red Hat names new services executive.\nType: Technology\nNews: Did Steelers send message? n If the New England Patriots are considered the NFL #39;s best team, what does that make Pittsburgh? The Steelers opened a lot of eyes Sunday at Heinz Field with a convincing 34-20 win over the defending Super \nType: Sports\nNews: China raises lending rate for first time in nearly a decade BEIJING : China has decided to raise its benchmark one-year lending rate to 5.58 percent from 5.31 percent with effect Friday, the first such move in nearly a decade, the central bank said on its website.\nType: Business\nNews: White, Leinart split top honors If Thursday was supposed to sort out a favorite for the Heisman Trophy, Jason White and Matt Leinart both can take heart. Each won separate national player of the year honors, two highlights \nType: Sports\nNews: Eight US marines killed in Iraq Eight US marines are reported to have been killed and at least nine are said to be injured during an attack west of Baghdad. The US military gave no details on the deaths, which it said occurred in the western \nType: World\nNews: BERNIE LEAVING CF HOT OFFSEASON TOPIC The challenge Kenny Lofton posed to Bernie Williams a year ago turned out to be a bug versus windshield. However, if the Yankees ink free agent Carlos Beltran he will be \nType: Sports\nNews: Scientists Follow Doomed Matter on a Ride Around a Black Hole Cambridge University -- Scientists have pieced together the journey of a bundle of doomed matter as it orbited a black hole four times, an observational first. Their technique provides a new method to measure the mass of a black hole; and this may enable the testing of Einstein's theory of gravity to a degree few thought possible...\nType: Technology\nNews: Former Bosnian Serb leader convicted of war crimes The International Tribunal for former Yugoslavia (ICTY) in the Hague Wednesday sentenced former Bosnian Serb Deputy Prime Minister Radoslav Brdjanin to 32 years in prison.\nType: World\nNews: Nikkei Ends Flat, Oil Concerns Weigh TOKYO (Reuters) - Tokyo stocks ended flat on Friday as worries about record-high oil prices took the edge off investors #39; appetite for recently battered technology issues such as Sharp Corp. \nType: Business\nNews: Shaq #39;s 40 help Heat dominate Wizards MIAMI - Playing without his sidekick for more than a half Monday, Shaquille O #39;Neal resembled the player who has been unstoppable for most of his 14 years in the NBA.\nType: Sports\nNews: Vermeil Figures on Coming Back Next Year (AP) AP - The coach who made burnout a part of sports lexicon is 68 and enduring one of the most disappointing years of a long, distinguished career.\nType: Sports\nNews: Halliburton to Restructure KBR Unit (Reuters) Reuters - Halliburton Co.  said on\\Thursday it would restructure its KBR unit and may shed the\\business if the oil services company's stock performance keeps\\lagging its peers.\nType: Business\nNews: The End User: Bluetooth now lives up to hype PARIS When I first heard the word Bluetooth in 1998, the page-one editor of this newspaper asked for my studied opinion as to whether it was  quot;a big deal.\nType: Technology\n"
+        ]
+    },
+    "test_result": {
+        "zero_shot": [],
+        "few_shot": [],
+        "ours": [
+            {
+                "acc": 0.866,
+                "macro_f1": 0.8661932451915376
+            },
+            {
+                "acc_mean": 0.866,
+                "acc_std": 0.0,
+                "macro_f1_mean": 0.8661932451915376,
+                "macro_f1_std": 0.0
+            }
+        ]
+    },
+    "time": {
+        "calibrate": [
+            0.03359341621398926
+        ],
+        "evaluate": [
+            816.3538825511932
+        ]
+    }
+}

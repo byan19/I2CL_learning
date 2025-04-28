@@ -1,0 +1,31 @@
+{
+    "demon": {
+        "run_0": [
+            "Review: ca n't miss it . \nSentiment: positive\nReview: bolado credit for good intentions \nSentiment: positive\nReview: with serious ideas \nSentiment: positive\nReview: , stop eric schaeffer before he makes another film . \nSentiment: negative\nReview: a college keg party \nSentiment: negative\nReview: a paint-by-numbers picture \nSentiment: negative\nReview: even the filmmakers did n't know what kind of movie they were making \nSentiment: negative\nReview: easily accessible stories \nSentiment: positive\nReview: just about the surest bet \nSentiment: positive\nReview: uncompromising , difficult \nSentiment: negative\n"
+        ]
+    },
+    "test_result": {
+        "zero_shot": [],
+        "few_shot": [],
+        "ours": [
+            {
+                "acc": 0.962,
+                "macro_f1": 0.961996199619962
+            },
+            {
+                "acc_mean": 0.962,
+                "acc_std": 0.0,
+                "macro_f1_mean": 0.961996199619962,
+                "macro_f1_std": 0.0
+            }
+        ]
+    },
+    "time": {
+        "calibrate": [
+            0.04463839530944824
+        ],
+        "evaluate": [
+            195.4287872314453
+        ]
+    }
+}

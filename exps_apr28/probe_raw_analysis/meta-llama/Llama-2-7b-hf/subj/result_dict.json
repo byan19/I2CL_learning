@@ -1,0 +1,31 @@
+{
+    "demon": {
+        "run_0": [
+            "Sentence: on the set he meets movie star and ex-cello-player inga ( fabienne babe ) - and the experience is bizarre spirited uplifting a com & # 233 ; die humaine .\nLabel: objective\nSentence: director andrew niccol . . . demonstrates a wry understanding of the quirks of fame . his healthy sense of satire is light and fun . . . .\nLabel: subjective\nSentence: five screenwriters are credited with the clichM-i-laden screenplay ; it seems as if each watered down the version of the one before .\nLabel: subjective\nSentence: the pianist is a fine valedictory work for polanski , made richer by his own experiences , making his other movies somehow richer in the bargain .\nLabel: subjective\nSentence: the chateau has one very funny joke and a few other decent ones , but all it amounts to is a mildly funny , sometimes tedious , ultimately insignificant film .\nLabel: subjective\nSentence: the story is set against a relationship that forms between the american hustler boy and a brazilian teenage girl who must help each other survive the drug gang-controlled slums of rio de janeiro .\nLabel: objective\nSentence: well , jason 's gone to manhattan and hell , i guess a space station in the year 2455 can be crossed off the list of ideas for the inevitable future sequels ( hey , do n't shoot the messenger ) .\nLabel: subjective\nSentence: it 's all about love is the story of two lovers and their attempts to save their relationship in a near-future world on the brink of cosmic collapse .\nLabel: objective\nSentence: directed by rob bowman ( `` the x-files `` ) , `` reign of fire `` fuses a medieval past with a post-apocalyptic future in this exciting tale of adventure and survival .\nLabel: objective\nSentence: styled after vh1 's `` behind the music , `` this mockumentary profiles the rise and fall of an internet startup , called icevan . com .\nLabel: objective\n"
+        ]
+    },
+    "test_result": {
+        "zero_shot": [],
+        "few_shot": [],
+        "ours": [
+            {
+                "acc": 0.652,
+                "macro_f1": 0.6233048719236565
+            },
+            {
+                "acc_mean": 0.652,
+                "acc_std": 0.0,
+                "macro_f1_mean": 0.6233048719236565,
+                "macro_f1_std": 0.0
+            }
+        ]
+    },
+    "time": {
+        "calibrate": [
+            0.05419659614562988
+        ],
+        "evaluate": [
+            339.0148947238922
+        ]
+    }
+}

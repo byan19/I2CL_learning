@@ -1,0 +1,31 @@
+{
+    "demon": {
+        "run_0": [
+            "Question: Where did the 6th annual meeting of Indonesia-Malaysia forest experts take place ?\nAnswer Type: Location\nQuestion: What does pH stand for ?\nAnswer Type: Abbreviation\nQuestion: What date is Boxing Day ?\nAnswer Type: Number\nQuestion: What is Supergirl 's secret identity ?\nAnswer Type: Person\nQuestion: How tall is kilamanjaro ?\nAnswer Type: Number\nQuestion: What singer sings `` Oh Boy '' ?\nAnswer Type: Person\nQuestion: What does Salk vaccine prevent ?\nAnswer Type: Entity\nQuestion: How can I enforce new rules to a group of youngsters who have been allowed to do as they please .\nAnswer Type: Description\nQuestion: What is the probability that at least 2 out of 25 people will have the same birthday ?\nAnswer Type: Number\nQuestion: Why was Curious George curious ?\nAnswer Type: Description\nQuestion: What is the longest river in the United States ?\nAnswer Type: Location\nQuestion: How do you stop junk snail mail ?\nAnswer Type: Description\nQuestion: What document did President Andrew Johnson want a copy of placed under his head upon his burial ?\nAnswer Type: Entity\nQuestion: What does NASDAQ stand for ?\nAnswer Type: Abbreviation\nQuestion: What does U.S.S.R. stand for ?\nAnswer Type: Abbreviation\nQuestion: What does the `` blue ribbon '' stand for ?\nAnswer Type: Abbreviation\nQuestion: What U.S. state boasts Stone Mountain , the world 's largest mass of exposed granite ?\nAnswer Type: Location\nQuestion: Where can I find a `` Fifth Element '' screensaver ?\nAnswer Type: Location\nQuestion: Who made the musical plea Be True to Your School ?\nAnswer Type: Person\nQuestion: What is the daily requirement of folic acid for an expectant mother ?\nAnswer Type: Description\nQuestion: What are the three secondary colors ?\nAnswer Type: Entity\nQuestion: Whose old London come-on was : `` Buy my sweet lavender '' ?\nAnswer Type: Person\nQuestion: What is the name of a book written by Aaron Hass ?\nAnswer Type: Entity\nQuestion: What was the highest mountain on earth before Mount Everest was discovered ?\nAnswer Type: Location\nQuestion: How many innings are there in a regulation softball game ?\nAnswer Type: Number\nQuestion: What does the word LASER mean ?\nAnswer Type: Abbreviation\nQuestion: What 's the third month of the Gregorian calendar ?\nAnswer Type: Number\nQuestion: What 's the last line of Dickens 's A Christmas Carol ?\nAnswer Type: Description\nQuestion: What are the four elements ?\nAnswer Type: Entity\nQuestion: What artist 's studio was the Bateau-Lavoir in Montmartre ?\nAnswer Type: Person\n"
+        ]
+    },
+    "test_result": {
+        "zero_shot": [],
+        "few_shot": [],
+        "ours": [
+            {
+                "acc": 0.77,
+                "macro_f1": 0.7790185729928879
+            },
+            {
+                "acc_mean": 0.77,
+                "acc_std": 0.0,
+                "macro_f1_mean": 0.7790185729928879,
+                "macro_f1_std": 0.0
+            }
+        ]
+    },
+    "time": {
+        "calibrate": [
+            0.04640030860900879
+        ],
+        "evaluate": [
+            384.45726132392883
+        ]
+    }
+}

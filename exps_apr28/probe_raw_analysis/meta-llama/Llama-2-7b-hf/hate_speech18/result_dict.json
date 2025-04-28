@@ -1,0 +1,31 @@
+{
+    "demon": {
+        "run_0": [
+            "Text: Depending on which part of Scotland you 're going to I might have some bad news for you about the Kaffirs .\nLabel: hate\nText: Who said we invented literally EVERYTHING useful ?\nLabel: neutral\nText: My Home Town is overran with spics and sec 8 coons at this junction .\nLabel: hate\nText: No wonder we are in such bad shape with this tribe in charge of the White House and Congress .\nLabel: hate\nText: From Norway to the Fareo Islands and then onto Iceland .\nLabel: neutral\nText: Come to Bromsgrove and I 'll be more than happy to give you a tour of the West Midlands and the History of Heavy Metal We have the Malvern Hills one of Englands most beautiful places\nLabel: neutral\nText: If it 's brown , flush it down .\nLabel: hate\nText: A man in charge of an organization that is so hated like the KKK should have been more careful .\nLabel: neutral\nText: I would love to hear her do this song today .\nLabel: neutral\nText: Who the hell cares if its not kosher ...\nLabel: hate\n"
+        ]
+    },
+    "test_result": {
+        "zero_shot": [],
+        "few_shot": [],
+        "ours": [
+            {
+                "acc": 0.788,
+                "macro_f1": 0.7846893839678902
+            },
+            {
+                "acc_mean": 0.788,
+                "acc_std": 0.0,
+                "macro_f1_mean": 0.7846893839678902,
+                "macro_f1_std": 0.0
+            }
+        ]
+    },
+    "time": {
+        "calibrate": [
+            0.044480085372924805
+        ],
+        "evaluate": [
+            227.7045614719391
+        ]
+    }
+}

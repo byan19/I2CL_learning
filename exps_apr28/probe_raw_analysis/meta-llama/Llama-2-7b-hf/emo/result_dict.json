@@ -1,0 +1,31 @@
+{
+    "demon": {
+        "run_0": [
+            "Dialogue: success in my campaigns  you will successful in your life if you work hard in your interested field good\nEmotion: happy\nDialogue: i m blocking you im really truly sorry 4 what i did no need sorry\nEmotion: others\nDialogue: m upset how come i don't know\nEmotion: sad\nDialogue: what india oh god i gonna stop sending u messages from tomorrow\nEmotion: angry\nDialogue: and i'm feeling good i am awesome thanks grinningsquintingface thanks to you\nEmotion: happy\nDialogue: i broke up with my gf thats just mean \nEmotion: sad\nDialogue: not ur dude either lol lol is an exception lol gotta go now i hope we never talk again wish me luck with my crush\nEmotion: others\nDialogue: i am not rude i hate those hate me why  'i hate being rude ' because selflessness is the highest virtue\nEmotion: angry\nDialogue: why u r fine  i'm fine like the sunshine  wow u r spread lights\nEmotion: happy\nDialogue: which chair this i can't see one\nEmotion: others\nDialogue: you are really funny i'm too funny to function carry on\nEmotion: happy\nDialogue: what  its too pink for me can you sex with me \nEmotion: others\nDialogue: he he funny so funny  yes\nEmotion: happy\nDialogue: can i  share yes you can share a video too \nEmotion: sad\nDialogue: can you be more specific  no not even if i tried in fact i was probably too specific you are dumb\nEmotion: angry\nDialogue: i got lost everywhere dont feel like i should live anymore  did you feel that yes i m dying today \nEmotion: sad\nDialogue: well i know he likes me it's clearly shown like when no one is around he is so lovey dovey kinda and if someone like his friends are there he would bully me and it hurts a lot when i spoke about it he told he had reasonsand the main thing i can't move on cause i am irrevocably and madly in love with himdisappointedface he is us means\nEmotion: others\nDialogue: i love a girl but she doesn't talk to me now you sound like you're obsessedshes not interested move on she ignorese\nEmotion: sad\nDialogue: i also irritated from you you not funny i know sorry you r u the negative girl\nEmotion: angry\nDialogue: again its annoying me something about us they like lol bye\nEmotion: angry\n"
+        ]
+    },
+    "test_result": {
+        "zero_shot": [],
+        "few_shot": [],
+        "ours": [
+            {
+                "acc": 0.654,
+                "macro_f1": 0.5811685656555684
+            },
+            {
+                "acc_mean": 0.654,
+                "acc_std": 0.0,
+                "macro_f1_mean": 0.5811685656555684,
+                "macro_f1_std": 0.0
+            }
+        ]
+    },
+    "time": {
+        "calibrate": [
+            0.0324244499206543
+        ],
+        "evaluate": [
+            367.9779489040375
+        ]
+    }
+}

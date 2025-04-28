@@ -1,0 +1,31 @@
+{
+    "demon": {
+        "run_0": [
+            "Review: [i]f you've been to more than one indie flick in your life , chances are you've already seen this kind of thing .\nSentiment: negative\nReview: a photographic marvel of sorts , and it's certainly an invaluable record of that special fishy community .\nSentiment: positive\nReview: the movie does a good job of laying out some of the major issues that we encounter as we journey through life .\nSentiment: positive\nReview: the ga-zillionth airhead movie about a wife in distress who resorts to desperate measures .\nSentiment: negative\nReview: avary's film never quite emerges from the shadow of ellis' book .\nSentiment: negative\nReview: time out is existential drama without any of the pretension associated with the term .\nSentiment: positive\nReview: bad in such a bizarre way that it's almost worth seeing , if only to witness the crazy confluence of purpose and taste .\nSentiment: negative\nReview: provides an intriguing window into the imagination and hermetic analysis of todd solondz .\nSentiment: positive\nReview: we hate [madonna] within the film's first five minutes , and she lacks the skill or presence to regain any ground .\nSentiment: negative\nReview: filled with alexandre desplat's haunting and sublime music , the movie completely transfixes the audience .\nSentiment: positive\n"
+        ]
+    },
+    "test_result": {
+        "zero_shot": [],
+        "few_shot": [],
+        "ours": [
+            {
+                "acc": 0.904,
+                "macro_f1": 0.9034997426659804
+            },
+            {
+                "acc_mean": 0.904,
+                "acc_std": 0.0,
+                "macro_f1_mean": 0.9034997426659804,
+                "macro_f1_std": 0.0
+            }
+        ]
+    },
+    "time": {
+        "calibrate": [
+            0.046718597412109375
+        ],
+        "evaluate": [
+            268.44709825515747
+        ]
+    }
+}

@@ -1,0 +1,31 @@
+{
+    "demon": {
+        "run_0": [
+            "Input:  The Accidental Time Machine is a science-fiction novel by Joe Haldeman that was published in 2007. The novel was a finalist for the Nebula Award in 2007 and the Locus Award in 2008.\nLabel: book\nInput:  USS Lewis (DE-535) was a John C. Butler-class destroyer escort acquired by the U.S. Navy during World War II. The primary purpose of the destroyer escort was to escort and protect ships in convoy in addition to other tasks as assigned such as patrol or radar picket. Lewis was laid down by the Boston Navy Yard on 3 November 1943 launched 7 December 1943; and commissioned 5 September 1944 Lt. Comdr. Robert H. Stevens in command.\nLabel: transportation\nInput:  Capital High School (CHS) Is a Public High School in the City of Santa Fe New Mexico. Its mascot the jaguar and its colors Turquoise Blue Silver and Black were selected by the parents and prospective students after several public meetings held before the school opened in 1988. The Jaguar mascot and the turquois blue silver and black colors were then adopted by the school board in 1987.\nLabel: school\nInput:  Ray is a 2004 biographical film focusing on 30 years of the life of rhythm and blues musician Ray Charles. The independently produced film was directed by Taylor Hackford and stars Jamie Foxx in the title role; Foxx received an Academy Award for Best Actor for his performance.Charles was set to attend an opening of the completed film but he died of liver disease in June several months before its premiere.\nLabel: film\nInput:  The David Lane House is a historic house at 137 North Road in Bedford Massachusetts. The main block of this 1 1\u20442 story wood frame Cape style house was built in the 1780s by David Lane who was a fifer in the Bedford minute company at the Battles of Lexington and Concord in 1775. There is architectural evidence suggesting that part of the house was built by his grandfather Job Lane about 1720.\nLabel: building\nInput:  Marios Demetriades (Greek: \u039c\u03ac\u03c1\u03b9\u03bf\u03c2 \u0394\u03b7\u03bc\u03b7\u03c4\u03c1\u03b9\u03ac\u03b4\u03b7\u03c2) (born 27 August 1971) is a Cypriot politician who was appointed Minister of Communications and Works in the Council of Ministers of Cyprus on 14 March 2014.He was born in Paphos and educated at the University of East Anglia graduating with a First Class BSc in Business Finance and Economics in 1993. He subsequently held various positions at Piraeus Bank (Cyprus) and is a Non-Executive Director of FxPro.\nLabel: politics\nInput:  Merycondontinae is a subfamily of pronghorn that arose during the middle of the Miocene and became extinct by the end of that period. The Merycondontinae were small slightly built fast-running ungulates. Both males and females were horned.\nLabel: animal\nInput:  Asure Software is a software company which has licensing as its primary revenue source. Prior to September 13 2007 the company was known as Forgent Networks. Critics claim Asure profits primarily as a patent troll. It also has a software division NetSimplicity which specializes in room scheduling and fixed assets management software.Effective September 13 2007 Forgent acquired iEmployee.\nLabel: company\nInput:  Heydareh-ye Dar-e Emam (Persian: \u062d\u064a\u062f\u0631\u0647 \u062f\u0627\u0631\u0627\u0645\u0627\u0645\u200e also Romanized as \u1e28eydareh-ye D\u0101r-e Em\u0101m; also known as Heydareh \u1e28eydareh Q\u0101z\u012b Kh\u0101n and \u1e28eydareh-ye Q\u0101\u1e95\u012b Kh\u0101n) is a village in Simineh Rud Rural District in the Central District of Bahar County Hamadan Province Iran. At the 2006 census its population was 667 in 179 families.\nLabel: village\nInput:  Xanthophyllum beccarianum is a tree in the family Polygalaceae. It is named for the Italian botanist Odoardo Beccari.\nLabel: plant\nInput:  Naoya Tsukahara (Japanese:\u585a\u539f \u76f4\u4e5f Tsukahara Naoya born June 25 1977) is a former Japanese artistic gymnast and 2004 Olympic Gold Medalist now coaching and competing for Australia. He is the son of the former Japanese gymnast Mitsuo Tsukahara who was also a multiple gold medalist in the Olympic Games during the 1960s and 1970s. He competed at the 1996 2000 and 2004 Olympic games as well as many World Gymnastics Championships for Japan's team from 1996 until 2006.\nLabel: athlete\nInput:  The Negrile\u0219ti River is a tributary of the Deju River in Romania.\nLabel: nature\nInput:  On the 13th Day is the 17th studio album from the rock group Magnum (including Keeping the Nite Light Burning and ignoring Evolution) which was released in September 2012 under the label of Steamhammer Records/SPV.The album entered the charts at number 3 in the UK Rock & Metal Charts number 5 in the UK Indie Charts number 28 in the German Album Charts #36 Swedish Album Charts #43 UK Album Charts during its first week making it their most successful album since their reformation in 2002 at the time of its release. \nLabel: album\nInput:  Alan Paul (born November 23 1949 Newark New Jersey) is a Grammy Award- winning singer and composer best known as one of the founding members of the current incarnation of the vocal group The Manhattan Transfer. He played Teen Angel and Johnny Casino in the original Broadway cast of Grease where he introduced the songs Beauty School Dropout and Born to Hand Jive. As a child he appeared in the original Broadway cast of Oliver!. He released a solo CD Another Place and Time in 2003.\nLabel: artist\n"
+        ]
+    },
+    "test_result": {
+        "zero_shot": [],
+        "few_shot": [],
+        "ours": [
+            {
+                "acc": 0.964,
+                "macro_f1": 0.9639955398587498
+            },
+            {
+                "acc_mean": 0.964,
+                "acc_std": 0.0,
+                "macro_f1_mean": 0.9639955398587498,
+                "macro_f1_std": 0.0
+            }
+        ]
+    },
+    "time": {
+        "calibrate": [
+            0.044770240783691406
+        ],
+        "evaluate": [
+            835.8697502613068
+        ]
+    }
+}
