@@ -1283,6 +1283,7 @@ class ModelWrapper(nn.Module):
         if config['skip_training']:
             for param in peft_model.parameters():
                 param.requires_grad = False
+            self.model = peft_model
             return
 
         tuning_param_list = []
