@@ -34,6 +34,7 @@ sessionname=version4_1sample_1demon_epoch60_flatMinueconvR
 sessionname=version4_evaluation
 sessionname=version4_desktop_debug
 sessionname=gpt2_xl_again
+sessionname=raw_result_for_comparsion
 
 File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
 
