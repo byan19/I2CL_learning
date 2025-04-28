@@ -1020,14 +1020,9 @@ class ModelWrapper(nn.Module):
         # cross entropy tuning
         '''
         print('Version 4 based LoRA')
-        pt_config = LoraConfig(r =config['lora_rank'],
-                              lora_alpha = 16,
-                               target_modules= ['q_proj', 'v_proj', 'k_proj'],
-                               lora_dropout=  0.05,
-                               bias = "none" ,
-                               task_type="CAUSAL_LM"
-                               )
-        
+        pt_config = LoraConfig(r =config['lora_rank'], lora_alpha = 16, target_modules= ['q_proj', 'v_proj', 'k_proj'], lora_dropout=  0.05, bias = "none" , task_type="CAUSAL_LM" )
+        #pt_config = LoraConfig(r =128, lora_alpha = 16, target_modules= ['q_proj', 'v_proj', 'k_proj'], lora_dropout=  0.05, bias = "none" , task_type="CAUSAL_LM" )
+
         peft_model = get_peft_model(self.model, pt_config)
         
         # prepare label dict
@@ -1044,7 +1039,7 @@ class ModelWrapper(nn.Module):
         
         # print trainable parameters
         peft_model.print_trainable_parameters()
-        pdb.set_trace()
+        print(f"LORA Rank: {config['lora_rank']}")
         #print(f'PEFT model:\n {peft_model}')
         # set model to peft model
         self.model = peft_model
