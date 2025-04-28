@@ -1022,8 +1022,10 @@ class ModelWrapper(nn.Module):
         print('Version 4 based LoRA')
         
         pt_config = LoraConfig(r =config['lora_rank'], lora_alpha = 16, target_modules= ['q_proj', 'v_proj'], lora_dropout=  0.05, bias = "none" , task_type="CAUSAL_LM" )
-        #pt_config = LoraConfig(r =128, lora_alpha = 16, target_modules= ['q_proj', 'v_proj', 'k_proj'], lora_dropout=  0.05, bias = "none" , task_type="CAUSAL_LM" )
-        pt_config = LoraConfig(r =config['lora_rank'], lora_alpha = 16, target_modules= ["q_proj", "v_proj", "k_proj", "o_proj", "gate_proj", "up_proj", "down_proj"], lora_dropout=  0.05, bias = "none" , task_type="CAUSAL_LM" )
+        #pt_config = LoraConfig(r =config['lora_rank'], lora_alpha = 16, target_modules= ["q_proj", "v_proj", "k_proj", "o_proj", "gate_proj", "up_proj", "down_proj"], lora_dropout=  0.05, bias = "none" , task_type="CAUSAL_LM" )
+
+        pt_config = LoraConfig(r =1, lora_alpha = 16, target_modules= ["q_proj", "v_proj" ], lora_dropout=  0.05, bias = "none" , task_type="CAUSAL_LM" )
+        
 
         peft_model = get_peft_model(self.model, pt_config)
         pdb.set_trace()
