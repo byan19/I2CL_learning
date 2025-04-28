@@ -72,7 +72,7 @@ config['demon_bs'] = 1
 #config['input_attention'] = False
 
 # lora
-config['lora_rank'] = 1 # 8, 32, 64, 128
+config['lora_rank'] = 8 # 8, 32, 64, 128
 
 config['layernorm_type'] = 'all' # 'post_attention', 'input_attention', 'all'
 config['entropy_loss'] = False
