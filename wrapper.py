@@ -1022,7 +1022,7 @@ class ModelWrapper(nn.Module):
         print('Version 4 based LoRA')
         pt_config = LoraConfig(r =config['lora_rank'],
                               lora_alpha = 16,
-                               target_modules= ['q', 'v', 'k'],
+                               target_modules= ['q_proj', 'v_proj', 'k_proj'],
                                lora_dropout=  0.05,
                                 bias = "none" ,
                                task_type="CAUSAL_LM"
