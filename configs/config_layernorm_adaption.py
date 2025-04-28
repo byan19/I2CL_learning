@@ -17,6 +17,7 @@ config['exp_name'] = 'exps_apr26/gpt2_xl_again'
 config['exp_name'] = 'exps_apr28/llama3_version4'
 config['exp_name'] = 'exps_apr28/gpt-j-6b'
 config['exp_name'] = 'exps_apr28/probe_raw_debugging'
+config['exp_name'] = 'exps_apr28/probe_rola_test_debugging'
 
 config['gpus'] = ['0']
 
@@ -61,6 +62,7 @@ config['rho'] = 1e-4
 
 #config['learning_type'] = 'sharpness_aware_approx' #'sharpness_encoding' # 'sharpness_aware' 'sharpness_aware_approx' 'layernorm_DyT'
 config['learning_type'] = 'version4' # 'rola_analysis' #'sharpness_encoding' # 'sharpness_aware' 'sharpness_aware_approx' 'layernorm_DyT'
+config['learning_type'] = 'rola_analysis' # 'rola_analysis' #'sharpness_encoding' # 'sharpness_aware' 'sharpness_aware_approx' 'layernorm_DyT'
 config['eval_type'] = 'eval_with_demonstration' # 'eval_with_demonstration', 'eval_with_empty'
 
 config['grad_bs'] = 1
@@ -80,8 +82,8 @@ config['pushing_loss_lambda'] = 1e-2
 
 config['skip_training'] = False
 
-config['learning_property_analysis'] = True
-config['probe_analysis'] = True
+config['learning_property_analysis'] = False
+config['probe_analysis'] = False
 
 config['flatness_loss'] = True
 config['flat_loss_lambda'] = 1e-3
