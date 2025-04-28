@@ -25,17 +25,9 @@ for ((idx=0; idx<${#Target_Para_List[@]}; idx++)); do
 Param=${Target_Para_List[$idx]}
 Tunning=${Tunning_list[$idx]}
 
-sessionname=I2CL_contextlearning_layernorm_entropy
-sessionname=I2CL_contextlearning_layernorm_debugging
-sessionname=I2CL_contextlearning_layernorm_entropyflatness
-sessionname=I2CL_contextlearning_laypernorm_flatencoding
-sessionname=I2CL_allLN_sharpnessencoding_alone_noiseinner
-sessionname=version4_1sample_1demon_epoch60_flatMinueconvR
-sessionname=version4_evaluation
-sessionname=version4_desktop_debug
 sessionname=lora_analysis
-sessionname=raw_result_for_comparsion
 
+sessionname=raw_result_for_comparsion
 File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
 
 CHECK=${sessionname}
