@@ -16,6 +16,7 @@ config['exp_name'] = 'exps_apr27/llama3instruct_version4'
 config['exp_name'] = 'exps_apr26/gpt2_xl_again'
 config['exp_name'] = 'exps_apr28/llama3_version4'
 config['exp_name'] = 'exps_apr28/gpt-j-6b'
+config['exp_name'] = 'exps_apr28/probe_raw_again'
 
 config['gpus'] = ['0']
 
@@ -52,7 +53,7 @@ pt_config['num_layers'] = 32
 config['pt_config'] = pt_config
 
 # optimization
-config['epochs'] = 60
+config['epochs'] = 0
 config['optim'] = 'adamW'  # 'adam', 'adamW', 'sgd'
 config['lr'] = 0.001
 config['wd'] = 0.001
@@ -77,9 +78,9 @@ config['ce_loss_lambda'] = 1.0
 config['pushing_loss'] = False
 config['pushing_loss_lambda'] = 1e-2
 
-config['skip_training'] = False
-config['learning_property_analysis'] = False
-config['probe_analysis'] = False
+config['skip_training'] = True
+config['learning_property_analysis'] = True
+config['probe_analysis'] = True
 
 config['flatness_loss'] = True
 config['flat_loss_lambda'] = 1e-3
