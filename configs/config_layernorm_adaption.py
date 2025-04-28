@@ -17,8 +17,8 @@ config['exp_name'] = 'exps_apr26/gpt2_xl_again'
 config['exp_name'] = 'exps_apr28/llama3_version4'
 config['exp_name'] = 'exps_apr28/gpt-j-6b'
 config['exp_name'] = 'exps_apr28/probe_raw_debugging'
-config['exp_name'] = 'exps_apr28/probe_raw_analysis'
 config['exp_name'] = 'exps_apr28/debugging_debugging'
+config['exp_name'] = 'exps_apr28/probe_raw_analysis'
 
 config['gpus'] = ['0']
 
@@ -27,7 +27,6 @@ config['models'] = ['openai-community/gpt2-xl'] # 'meta-llama/Meta-Llama-3-8B', 
 config['models'] = ['meta-llama/Meta-Llama-3-8B'] # 'meta-llama/Meta-Llama-3-8B', 'openai-community/gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
 config['models'] = ['EleutherAI/gpt-j-6b'] # 'meta-llama/Meta-Llama-3-8B', 'openai-community/gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
 config['models'] = ['meta-llama/Llama-2-7b-hf'] # 'meta-llama/Meta-Llama-3-8B', 'openai-community/gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
-
 
 config['datasets'] = list(md.target_datasets.keys())
 config['seed'] = 42
@@ -62,8 +61,8 @@ config['wd'] = 0.001
 config['rho'] = 1e-4
 
 #config['learning_type'] = 'sharpness_aware_approx' #'sharpness_encoding' # 'sharpness_aware' 'sharpness_aware_approx' 'layernorm_DyT'
-config['learning_type'] = 'version4' # 'rola_analysis' #'sharpness_encoding' # 'sharpness_aware' 'sharpness_aware_approx' 'layernorm_DyT'
 config['learning_type'] = 'rola_analysis' # 'rola_analysis' #'sharpness_encoding' # 'sharpness_aware' 'sharpness_aware_approx' 'layernorm_DyT'
+config['learning_type'] = 'version4' # 'rola_analysis' #'sharpness_encoding' # 'sharpness_aware' 'sharpness_aware_approx' 'layernorm_DyT'
 config['eval_type'] = 'eval_with_demonstration' # 'eval_with_demonstration', 'eval_with_empty'
 
 config['grad_bs'] = 1
@@ -82,7 +81,7 @@ config['pushing_loss'] = False
 config['pushing_loss_lambda'] = 1e-2
 
 
-config['skip_training'] =False
+config['skip_training']  = True
 config['learning_property_analysis'] = True
 config['probe_analysis'] = True
 
