@@ -18,6 +18,7 @@ config['exp_name'] = 'exps_apr28/llama3_version4'
 config['exp_name'] = 'exps_apr28/gpt-j-6b'
 config['exp_name'] = 'exps_apr28/probe_raw_debugging'
 config['exp_name'] = 'exps_apr28/probe_raw_analysis'
+config['exp_name'] = 'exps_apr28/debugging_debugging'
 
 config['gpus'] = ['0']
 
@@ -80,10 +81,11 @@ config['ce_loss_lambda'] = 1.0
 config['pushing_loss'] = False
 config['pushing_loss_lambda'] = 1e-2
 
-config['skip_training'] = True
 
+config['skip_training'] =False
 config['learning_property_analysis'] = True
 config['probe_analysis'] = True
+
 
 config['flatness_loss'] = True
 config['flat_loss_lambda'] = 1e-3
