@@ -57,6 +57,7 @@ config['rho'] = 1e-4
 config['learning_type'] = 'version4' # 'rola_analysis' #'sharpness_encoding' # 'sharpness_aware' 'sharpness_aware_approx' 'layernorm_DyT'
 config['learning_type'] = 'rola_analysis' # 'rola_analysis' #'sharpness_encoding' # 'sharpness_aware' 'sharpness_aware_approx' 'layernorm_DyT'
 config['eval_type'] = 'eval_with_demonstration' # 'eval_with_demonstration', 'eval_with_empty'
+config['eval_type'] = 'eval_with_empty' # 'eval_with_demonstration', 'eval_with_empty'
 
 config['grad_bs'] = 1
 config['demon_bs'] = 0
