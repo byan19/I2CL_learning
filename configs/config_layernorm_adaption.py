@@ -6,27 +6,20 @@ import my_datasets as md
 config = {}
 # general
 #config['exp_name'] = 'exps/Llama3_32layers_debug'
-config['exp_name'] = 'exps_apr7/Llama2_sharpnessencoding_softplusN1e-3C_flatlam1e-3'
-config['exp_name'] = 'exps_apr7/debugging_with_adding_demonstration'
-config['exp_name'] = 'exps_apr10/version4_1sample_1demon_epoch60_flatMinueconvR_demon3'
-config['exp_name'] = 'exps_apr24/version4_checking_loss_debugging'
-config['exp_name'] = 'exps_apr25/version4_fixedflatness_1sample_1demon_llama3-8b'
-config['exp_name'] = 'exps_apr27/llama3instruct_version4'
-config['exp_name'] = 'exps_apr27/llama3instruct_version4'
 config['exp_name'] = 'exps_apr26/gpt2_xl_again'
 config['exp_name'] = 'exps_apr28/llama3_version4'
-config['exp_name'] = 'exps_apr28/gpt-j-6b'
 config['exp_name'] = 'exps_apr28/probe_raw_debugging'
 config['exp_name'] = 'exps_apr28/debugging_debugging'
-config['exp_name'] = 'exps_apr28/probe_raw_analysis'
+config['exp_name'] = 'exps_apr29/probe_raw_analysis'
+config['exp_name'] = 'exps_apr29/gpt-j-6b'
 
 config['gpus'] = ['0']
 
 config['models'] = ['meta-llama/Meta-Llama-3-8B-Instruct'] # 'meta-llama/Meta-Llama-3-8B', 'openai-community/gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
 config['models'] = ['openai-community/gpt2-xl'] # 'meta-llama/Meta-Llama-3-8B', 'openai-community/gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
 config['models'] = ['meta-llama/Meta-Llama-3-8B'] # 'meta-llama/Meta-Llama-3-8B', 'openai-community/gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
-config['models'] = ['EleutherAI/gpt-j-6b'] # 'meta-llama/Meta-Llama-3-8B', 'openai-community/gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
 config['models'] = ['meta-llama/Llama-2-7b-hf'] # 'meta-llama/Meta-Llama-3-8B', 'openai-community/gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
+config['models'] = ['EleutherAI/gpt-j-6b'] # 'meta-llama/Meta-Llama-3-8B', 'openai-community/gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
 
 config['datasets'] = list(md.target_datasets.keys())
 config['seed'] = 42
