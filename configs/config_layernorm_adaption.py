@@ -11,7 +11,7 @@ config['exp_name'] = 'exps_apr28/probe_raw_debugging'
 config['exp_name'] = 'exps_apr28/debugging_debugging'
 config['exp_name'] = 'exps_apr29/probe_raw_analysis'
 config['exp_name'] = 'exps_apr29/llama3_8B_version4'
-config['exp_name'] = 'exps_apr29_ibme/llama2_Lora_1_ourloss'
+config['exp_name'] = 'exps_apr29_ibme/llama2_Lora_1_ourloss_debugging'
 
 config['gpus'] = ['0']
 
@@ -66,8 +66,8 @@ config['demon_bs'] = 0
 
 # lora
 config['lora_rank'] = 1 # 8, 16, 64, 128
-config['lora_taget_modules'] = ["q_proj", "v_proj", "k_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
-config['lora_taget_modules'] = ['q_proj', 'v_proj']
+config['lora_target_modules'] = ["q_proj", "v_proj", "k_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+config['lora_target_modules'] = ['q_proj', 'v_proj']
 
 config['layernorm_type'] = 'all' # 'post_attention', 'input_attention', 'all'
 config['entropy_loss'] = False
