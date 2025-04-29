@@ -14,7 +14,7 @@ sleep 1.0s
 echo ${File}
 #screen -S $sessionname -X stuff "sbatch -w node04 --gres=gpu:1 ${File} ${GPU} ${sessionname} ${Tunning}^M"
 #screen -S $sessionname -X stuff "sbatch -w node05 --gres=gpu:1 ${File} ${GPU} ${sessionname} ${Tunning}^M"
-screen -S $sessionname -X stuff "sbatch -w node05 --gres=gpu:1 ${File} ${Param} ${sessionname} ${Tunning} ^M"
+screen -S $sessionname -X stuff "sbatch -w node04 --gres=gpu:1 ${File} ${Param} ${sessionname} ${Tunning} ^M"
 }
 
 Tunning=1
