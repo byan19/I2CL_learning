@@ -11,7 +11,7 @@ config['exp_name'] = 'exps_apr28/probe_raw_debugging'
 config['exp_name'] = 'exps_apr28/debugging_debugging'
 config['exp_name'] = 'exps_apr29/probe_raw_analysis'
 config['exp_name'] = 'exps_apr29/llama3_8B_version4'
-config['exp_name'] = 'exps_apr29_ibme/llama2_Lora_1_ourloss'
+config['exp_name'] = 'exps_apr29_ibme/llama2_Lora_1_CEloss'
 
 config['gpus'] = ['0']
 
@@ -84,10 +84,10 @@ config['probe_analysis'] = False
 
 config['flatness_loss'] = True
 config['flat_loss_lambda'] = 1e-3
-#config['flat_loss_lambda'] = 0.0
+config['flat_loss_lambda'] = 0.0
 
 config['conver_loss_lambda'] = 1e-2
-#config['conver_loss_lambda'] = 0.0
+config['conver_loss_lambda'] = 0.0
 
 config['noise_scale_hess'] = 1e-3
 
