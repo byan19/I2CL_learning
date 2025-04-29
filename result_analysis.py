@@ -9,6 +9,7 @@ def analysis(exp_name, model_name, dataset_list):
 	for dataset in dataset_list:
 		file_name = f'{exp_name}/meta-llama/{model_name}/{dataset}/result_dict.json'
 		file_name = f'{exp_name}/openai-community/gpt2-xl/{dataset}/result_dict.json'
+		file_name = f'exps_apr27/llama3instruct_version4/meta-llama/Meta-Llama-3-8B-Instruct/{dataset}/result_dict.json'
 
 
 		print(file_name)
@@ -88,6 +89,6 @@ args = parser.parse_args()
 if __name__ == "__main__":
 	exp_name = args.exp_name
 	model_name = args.model_name
-	dataset_list = ['sst2', 'sst5', 'trec','agnews', 'subj', 'hate_speech18', 'dbpedia', 'emo', 'mr' ]
 	dataset_list = ['sst2', 'sst5', 'trec','subj', 'hate_speech18',  'emo', 'mr' ]
+	dataset_list = ['sst2', 'sst5', 'trec','agnews', 'subj', 'hate_speech18', 'dbpedia', 'emo', 'mr' ]
 	analysis(exp_name, model_name, dataset_list)
