@@ -11,7 +11,7 @@ config['exp_name'] = 'exps_apr28/probe_raw_debugging'
 config['exp_name'] = 'exps_apr28/debugging_debugging'
 config['exp_name'] = 'exps_apr29/probe_raw_analysis'
 config['exp_name'] = 'exps_apr29/llama3_8B_version4'
-config['exp_name'] = 'exps_apr29/llama2_Lora_1_ourloss_debugging'
+config['exp_name'] = 'exps_apr29_ibme/llama2_Lora_1_ourloss'
 
 config['gpus'] = ['0']
 
