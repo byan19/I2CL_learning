@@ -13,7 +13,7 @@ config['exp_name'] = 'exps_apr29/probe_raw_analysis'
 config['exp_name'] = 'exps_apr29/llama3_8B_version4'
 config['exp_name'] = 'exps_apr29_downloading/llama3_instruct_Lora_1'
 config['exp_name'] = 'exps_apr30_ibme/gpt-j-6b'
-config['exp_name'] = 'exps_apr30_ibme/llama2_lora16_ce'
+config['exp_name'] = 'exps_apr30_yibo/llama3_version4_ce_with_zerofewshot'
 
 config['gpus'] = ['0']
 
@@ -26,7 +26,7 @@ config['models'] = ['meta-llama/Llama-2-7b-hf'] # 'meta-llama/Meta-Llama-3-8B', 
 config['datasets'] = list(md.target_datasets.keys())
 config['seed'] = 42
 config['run_num'] = 5
-config['run_baseline'] = False
+config['run_baseline'] = True
 config['metric'] = 'acc'  # 'acc', 'macro_f1'
 config['bs'] = 1
 
@@ -56,13 +56,13 @@ config['wd'] = 0.001
 config['rho'] = 1e-4
 
 #config['learning_type'] = 'sharpness_aware_approx' #'sharpness_encoding' # 'sharpness_aware' 'sharpness_aware_approx' 'layernorm_DyT'
-config['learning_type'] = 'version4' # 'rola_analysis' #'sharpness_encoding' # 'sharpness_aware' 'sharpness_aware_approx' 'layernorm_DyT'
 config['learning_type'] = 'rola_analysis' # 'rola_analysis' #'sharpness_encoding' # 'sharpness_aware' 'sharpness_aware_approx' 'layernorm_DyT'
-config['eval_type'] = 'eval_with_demonstration' # 'eval_with_demonstration', 'eval_with_empty'
+config['learning_type'] = 'version4' # 'rola_analysis' #'sharpness_encoding' # 'sharpness_aware' 'sharpness_aware_approx' 'layernorm_DyT'
 config['eval_type'] = 'eval_with_empty' # 'eval_with_demonstration', 'eval_with_empty'
+config['eval_type'] = 'eval_with_demonstration' # 'eval_with_demonstration', 'eval_with_empty'
 
 config['grad_bs'] = 1
-config['demon_bs'] = 0
+config['demon_bs'] = 1
 
 #config['post_attention'] = False
 #config['input_attention'] = False
@@ -77,7 +77,6 @@ config['entropy_loss'] = False
 config['ce_loss_lambda'] = 1.0
 config['pushing_loss'] = False
 config['pushing_loss_lambda'] = 1e-2
-
 
 config['skip_training']  = False
 config['learning_property_analysis'] = False
