@@ -38,6 +38,7 @@ sessionname=version4_test_path_set
 sessionname=llama3_ourmethod_apr28
 sessionname=gpt_j_6b_version4_apr29
 sessionname=llama3_ourmethod_apr29
+sessionname=gpt_j_6b_version4_apr30
 File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
 
 CHECK=${sessionname}

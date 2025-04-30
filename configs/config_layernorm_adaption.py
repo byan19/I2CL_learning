@@ -12,14 +12,15 @@ config['exp_name'] = 'exps_apr28/debugging_debugging'
 config['exp_name'] = 'exps_apr29/probe_raw_analysis'
 config['exp_name'] = 'exps_apr29/llama3_8B_version4'
 config['exp_name'] = 'exps_apr29_downloading/llama3_instruct_Lora_1'
+config['exp_name'] = 'exps_apr30/gpt-j-6b'
 
 config['gpus'] = ['0']
 
 config['models'] = ['openai-community/gpt2-xl'] # 'meta-llama/Meta-Llama-3-8B', 'openai-community/gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
-config['models'] = ['EleutherAI/gpt-j-6b'] # 'meta-llama/Meta-Llama-3-8B', 'openai-community/gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
 config['models'] = ['meta-llama/Llama-2-7b-hf'] # 'meta-llama/Meta-Llama-3-8B', 'openai-community/gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
 config['models'] = ['meta-llama/Meta-Llama-3-8B'] # 'meta-llama/Meta-Llama-3-8B', 'openai-community/gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
 config['models'] = ['meta-llama/Meta-Llama-3-8B-Instruct'] # 'meta-llama/Meta-Llama-3-8B', 'openai-community/gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
+config['models'] = ['EleutherAI/gpt-j-6b'] # 'meta-llama/Meta-Llama-3-8B', 'openai-community/gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
 
 config['datasets'] = list(md.target_datasets.keys())
 config['seed'] = 42
@@ -54,13 +55,13 @@ config['wd'] = 0.001
 config['rho'] = 1e-4
 
 #config['learning_type'] = 'sharpness_aware_approx' #'sharpness_encoding' # 'sharpness_aware' 'sharpness_aware_approx' 'layernorm_DyT'
-config['learning_type'] = 'version4' # 'rola_analysis' #'sharpness_encoding' # 'sharpness_aware' 'sharpness_aware_approx' 'layernorm_DyT'
 config['learning_type'] = 'rola_analysis' # 'rola_analysis' #'sharpness_encoding' # 'sharpness_aware' 'sharpness_aware_approx' 'layernorm_DyT'
-config['eval_type'] = 'eval_with_demonstration' # 'eval_with_demonstration', 'eval_with_empty'
+config['learning_type'] = 'version4' # 'rola_analysis' #'sharpness_encoding' # 'sharpness_aware' 'sharpness_aware_approx' 'layernorm_DyT'
 config['eval_type'] = 'eval_with_empty' # 'eval_with_demonstration', 'eval_with_empty'
+config['eval_type'] = 'eval_with_demonstration' # 'eval_with_demonstration', 'eval_with_empty'
 
 config['grad_bs'] = 1
-config['demon_bs'] = 0
+config['demon_bs'] = 1
 
 #config['post_attention'] = False
 #config['input_attention'] = False
@@ -83,11 +84,11 @@ config['probe_analysis'] = False
 
 
 config['flatness_loss'] = True
-config['flat_loss_lambda'] = 1e-3
 config['flat_loss_lambda'] = 0.0
+config['flat_loss_lambda'] = 1e-3
 
-config['conver_loss_lambda'] = 1e-2
 config['conver_loss_lambda'] = 0.0
+config['conver_loss_lambda'] = 1e-2
 
 config['noise_scale_hess'] = 1e-3
 
