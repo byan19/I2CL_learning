@@ -44,6 +44,7 @@ sessionname=I2CL_adding_demonstration_epoch50_conver_regular
 sessionname=version4_1sample_0demon_epoch30_flatMinue
 sessionname=lora_1_llama3_downloading_instruct
 sessionname=gpt6b_for_experiments
+sessionname=gpt6b_for_experiments
 File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
 
 MultiRun ${sessionname} ${File} ${Param} ${Tunning}
