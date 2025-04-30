@@ -8,8 +8,8 @@ def analysis(exp_name, model_name, dataset_list):
 	ours_macro_f1_std_list = []
 	for dataset in dataset_list:
 		file_name = f'{exp_name}/meta-llama/{model_name}/{dataset}/result_dict.json'
-		file_name = f'{exp_name}/openai-community/gpt2-xl/{dataset}/result_dict.json'
-		file_name = f'exps_apr27/llama3instruct_version4/meta-llama/Meta-Llama-3-8B-Instruct/{dataset}/result_dict.json'
+		#file_name = f'{exp_name}/openai-community/gpt2-xl/{dataset}/result_dict.json'
+		#file_name = f'exps_apr27/llama3instruct_version4/meta-llama/Meta-Llama-3-8B-Instruct/{dataset}/result_dict.json'
 
 
 		print(file_name)
