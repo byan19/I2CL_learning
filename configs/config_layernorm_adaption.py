@@ -13,15 +13,15 @@ config['exp_name'] = 'exps_apr29/probe_raw_analysis'
 config['exp_name'] = 'exps_apr29/llama3_8B_version4'
 config['exp_name'] = 'exps_apr29_downloading/llama3_instruct_Lora_1'
 config['exp_name'] = 'exps_apr30_ibme/gpt-j-6b'
-config['exp_name'] = 'exps_apr30_yibo/llama3_version4_ce_with_zerofewshot'
+config['exp_name'] = 'exps_apr30_yibo/llama3instruct_version4_ce_with_zerofewshot'
 
 config['gpus'] = ['0']
 
 config['models'] = ['openai-community/gpt2-xl'] # 'meta-llama/Meta-Llama-3-8B', 'openai-community/gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
-config['models'] = ['meta-llama/Meta-Llama-3-8B-Instruct'] # 'meta-llama/Meta-Llama-3-8B', 'openai-community/gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
 config['models'] = ['EleutherAI/gpt-j-6b'] # 'meta-llama/Meta-Llama-3-8B', 'openai-community/gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
 config['models'] = ['meta-llama/Llama-2-7b-hf'] # 'meta-llama/Meta-Llama-3-8B', 'openai-community/gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
 config['models'] = ['meta-llama/Meta-Llama-3-8B'] # 'meta-llama/Meta-Llama-3-8B', 'openai-community/gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
+config['models'] = ['meta-llama/Meta-Llama-3-8B-Instruct'] # 'meta-llama/Meta-Llama-3-8B', 'openai-community/gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
 
 config['datasets'] = list(md.target_datasets.keys())
 config['seed'] = 42
