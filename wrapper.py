@@ -1268,11 +1268,11 @@ class ModelWrapper(nn.Module):
         if not os.path.exists(f'{save_dir}/loss_record/'):
             os.makedirs(f'{save_dir}/loss_record/')
         
-        np.save(f'{save_dir}/loss_record/ce_loss.npy', loss_list)
+        np.save(f'{save_dir}/loss_record/{run_name}_ce_loss.npy', loss_list)
         
         if config['conver_loss'] or config['conver_loss_regular']:
             utils.plot_loss_curve(conv_loss_list, save_dir + f'/{run_name}_conv_loss_curve.png')
-            np.save(f'{save_dir}/loss_record/conv_loss.npy', conv_loss_list)
+            np.save(f'{save_dir}/loss_record/{run_name}_conv_loss.npy', conv_loss_list)
 
     def layernorm_adaptation_verion4(self, config, dataset, save_dir=None, run_name=None):
         '''
@@ -1562,11 +1562,11 @@ class ModelWrapper(nn.Module):
         if not os.path.exists(f'{save_dir}/loss_record/'):
             os.makedirs(f'{save_dir}/loss_record/')
         
-        np.save(f'{save_dir}/loss_record/ce_loss.npy', loss_list)
+        np.save(f'{save_dir}/loss_record/{run_name}_ce_loss.npy', loss_list)
         
         if config['conver_loss'] or config['conver_loss_regular']:
             utils.plot_loss_curve(conv_loss_list, save_dir + f'/{run_name}_conv_loss_curve.png')
-            np.save(f'{save_dir}/loss_record/conv_loss.npy', conv_loss_list)
+            np.save(f'{save_dir}/loss_record/{run_name}_conv_loss.npy', conv_loss_list)
 
     
     def layernorm_adaptation_verion4_analysis(self, config, dataset, test_dataset, demonstration, save_dir=None, run_name=None):
