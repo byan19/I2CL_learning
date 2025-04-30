@@ -56,13 +56,13 @@ config['wd'] = 0.001
 config['rho'] = 1e-4
 
 #config['learning_type'] = 'sharpness_aware_approx' #'sharpness_encoding' # 'sharpness_aware' 'sharpness_aware_approx' 'layernorm_DyT'
-config['learning_type'] = 'rola_analysis' # 'rola_analysis' #'sharpness_encoding' # 'sharpness_aware' 'sharpness_aware_approx' 'layernorm_DyT'
 config['learning_type'] = 'version4' # 'rola_analysis' #'sharpness_encoding' # 'sharpness_aware' 'sharpness_aware_approx' 'layernorm_DyT'
-config['eval_type'] = 'eval_with_empty' # 'eval_with_demonstration', 'eval_with_empty'
+config['learning_type'] = 'rola_analysis' # 'rola_analysis' #'sharpness_encoding' # 'sharpness_aware' 'sharpness_aware_approx' 'layernorm_DyT'
 config['eval_type'] = 'eval_with_demonstration' # 'eval_with_demonstration', 'eval_with_empty'
+config['eval_type'] = 'eval_with_empty' # 'eval_with_demonstration', 'eval_with_empty'
 
 config['grad_bs'] = 1
-config['demon_bs'] = 1
+config['demon_bs'] = 0
 
 #config['post_attention'] = False
 #config['input_attention'] = False
@@ -87,9 +87,11 @@ config['probe_analysis'] = False
 config['flatness_loss'] = True
 config['flat_loss_lambda'] = 0.0
 config['flat_loss_lambda'] = 1e-3
+config['flat_loss_lambda'] = 1e-4
 
 config['conver_loss_lambda'] = 0.0
 config['conver_loss_lambda'] = 1e-2
+config['conver_loss_lambda'] = 1e-3
 
 config['noise_scale_hess'] = 1e-3
 
