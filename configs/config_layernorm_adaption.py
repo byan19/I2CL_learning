@@ -13,7 +13,7 @@ config['exp_name'] = 'exps_apr29/probe_raw_analysis'
 config['exp_name'] = 'exps_apr29/llama3_8B_version4'
 config['exp_name'] = 'exps_apr29_downloading/llama3_instruct_Lora_1'
 config['exp_name'] = 'exps_apr30_ibme/gpt-j-6b'
-config['exp_name'] = 'exps_apr30_ibme/llama2_lora1_oursconv3_flat4'
+config['exp_name'] = 'exps_apr30_ibme/llama2_lora16_ce'
 
 config['gpus'] = ['0']
 
@@ -68,7 +68,7 @@ config['demon_bs'] = 0
 #config['input_attention'] = False
 
 # lora
-config['lora_rank'] = 1 # 8, 16, 64, 128
+config['lora_rank'] = 16 # 8, 16, 64, 128
 config['lora_target_modules'] = ["q_proj", "v_proj", "k_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
 config['lora_target_modules'] = ['q_proj', 'v_proj']
 
@@ -85,13 +85,11 @@ config['probe_analysis'] = False
 
 
 config['flatness_loss'] = True
-config['flat_loss_lambda'] = 0.0
 config['flat_loss_lambda'] = 1e-3
-config['flat_loss_lambda'] = 1e-4
+config['flat_loss_lambda'] = 0.0
 
-config['conver_loss_lambda'] = 0.0
 config['conver_loss_lambda'] = 1e-2
-config['conver_loss_lambda'] = 1e-3
+config['conver_loss_lambda'] = 0.0
 
 config['noise_scale_hess'] = 1e-3
 
