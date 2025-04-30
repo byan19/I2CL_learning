@@ -43,7 +43,7 @@ def main(args):
     # set comprare metric
     args.metric = args.config['metric']
     # get save dir
-    
+    pdb.set_trace()
     utils.init_exp_path(args, args.config['exp_name'])
 
     # load datasets
