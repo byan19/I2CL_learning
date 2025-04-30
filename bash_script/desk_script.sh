@@ -29,6 +29,7 @@ Tunning=${Tunning_list[$idx]}
 sessionname=lora_analysis
 sessionname=raw_result_for_comparsion
 sessionname=lora_debugging
+sessionname=lora128_llama2
 File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
 
 CHECK=${sessionname}

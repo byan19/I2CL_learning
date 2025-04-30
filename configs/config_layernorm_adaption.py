@@ -13,7 +13,7 @@ config['exp_name'] = 'exps_apr29/probe_raw_analysis'
 config['exp_name'] = 'exps_apr29/llama3_8B_version4'
 config['exp_name'] = 'exps_apr29_downloading/llama3_instruct_Lora_1'
 config['exp_name'] = 'exps_apr30_ibme/gpt-j-6b'
-config['exp_name'] = 'exps_apr30_ibme/llama2_lora128_ce'
+config['exp_name'] = 'exps_apr30_desktop/llama2_lora128_ce'
 
 config['gpus'] = ['0']
 
