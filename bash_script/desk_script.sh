@@ -30,6 +30,7 @@ sessionname=lora_analysis
 sessionname=raw_result_for_comparsion
 sessionname=lora_debugging
 sessionname=lora16_scripttest
+sessionname=softprompt
 
 File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
 File=bash_script/bash_sub_script/sub_lora.sh
