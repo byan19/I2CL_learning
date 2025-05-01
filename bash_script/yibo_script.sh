@@ -40,6 +40,9 @@ sessionname=gpt_j_6b_version4_apr29
 sessionname=llama3_ourmethod_apr29
 sessionname=gpt_j_6b_version4_apr30
 sessionname=llama3instruct_ce_zerofewshot
+sessionname=llama3_ce_zero_fewshot
+
+File=bash_script/bash_sub_script/sub_lora.sh
 File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
 
 CHECK=${sessionname}
