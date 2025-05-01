@@ -7,11 +7,11 @@ config = {}
 # general
 config['exp_name'] = 'exps/soft_prompt_debug'
 config['gpus'] = ['0']
-config['models'] = ['meta-llama/Meta-Llama-3-8B'] # 'gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
+config['models'] = ['meta-llama/Llama-2-7b-hf'] # 'gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
 config['datasets'] = list(md.target_datasets.keys())
 config['seed'] = 42
 config['run_num'] = 5
-config['run_baseline'] = True
+config['run_baseline'] = False
 config['metric'] = 'acc'  # 'acc', 'macro_f1'
 config['bs'] = 2
 config['load_in_8bit'] = False
