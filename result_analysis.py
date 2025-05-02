@@ -10,6 +10,7 @@ def analysis(exp_name, model_name, dataset_list):
 		file_name = f'{exp_name}/meta-llama/{model_name}/{dataset}/result_dict.json'
 		#file_name = f'{exp_name}/openai-community/gpt2-xl/{dataset}/result_dict.json'
 		#file_name = f'exps_apr27/llama3instruct_version4/meta-llama/Meta-Llama-3-8B-Instruct/{dataset}/result_dict.json'
+		file_name = f'exps_May1_yibo/llama3_version4_ce_with_zerofewshot/meta-llama/Meta-Llama-3-8B/result_dict.json'
 
 
 		print(file_name)
