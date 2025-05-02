@@ -46,6 +46,7 @@ sessionname=lora_1_llama3_downloading_instruct
 sessionname=gpt6b_for_experiments
 sessionname=gpt6b_for_experiments
 sessionname=llama2_lora_rank16
+sessionname=softprompt_llama3
 
 File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
 File=bash_script/bash_sub_script/sub_run.sh
