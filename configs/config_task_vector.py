@@ -6,12 +6,12 @@ import my_datasets as md
 config = {}
 # general
 config['exp_name'] = 'exps/task_vector'
-config['exp_name'] = 'exps_May2_yibo/task_vector_llama3_instruct'
+config['exp_name'] = 'exps_May2_yibo/task_vector_llama3'
 config['gpus'] = ['0']
 
 config['models'] = ['meta-llama/Llama-2-7b-hf'] # 'gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
-config['models'] = ['meta-llama/Meta-Llama-3-8B'] # 'meta-llama/Meta-Llama-3-8B', 'openai-community/gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
 config['models'] = ['meta-llama/Meta-Llama-3-8B-Instruct'] # 'meta-llama/Meta-Llama-3-8B', 'openai-community/gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
+config['models'] = ['meta-llama/Meta-Llama-3-8B'] # 'meta-llama/Meta-Llama-3-8B', 'openai-community/gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
 
 
 config['datasets'] = list(md.target_datasets.keys())
