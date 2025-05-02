@@ -1,2 +1,2 @@
 #!/bin/bash
-python run_soft_prompt.py
+python run_task_vector.py
