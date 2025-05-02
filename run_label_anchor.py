@@ -239,6 +239,12 @@ def main(args):
         with open(args.save_dir + '/result_dict.json', 'w') as f:
             json.dump(result_dict, f, indent=4)
     
+    if config['run_baseline']:
+        utils.result_mean_calculator(result_dict, 'few_shot')
+    utils.result_mean_calculator(result_dict, 'ours')
+    # save result_dict after each run
+    with open(args.save_dir + '/result_dict.json', 'w') as f:
+        json.dump(result_dict, f, indent=4)
     # delete all variables
     del model_wrapper, model, tokenizer, train_dataset, test_dataset
     del test_evaluator
@@ -284,11 +290,4 @@ if __name__ == "__main__":
                 time.sleep(5)
 
     # Create a process for each GPU
-    processes = [Process(target=run_task, args=(gpu_id, config)) for gpu_id in config['gpus']]
-    # Start all processes
-    for p in processes:
-        p.start()
-    # Wait for all processes to finish
-    for p in processes:
-        p.join()
-    print("All tasks completed.")
+    run_task('0', config)  # without parallelisation
