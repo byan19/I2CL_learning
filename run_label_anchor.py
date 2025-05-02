@@ -221,7 +221,9 @@ def main(args):
             position_offset = 0
         elif args.model_name == 'EleutherAI/gpt-j-6B':
             position_offset = torch.where(compress_attn_mask)[0][-1] + 1
-        elif args.model_name == 'meta-llama/Llama-2-7b-hf':
+        elif (args.model_name == 'meta-llama/Llama-2-7b-hf'
+              or args.model_name=='meta-llama/Meta-Llama-3-8B-Instruct'
+              or args.model_name == 'meta-llama/Meta-Llama-3-8B' ) :
             position_offset = None
         else:
             raise ValueError('model not supported')
