@@ -12,6 +12,8 @@ def analysis(exp_name, model_name, dataset_list):
 		#file_name = f'exps_apr27/llama3instruct_version4/meta-llama/Meta-Llama-3-8B-Instruct/{dataset}/result_dict.json'
 		file_name = f'exps_May1_yibo/llama3_version4_ce_with_zerofewshot/meta-llama/Meta-Llama-3-8B/{dataset}/result_dict.json'
 		file_name = f'exps_apr29/llama3_8B_version4/meta-llama/Meta-Llama-3-8B/{dataset}/result_dict.json'
+		file_name = f'exps_May2_yibo/soft_prompt_llama3/meta-llama/Meta-Llama-3-8B/{dataset}/result_dict.json'
+		file_name = f'exps_May2_yibo/soft_prompt_llama3_instruct/meta-llama/Meta-Llama-3-8B-Instruct/{dataset}/result_dict.json'
 
 
 		print(file_name)
