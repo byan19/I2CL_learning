@@ -32,6 +32,7 @@ sessionname=lora_debugging
 sessionname=lora16_scripttest
 sessionname=softprompt
 sessionname=taskvector
+sessionname=label_ancho
 
 File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
 File=bash_script/bash_sub_script/sub_lora.sh
