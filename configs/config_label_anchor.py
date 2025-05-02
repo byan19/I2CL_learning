@@ -5,7 +5,7 @@ import my_datasets as md
 
 config = {}
 # general
-config['exp_name'] = 'exps_May2_desk/label_anchor_llama3_instruct'
+config['exp_name'] = 'exps_May2_desk/label_anchor_llama3_instruct_debug'
 
 config['gpus'] = ['0']
 config['models'] = ['meta-llama/Llama-2-7b-hf'] # 'gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
