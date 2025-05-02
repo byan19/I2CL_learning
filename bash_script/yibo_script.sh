@@ -44,8 +44,8 @@ sessionname=llama3_ce_zero_fewshot
 sessionname=softprompt_llama3_instruct
 
 File=bash_script/bash_sub_script/sub_lora.sh
-File=bash_script/bash_sub_script/sub_run.sh
 File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
+File=bash_script/bash_sub_script/sub_run.sh
 
 CHECK=${sessionname}
 
