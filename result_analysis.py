@@ -17,7 +17,7 @@ def analysis(exp_name, model_name, dataset_list):
 		file_name = f'exps_May2_yibo/label_anchor_llama3_instruct/meta-llama/Meta-Llama-3-8B/{dataset}/result_dict.json'
 		
 		file_name = f'exps_May2_yibo/task_vector_llama3_instruct/meta-llama/Meta-Llama-3-8B-Instruct/{dataset}/result_dict.json'
-		file_name = f'exps_May2_yibo/task_vector_llama3/meta-llama/Meta-Llama-3-8B/{dataset}/result_dict.json'
+		file_name = f'exps_May2_yibo/label_anchor_llama3_instruct/meta-llama/Meta-Llama-3-8B-Instruct/{dataset}/result_dict.json'
 
 
 		print(file_name)
