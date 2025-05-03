@@ -1,2 +1,2 @@
 #!/bin/bash
-python run_label_anchor.py
+python run_i2cl.py
