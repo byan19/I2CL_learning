@@ -44,6 +44,7 @@ sessionname=llama3_ce_zero_fewshot
 sessionname=softprompt_llama3_instruct
 sessionname=label_anchor_llama3_instruct
 sessionname=i2cl_llama3_instruct
+sessionname=label_anchor_llama3
 
 File=bash_script/bash_sub_script/sub_lora.sh
 File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
