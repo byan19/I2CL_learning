@@ -101,6 +101,6 @@ args = parser.parse_args()
 if __name__ == "__main__":
 	exp_name = args.exp_name
 	model_name = args.model_name
-	dataset_list = ['sst2', 'sst5', 'trec','agnews', 'subj', 'hate_speech18', 'dbpedia', 'emo', 'mr' ]
 	dataset_list = ['sst2', 'sst5', 'trec','subj', 'hate_speech18',  'emo', 'mr' ]
+	dataset_list = ['sst2', 'sst5', 'trec','agnews', 'subj', 'hate_speech18', 'dbpedia', 'emo', 'mr' ]
 	analysis(exp_name, model_name, dataset_list)
