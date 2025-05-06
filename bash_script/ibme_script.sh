@@ -47,9 +47,11 @@ sessionname=gpt6b_for_experiments
 sessionname=gpt6b_for_experiments
 sessionname=llama2_lora_rank16
 sessionname=softprompt_llama3
+sessionname=lora16_llama2
 
 File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
 File=bash_script/bash_sub_script/sub_run.sh
+File=bash_script/bash_sub_script/sub_lora.sh
 
 MultiRun ${sessionname} ${File} ${Param} ${Tunning}
 done
