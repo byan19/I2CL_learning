@@ -66,6 +66,7 @@ config['demon_bs'] = 0
 #config['post_attention'] = False
 #config['input_attention'] = False
 
+
 # lora
 config['lora_rank'] = 16 # 8, 16, 64, 128
 config['lora_target_modules'] = ['q_proj', 'v_proj']
