@@ -14,7 +14,7 @@ config['exp_name'] = 'exps_apr29/llama3_8B_version4'
 config['exp_name'] = 'exps_apr29_downloading/llama3_instruct_Lora_1'
 config['exp_name'] = 'exps_apr30_ibme/gpt-j-6b'
 config['exp_name'] = 'exps_apr30_desktop/lora_script_test'
-config['exp_name'] = 'exps_May7_desk/lora128all_llama2'
+config['exp_name'] = 'exps_May7_desk/lora64all_llama2'
 
 config['gpus'] = ['0']
 
@@ -67,7 +67,7 @@ config['demon_bs'] = 0
 #config['input_attention'] = False
 
 # lora
-config['lora_rank'] = 128 # 8, 16, 64, 128
+config['lora_rank'] = 64 # 8, 16, 64, 128
 config['lora_target_modules'] = ['q_proj', 'v_proj']
 config['lora_target_modules'] = ["q_proj", "v_proj", "k_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
 
