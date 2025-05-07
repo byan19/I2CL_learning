@@ -25,6 +25,7 @@ def analysis(exp_name, model_name, dataset_list):
 		file_name = f'exps_apr30_ibme/llama2_lora1_oursconv3_flat4/meta-llama/Llama-2-7b-hf/{dataset}/result_dict.json'
 		file_name = f'exps_apr29_ibme/llama2_Lora_1_CEloss/meta-llama/Llama-2-7b-hf/{dataset}/result_dict.json'
 		file_name = f'exps_May6_desk/lora64_llama2/meta-llama/Llama-2-7b-hf/{dataset}/result_dict.json'
+		file_name = f'exps_May6_desk/lora64_llama2/meta-llama/Llama-2-7b-hf/{dataset}/result_dict.json'
 
 
 		print(file_name)
