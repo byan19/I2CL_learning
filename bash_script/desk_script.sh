@@ -34,7 +34,7 @@ sessionname=softprompt
 sessionname=taskvector
 sessionname=label_ancho
 sessionname=gpt-xl_CE
-sessionname=lora16all_llama2
+sessionname=lora1all_llama2_ce
 
 File=bash_script/bash_sub_script/sub_run.sh
 File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
