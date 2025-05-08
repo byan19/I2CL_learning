@@ -132,6 +132,7 @@ def main(args):
         #pdb.set_trace()
         cali_dataset.all_data = [train_dataset.all_data[i] for i in demon_data_index]
 
+        pdb.set_trace()
         # train sharpness_aware
         s_t = time.time()
         if args.config['learning_type'] == 'sharpness_aware':
