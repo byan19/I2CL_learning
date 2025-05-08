@@ -14,7 +14,7 @@ config['exp_name'] = 'exps_apr29/llama3_8B_version4'
 config['exp_name'] = 'exps_apr29_downloading/llama3_instruct_Lora_1'
 config['exp_name'] = 'exps_apr30_ibme/gpt-j-6b'
 config['exp_name'] = 'exps_apr30_desktop/lora_script_test'
-config['exp_name'] = 'exps_May7_desk/lora1all_llama2_ours'
+config['exp_name'] = 'exps_May8_desk/lora1all_llama2_ce'
 
 config['gpus'] = ['0']
 
@@ -84,11 +84,11 @@ config['probe_analysis'] = False
 
 
 config['flatness_loss'] = True
-config['flat_loss_lambda'] = 0.0
 config['flat_loss_lambda'] = 1e-3
+config['flat_loss_lambda'] = 0.0
 
-config['conver_loss_lambda'] = 0.0
 config['conver_loss_lambda'] = 1e-2
+config['conver_loss_lambda'] = 0.0
 
 config['noise_scale_hess'] = 1e-3
 
