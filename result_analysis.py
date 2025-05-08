@@ -11,21 +11,11 @@ def analysis(exp_name, model_name, dataset_list):
 		#file_name = f'{exp_name}/openai-community/gpt2-xl/{dataset}/result_dict.json'
 		#file_name = f'exps_apr27/llama3instruct_version4/meta-llama/Meta-Llama-3-8B-Instruct/{dataset}/result_dict.json'
 		file_name = f'exps_May1_yibo/llama3_version4_ce_with_zerofewshot/meta-llama/Meta-Llama-3-8B/{dataset}/result_dict.json'
-		file_name = f'exps_apr29/llama3_8B_version4/meta-llama/Meta-Llama-3-8B/{dataset}/result_dict.json'
-		file_name = f'exps_May2_yibo/soft_prompt_llama3_instruct/meta-llama/Meta-Llama-3-8B-Instruct/{dataset}/result_dict.json'
-		file_name = f'exps_May2_yibo/soft_prompt_llama3/meta-llama/Meta-Llama-3-8B/{dataset}/result_dict.json'
-		file_name = f'exps_May2_yibo/label_anchor_llama3_instruct/meta-llama/Meta-Llama-3-8B/{dataset}/result_dict.json'
-		
-		file_name = f'exps_May2_yibo/task_vector_llama3_instruct/meta-llama/Meta-Llama-3-8B-Instruct/{dataset}/result_dict.json'
-		file_name = f'exps_May2_yibo/label_anchor_llama3_instruct/meta-llama/Meta-Llama-3-8B-Instruct/{dataset}/result_dict.json'
-		file_name = f'exps_May3_yibo/i2cl_llama3/meta-llama/Meta-Llama-3-8B/{dataset}/result_dict.json'
-		file_name = f'exps_apr26/gpt2_xl_again/openai-community/gpt2-xl/{dataset}/result_dict.json'
-		file_name = f'exps_apr26/gpt2_xl_again/openai-community/gpt2-xl/{dataset}/result_dict.json'
-		file_name = f'exps_apr30_ibme/llama2_lora128_ce/meta-llama/Llama-2-7b-hf//{dataset}/result_dict.json'
 		file_name = f'exps_apr30_ibme/llama2_lora1_oursconv3_flat4/meta-llama/Llama-2-7b-hf/{dataset}/result_dict.json'
 		file_name = f'exps_apr29_ibme/llama2_Lora_1_CEloss/meta-llama/Llama-2-7b-hf/{dataset}/result_dict.json'
 		file_name = f'exps_May6_desk/lora64_llama2/meta-llama/Llama-2-7b-hf/{dataset}/result_dict.json'
 		file_name = f'exps_May6_desk/lora64_llama2/meta-llama/Llama-2-7b-hf/{dataset}/result_dict.json'
+		file_name = f'exps_May7_desk/lora128all_llama2/meta-llama/Llama-2-7b-hf/{dataset}/result_dict.json'
 
 
 		print(file_name)
