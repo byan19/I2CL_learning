@@ -7,7 +7,7 @@ config = {}
 #config['exp_name'] = 'exps/Llama3_32layers_debug'
 config['exp_name'] = 'exps_apr30_desktop/lora_script_test'
 config['exp_name'] = 'exps_May8_desk/lora1all_llama2_ce'
-config['exp_name'] = 'exps_May8_desk/ia3_debugging'
+config['exp_name'] = 'exps_May8_yibo/ia3_llama2'
 
 config['gpus'] = ['0']
 
