@@ -8,7 +8,7 @@ config = {}
 config['exp_name'] = 'exps_apr30_desktop/lora_script_test'
 config['exp_name'] = 'exps_May8_desk/lora1all_llama2_ce'
 config['exp_name'] = 'exps_May8_yibo/ia3_llama3_instruct'
-config['exp_name'] = 'exps_May9_desk/ia3_gpt2_debug'
+config['exp_name'] = 'exps_May9_desk/ia3_gpt2'
 
 config['gpus'] = ['0']
 
