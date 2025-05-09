@@ -13,10 +13,8 @@ def analysis(exp_name, model_name, dataset_list):
 		file_name = f'exps_May1_yibo/llama3_version4_ce_with_zerofewshot/meta-llama/Meta-Llama-3-8B/{dataset}/result_dict.json'
 		file_name = f'exps_apr30_ibme/llama2_lora1_oursconv3_flat4/meta-llama/Llama-2-7b-hf/{dataset}/result_dict.json'
 		file_name = f'exps_apr29_ibme/llama2_Lora_1_CEloss/meta-llama/Llama-2-7b-hf/{dataset}/result_dict.json'
-		file_name = f'exps_May6_desk/lora64_llama2/meta-llama/Llama-2-7b-hf/{dataset}/result_dict.json'
-		file_name = f'exps_May6_desk/lora64_llama2/meta-llama/Llama-2-7b-hf/{dataset}/result_dict.json'
-		file_name = f'exps_May7_desk/lora128all_llama2/meta-llama/Llama-2-7b-hf/{dataset}/result_dict.json'
 		file_name = f'exps_May7_desk/lora16all_llama2/meta-llama/Llama-2-7b-hf/{dataset}/result_dict.json'
+		file_name = f'exps_May9_desk/ia3_gpt2/openai-community/gpt2-xl/{dataset}/result_dict.json'
 
 
 		print(file_name)
