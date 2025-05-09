@@ -1025,10 +1025,15 @@ class ModelWrapper(nn.Module):
         pt_config = LoraConfig(r=config['lora_rank'], lora_alpha=16, target_modules=config['lora_target_modules'],
                                lora_dropout=0.05, bias="none", task_type="CAUSAL_LM")
         '''
-        pt_config = IA3Config(
-            task_type=TaskType.SEQ_CLS, target_modules=config['target_modules'],
-            feedforward_modules=["down_proj"]
-        )
+        if 'gpt' in config['models'][0]:
+            pt_config = IA3Config(
+                task_type=TaskType.SEQ_CLS, target_modules='c_attn',
+            )
+        else:
+            pt_config = IA3Config(
+                task_type=TaskType.SEQ_CLS, target_modules=config['target_modules'],
+                feedforward_modules=["down_proj"]
+            )
         # pt_config = LoraConfig(r =config['lora_rank'], lora_alpha = 16, target_modules= ["q_proj", "v_proj", "k_proj", "o_proj", "gate_proj", "up_proj", "down_proj"], lora_dropout=  0.05, bias = "none" , task_type="CAUSAL_LM" )
         
         peft_model = get_peft_model(self.model, pt_config)

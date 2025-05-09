@@ -37,6 +37,7 @@ sessionname=gpt-xl_CE
 sessionname=lora1all_llama2_ce
 sessionname=ia3running
 sessionname=ia3_llama2
+sessionname=ia3_gpt2
 
 File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
 File=bash_script/bash_sub_script/sub_lora.sh
