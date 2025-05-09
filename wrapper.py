@@ -1025,6 +1025,7 @@ class ModelWrapper(nn.Module):
         pt_config = LoraConfig(r=config['lora_rank'], lora_alpha=16, target_modules=config['lora_target_modules'],
                                lora_dropout=0.05, bias="none", task_type="CAUSAL_LM")
         '''
+        pdb.set_trace()
         if 'gpt' in config['models'][0]:
             pt_config = IA3Config(
                 task_type=TaskType.SEQ_CLS, target_modules='c_attn',
