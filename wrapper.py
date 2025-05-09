@@ -1137,6 +1137,7 @@ class ModelWrapper(nn.Module):
                 else:
                     loss = utils.entropy_from_logits(pred_logits).mean()
                 
+                print(f'loss: {loss.item()}')
                 epoch_loss.append(loss.item())
                
                 # update strength params
