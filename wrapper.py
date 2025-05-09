@@ -1027,9 +1027,8 @@ class ModelWrapper(nn.Module):
         '''
         pdb.set_trace()
         if 'gpt' in config['models'][0]:
-            pt_config = IA3Config(
-                task_type=TaskType.SEQ_CLS, target_modules='c_attn',
-            )
+            #pt_config = IA3Config( task_type=TaskType.SEQ_CLS, target_modules=['c_attn'] )
+            pt_config = IA3Config( task_type=TaskType.SEQ_CLS, target_modules=config['target_modules'] )
         else:
             pt_config = IA3Config(
                 task_type=TaskType.SEQ_CLS, target_modules=config['target_modules'],
