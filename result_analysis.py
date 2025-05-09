@@ -14,7 +14,7 @@ def analysis(exp_name, model_name, dataset_list):
 		file_name = f'exps_apr30_ibme/llama2_lora1_oursconv3_flat4/meta-llama/Llama-2-7b-hf/{dataset}/result_dict.json'
 		file_name = f'exps_apr29_ibme/llama2_Lora_1_CEloss/meta-llama/Llama-2-7b-hf/{dataset}/result_dict.json'
 		file_name = f'exps_May7_desk/lora16all_llama2/meta-llama/Llama-2-7b-hf/{dataset}/result_dict.json'
-		file_name = f'exps_May9_desk/ia3_gpt2/openai-community/gpt2-xl/{dataset}/result_dict.json'
+		file_name = f'exps_May8_desk/ia3_llama2/meta-llama/Llama-2-7b-hf/{dataset}/result_dict.json'
 
 
 		print(file_name)
@@ -94,6 +94,6 @@ args = parser.parse_args()
 if __name__ == "__main__":
 	exp_name = args.exp_name
 	model_name = args.model_name
-	dataset_list = ['sst2', 'sst5', 'trec','agnews', 'subj', 'hate_speech18', 'dbpedia', 'emo', 'mr' ]
 	dataset_list = ['sst2', 'sst5', 'trec','subj', 'hate_speech18',  'emo', 'mr' ]
+	dataset_list = ['sst2', 'sst5', 'trec','agnews', 'subj', 'hate_speech18', 'dbpedia', 'emo', 'mr' ]
 	analysis(exp_name, model_name, dataset_list)
