@@ -1138,116 +1138,7 @@ class ModelWrapper(nn.Module):
                     loss = utils.entropy_from_logits(pred_logits).mean()
                 
                 epoch_loss.append(loss.item())
-                
-                conver_loss = 0.0
-                weight_scale = [hold for hold in range(1, len(hidden_states))]
-                weight_scale = torch.softmax(
-                    torch.from_numpy(np.asarray(weight_scale) / config['conver_loss_regular_temp']), dim=0)
-                if config['conver_loss']:
-                    print('conver loss')
-                    for i in range(1, len(hidden_states) - 1):
-                        conver_loss += torch.nn.functional.mse_loss(
-                            hidden_states[i][torch.arange(logits.size(0)), pred_loc]
-                            , hidden_states[i + 1][torch.arange(logits.size(0)), pred_loc])
-                    
-                    loss = config['ce_loss_lambda'] * loss + config['conver_loss_lambda'] * conver_loss
-                    epoch_conv_loss.append(conver_loss.item())
-                elif config['conver_loss_regular']:
-                    print('conver loss with regualrizer')
-                    for i in range(2, len(hidden_states) - 1):
-                        numerator = torch.nn.functional.mse_loss(
-                            hidden_states[i][torch.arange(logits.size(0)), pred_loc]
-                            , hidden_states[i + 1][torch.arange(logits.size(0)), pred_loc])
-                        
-                        demoninator = torch.nn.functional.mse_loss(
-                            hidden_states[i][torch.arange(logits.size(0)), pred_loc]
-                            , hidden_states[i - 1][torch.arange(logits.size(0)), pred_loc])
-                        
-                        if config['conver_loss_regular_expo']:
-                            conver_loss += weight_scale[i].item() * numerator / demoninator
-                        else:
-                            # conver_loss += torch.log(numerator/demoninator)
-                            conver_loss += numerator / demoninator
-                    
-                    loss = config['ce_loss_lambda'] * loss + config['conver_loss_lambda'] * conver_loss
-                    epoch_conv_loss.append(conver_loss.item())
-                
-                if config['pushing_loss']:
-                    print('adding pushing_loss')
-                    pushing_loss = 0.0
-                    for i in range(2, len(hidden_states) - 1):
-                        numerator = torch.nn.functional.mse_loss(
-                            hidden_states[i][torch.arange(logits.size(0)), pred_loc]
-                            , hidden_states[1][torch.arange(logits.size(0)), pred_loc])
-                        
-                        demoninator = torch.nn.functional.mse_loss(
-                            hidden_states[i + 1][torch.arange(logits.size(0)), pred_loc]
-                            , hidden_states[1][torch.arange(logits.size(0)), pred_loc])
-                        pushing_loss += numerator / demoninator
-                    
-                    loss += config['pushing_loss_lambda'] * pushing_loss
-                
-                ####################################
-                # flatness approximation
-                ####################################
-                if config['flatness_loss']:
-                    noise_scale = config['noise_scale_hess']
-                    noise_holder = []
-                    post_layer_norm_holder = []
-                    hooks = []
-                    
-                    if 'gpt' in config['models'][0]:
-                        def hook_fn_local(module, input):
-                            """Function to add noise and store it."""
-                            noise = torch.randn_like(input[0]) * noise_scale
-                            post_layer_norm_holder.append(module.ln_2.base_layer.weight)
-                            input = (input[0] + noise * module.ln_2.base_layer.weight,)
-                            noise_holder.append(noise)
-                            return input
-                        
-                        for layer in self.model.transformer.h:
-                            hook = layer.register_forward_pre_hook(hook_fn_local)
-                            hooks.append(hook)
-                    else:
-                        def hook_fn_local(module, input):
-                            """Function to add noise and store it."""
-                            noise = torch.randn_like(input[0]) * noise_scale
-                            post_layer_norm_holder.append(module.post_attention_layernorm.weight)
-                            input = (input[0] + noise * module.post_attention_layernorm.weight,)
-                            noise_holder.append(noise)
-                            return input
-                        
-                        for layer in self.model.model.model.layers:
-                            hook = layer.register_forward_pre_hook(hook_fn_local)
-                            hooks.append(hook)
-                    
-                    noise_output = self.model(input_ids=input_ids, attention_mask=attn_mask, output_hidden_states=True)
-                    noise_hidden_states = noise_output.hidden_states
-                    
-                    flat_loss = 0.0
-                    for i in range(1, len(hidden_states) - 1):
-                        '''
-                        conver_loss += torch.nn.functional.mse_loss(
-                            hidden_states[i][torch.arange(logits.size(0)), pred_loc]
-                            , hidden_states[i + 1][torch.arange(logits.size(0)), pred_loc])
-                        '''
-                        grad_noise = noise_hidden_states[i + 1][torch.arange(logits.size(0)), pred_loc] - \
-                                     noise_hidden_states[i][torch.arange(logits.size(0)), pred_loc]
-                        grad = hidden_states[i + 1][torch.arange(logits.size(0)), pred_loc] - hidden_states[i][
-                            torch.arange(logits.size(0)), pred_loc]
-                        # flat_loss += post_layer_norm_holder[i] @ (grad_noise - grad).t()/noise_scale
-                        # flat_loss += torch.nn.functional.softplus(post_layer_norm_holder[i] @ (grad_noise - grad).t()/noise_scale)
-                        
-                        # worked version
-                        # flat_loss += torch.nn.functional.softplus( -1 * noise_holder[i] @ (grad_noise - grad).t() / noise_scale)
-                        
-                        # precised version
-                        flat_loss += torch.nn.functional.softplus(
-                            -1 * noise_holder[i][torch.arange(logits.size(0)), pred_loc] @ (
-                                    grad_noise - grad).t() / noise_scale)
-                    
-                    loss += config['flat_loss_lambda'] * flat_loss.mean()
-                
+               
                 # update strength params
                 optimizer.zero_grad()
                 loss.backward()
@@ -1255,15 +1146,9 @@ class ModelWrapper(nn.Module):
                 optimizer.step()
                 scheduler.step()
                 
-                if config['flatness_loss']:
-                    for ele in hooks:
-                        ele.remove()
             
             epoch_loss = np.mean(epoch_loss)
             loss_list.append(epoch_loss)
-            if config['conver_loss'] or config['conver_loss_regular']:
-                epoch_conv_loss = np.mean(epoch_conv_loss)
-                conv_loss_list.append(epoch_conv_loss)
         
         # fronzen all learnable strength params
         for param in self.model.parameters():
@@ -1276,11 +1161,6 @@ class ModelWrapper(nn.Module):
         if not os.path.exists(f'{save_dir}/loss_record/'):
             os.makedirs(f'{save_dir}/loss_record/')
         
-        np.save(f'{save_dir}/loss_record/{run_name}_ce_loss.npy', loss_list)
-        
-        if config['conver_loss'] or config['conver_loss_regular']:
-            utils.plot_loss_curve(conv_loss_list, save_dir + f'/{run_name}_conv_loss_curve.png')
-            np.save(f'{save_dir}/loss_record/{run_name}_conv_loss.npy', conv_loss_list)
     
     def layernorm_adaptation_verion4_basedrola(self, config, dataset, save_dir=None, run_name=None):
         '''
