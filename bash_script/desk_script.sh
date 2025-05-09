@@ -33,15 +33,13 @@ sessionname=lora16_scripttest
 sessionname=softprompt
 sessionname=taskvector
 sessionname=label_ancho
-sessionname=gpt-xl_CE
-sessionname=lora1all_llama2_ce
-sessionname=ia3running
 sessionname=ia3_llama2
 sessionname=ia3_gpt2
+sessionname=lora_llama3
 
 File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
-File=bash_script/bash_sub_script/sub_lora.sh
 File=bash_script/bash_sub_script/sub_run.sh
+File=bash_script/bash_sub_script/sub_lora.sh
 
 CHECK=${sessionname}
 

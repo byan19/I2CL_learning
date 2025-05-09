@@ -8,21 +8,16 @@ config = {}
 config['exp_name'] = 'exps_apr26/gpt2_xl_again'
 config['exp_name'] = 'exps_apr28/llama3_version4'
 config['exp_name'] = 'exps_apr28/probe_raw_debugging'
-config['exp_name'] = 'exps_apr28/debugging_debugging'
-config['exp_name'] = 'exps_apr29/probe_raw_analysis'
-config['exp_name'] = 'exps_apr29/llama3_8B_version4'
-config['exp_name'] = 'exps_apr29_downloading/llama3_instruct_Lora_1'
-config['exp_name'] = 'exps_apr30_ibme/gpt-j-6b'
-config['exp_name'] = 'exps_apr30_desktop/lora_script_test'
 config['exp_name'] = 'exps_May8_desk/lora1all_llama2_ce'
+config['exp_name'] = 'exps_May9_desk/lora128_llama3_instruct'
 
 config['gpus'] = ['0']
 
 config['models'] = ['openai-community/gpt2-xl'] # 'meta-llama/Meta-Llama-3-8B', 'openai-community/gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
 config['models'] = ['EleutherAI/gpt-j-6b'] # 'meta-llama/Meta-Llama-3-8B', 'openai-community/gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
 config['models'] = ['meta-llama/Meta-Llama-3-8B'] # 'meta-llama/Meta-Llama-3-8B', 'openai-community/gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
-config['models'] = ['meta-llama/Meta-Llama-3-8B-Instruct'] # 'meta-llama/Meta-Llama-3-8B', 'openai-community/gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
 config['models'] = ['meta-llama/Llama-2-7b-hf'] # 'meta-llama/Meta-Llama-3-8B', 'openai-community/gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
+config['models'] = ['meta-llama/Meta-Llama-3-8B-Instruct'] # 'meta-llama/Meta-Llama-3-8B', 'openai-community/gpt2-xl', 'meta-llama/Llama-2-7b-hf', 'EleutherAI/gpt-j-6B'
 
 config['datasets'] = list(md.target_datasets.keys())
 config['seed'] = 42
@@ -68,9 +63,9 @@ config['demon_bs'] = 0
 
 
 # lora
-config['lora_rank'] = 1 # 8, 16, 64, 128
-config['lora_target_modules'] = ['q_proj', 'v_proj']
+config['lora_rank'] = 128 # 8, 16, 64, 128
 config['lora_target_modules'] = ["q_proj", "v_proj", "k_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+config['lora_target_modules'] = ['q_proj', 'v_proj']
 
 config['layernorm_type'] = 'all' # 'post_attention', 'input_attention', 'all'
 config['entropy_loss'] = False
