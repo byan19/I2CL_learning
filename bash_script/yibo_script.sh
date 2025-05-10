@@ -37,7 +37,7 @@ sessionname=version4_test
 sessionname=lora16_llama2
 sessionname=lora1all_llama2_ours
 sessionname=ia3_llama3_may9
-sessionname=llama3_instruct_lora64
+sessionname=llama3_instruct_lora16
 
 File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
 File=bash_script/bash_sub_script/sub_run.sh
