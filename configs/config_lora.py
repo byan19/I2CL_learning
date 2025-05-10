@@ -9,8 +9,8 @@ config['exp_name'] = 'exps_apr26/gpt2_xl_again'
 config['exp_name'] = 'exps_apr28/llama3_version4'
 config['exp_name'] = 'exps_apr28/probe_raw_debugging'
 config['exp_name'] = 'exps_May8_desk/lora1all_llama2_ce'
-config['exp_name'] = 'exps_May9_desk/lora128_llama3_instruct'
 config['exp_name'] = 'exps_May10_yibo/lora16_llama3_instruct'
+config['exp_name'] = 'exps_May10_desk/lora1_llama3_instruct'
 
 config['gpus'] = ['0']
 
@@ -64,7 +64,7 @@ config['demon_bs'] = 0
 
 
 # lora
-config['lora_rank'] = 16 # 8, 16, 64, 128
+config['lora_rank'] = 1 # 8, 16, 64, 128
 config['lora_target_modules'] = ["q_proj", "v_proj", "k_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
 config['lora_target_modules'] = ['q_proj', 'v_proj']
 
