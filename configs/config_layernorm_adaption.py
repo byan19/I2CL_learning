@@ -15,7 +15,7 @@ config['exp_name'] = 'exps_apr29_downloading/llama3_instruct_Lora_1'
 config['exp_name'] = 'exps_apr30_ibme/gpt-j-6b'
 config['exp_name'] = 'exps_apr30_yibo/llama3instruct_version4_ce_with_zerofewshot'
 config['exp_name'] = 'exps_May1_yibo/llama3_version4_ce_with_zerofewshot'
-config['exp_name'] = 'exps_May10_debugging/debugging'
+config['exp_name'] = 'exps_May10_desklora/lora64_llama3_instruct'
 
 config['gpus'] = ['0']
 

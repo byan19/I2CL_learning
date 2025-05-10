@@ -36,10 +36,11 @@ sessionname=label_ancho
 sessionname=ia3_llama2
 sessionname=ia3_gpt2
 sessionname=test_trainable_parameters
+sessionname=lora64_llama3_instruct
 
 File=bash_script/bash_sub_script/sub_run.sh
-File=bash_script/bash_sub_script/sub_lora.sh
 File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
+File=bash_script/bash_sub_script/sub_lora.sh
 
 CHECK=${sessionname}
 
