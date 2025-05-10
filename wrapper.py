@@ -1414,7 +1414,7 @@ class ModelWrapper(nn.Module):
         self.model.eval()
         # plot loss curve and save it
         utils.plot_loss_curve(loss_list, save_dir + f'/{run_name}_loss_curve.png')
-        
+       
         if not os.path.exists(f'{save_dir}/loss_record/'):
             os.makedirs(f'{save_dir}/loss_record/')
         
