@@ -38,8 +38,8 @@ sessionname=ia3_gpt2
 sessionname=test_trainable_parameters
 
 File=bash_script/bash_sub_script/sub_run.sh
-File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
 File=bash_script/bash_sub_script/sub_lora.sh
+File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
 
 CHECK=${sessionname}
 

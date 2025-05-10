@@ -1177,8 +1177,6 @@ class ModelWrapper(nn.Module):
 
         peft_model = get_peft_model(self.model, pt_config)
         
-        pdb.set_trace()
-        peft_model.print_trainable_parameters()
         # prepare label dict
         label_map = {}
         ans_txt_list = dataset.get_dmonstration_template()['options']
@@ -1437,6 +1435,7 @@ class ModelWrapper(nn.Module):
         pt_config = LNTuningConfig(task_type=TaskType.CAUSAL_LM)
         peft_model = get_peft_model(self.model, pt_config)
         
+        pdb.set_trace()
         if config['skip_training']:
             for param in peft_model.parameters():
                 param.requires_grad = False
