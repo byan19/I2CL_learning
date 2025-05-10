@@ -62,6 +62,7 @@ config['demon_bs'] = 0
 #config['input_attention'] = False
 
 
+
 # lora
 config['target_modules'] = [ "c_attn", "c_proj", "c_fc", "c_proj"]
 config['target_modules'] =["k_proj", "v_proj", "down_proj"]
