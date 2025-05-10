@@ -10,7 +10,7 @@ config['exp_name'] = 'exps_apr28/llama3_version4'
 config['exp_name'] = 'exps_apr28/probe_raw_debugging'
 config['exp_name'] = 'exps_May8_desk/lora1all_llama2_ce'
 config['exp_name'] = 'exps_May10_yibo/lora16_llama3_instruct'
-config['exp_name'] = 'exps_May10_desk/lora1_llama3_instruct'
+config['exp_name'] = 'exps_May10_yibo/lora1_llama3_instruct_ours'
 
 config['gpus'] = ['0']
 
@@ -80,11 +80,11 @@ config['probe_analysis'] = False
 
 
 config['flatness_loss'] = True
-config['flat_loss_lambda'] = 1e-3
 config['flat_loss_lambda'] = 0.0
+config['flat_loss_lambda'] = 1e-3
 
-config['conver_loss_lambda'] = 1e-2
 config['conver_loss_lambda'] = 0.0
+config['conver_loss_lambda'] = 1e-2
 
 config['noise_scale_hess'] = 1e-3
 
