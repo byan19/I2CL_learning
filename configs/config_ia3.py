@@ -63,9 +63,8 @@ config['demon_bs'] = 0
 
 
 # lora
-config['target_modules'] =["k_proj", "v_proj", "down_proj"]
-
 config['target_modules'] = [ "c_attn", "c_proj", "c_fc", "c_proj"]
+config['target_modules'] =["k_proj", "v_proj", "down_proj"]
 
 config['layernorm_type'] = 'all' # 'post_attention', 'input_attention', 'all'
 config['entropy_loss'] = False
