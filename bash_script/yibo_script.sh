@@ -34,17 +34,6 @@ Param=${Target_Para_List[$idx]}
 Tunning=${Tunning_list[$idx]}
 
 sessionname=version4_test
-sessionname=version4_test_path_set
-sessionname=llama3_ourmethod_apr28
-sessionname=gpt_j_6b_version4_apr29
-sessionname=llama3_ourmethod_apr29
-sessionname=gpt_j_6b_version4_apr30
-sessionname=llama3instruct_ce_zerofewshot
-sessionname=llama3_ce_zero_fewshot
-sessionname=softprompt_llama3_instruct
-sessionname=label_anchor_llama3_instruct
-sessionname=i2cl_llama3_instruct
-sessionname=label_anchor_llama3
 sessionname=lora16_llama2
 sessionname=lora1all_llama2_ours
 sessionname=ia3_llama3_may9
