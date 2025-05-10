@@ -10,6 +10,7 @@ config['exp_name'] = 'exps_apr28/llama3_version4'
 config['exp_name'] = 'exps_apr28/probe_raw_debugging'
 config['exp_name'] = 'exps_May8_desk/lora1all_llama2_ce'
 config['exp_name'] = 'exps_May9_desk/lora128_llama3_instruct'
+config['exp_name'] = 'exps_May10_debugging/debugging'
 
 config['gpus'] = ['0']
 

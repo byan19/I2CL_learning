@@ -1175,9 +1175,10 @@ class ModelWrapper(nn.Module):
         pt_config = LoraConfig(r =config['lora_rank'], lora_alpha = 16, target_modules= config['lora_target_modules'], lora_dropout=  0.05, bias = "none" , task_type="CAUSAL_LM" )
         #pt_config = LoraConfig(r =config['lora_rank'], lora_alpha = 16, target_modules= ["q_proj", "v_proj", "k_proj", "o_proj", "gate_proj", "up_proj", "down_proj"], lora_dropout=  0.05, bias = "none" , task_type="CAUSAL_LM" )
 
-        
         peft_model = get_peft_model(self.model, pt_config)
-
+        
+        pdb.set_trace()
+        peft_model.print_trainable_parameters()
         # prepare label dict
         label_map = {}
         ans_txt_list = dataset.get_dmonstration_template()['options']
