@@ -6,6 +6,7 @@ import time
 import argparse
 import itertools
 import torch
+import pdb
 from multiprocessing import Process, Queue
 
 import utils
@@ -190,6 +191,7 @@ def get_args():
 
 if __name__ == "__main__":
     # get args
+    pdb.set_trace()
     args = get_args()
     # load config
     config = utils.load_config(args.config_path)
