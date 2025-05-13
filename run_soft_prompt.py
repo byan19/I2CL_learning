@@ -1,6 +1,7 @@
 import gc
 import json
 import copy
+import pdb
 import time
 import random
 import argparse
@@ -79,9 +80,11 @@ def main(args):
         utils.set_seed(run_seed)        
 
         # zero-shot baseline
-        if run_id == 0 and args.config['run_baseline']:  
+        if run_id == 0 and args.config['run_baseline']:
+            zero_start_time = time.time()
             test_zeroshot_result = test_evaluator.evaluate(model_wrapper, tokenizer, demonstration='',
                                                            use_cache=args.config['use_cache'])
+            zero_cost_time = time.time() - zero_start_time
             result_dict['test_result']['zero_shot'].append(test_zeroshot_result)
             print(f'Test zero-shot result: {test_zeroshot_result}\n')
 
@@ -108,12 +111,16 @@ def main(args):
         
         # few-shot baseline
         if args.config['run_baseline']:
+            few_start_time = time.time()
             test_fewshot_result = test_evaluator.evaluate(model_wrapper, tokenizer,
                                                           demonstration=baseline_demon,
                                                           use_cache=args.config['use_cache'])
+            few_cost_time = time.time() - few_start_time
             result_dict['test_result']['few_shot'].append(test_fewshot_result)
             print(f'Test few-shot result: {test_fewshot_result}\n')
-
+        pdb.set_trace()
+        print(f'zero-shot time cost: {zero_cost_time}')
+        print(f'few-shot time cost: {few_cost_time}')
         # generate demon_list
         demon_list = [demon]
         # save demon_list

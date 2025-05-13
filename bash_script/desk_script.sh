@@ -37,7 +37,7 @@ sessionname=ia3_llama2
 sessionname=ia3_gpt2
 sessionname=test_trainable_parameters
 sessionname=lora64_llama3_instruct
-sessionname=llama3_instruct_softprompt
+sessionname=llama3_instruct_few_zero
 
 File=bash_script/bash_sub_script/sub_lora.sh
 File=bash_script/bash_sub_script/sub_layernorm_adaptation.sh
