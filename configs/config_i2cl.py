@@ -5,7 +5,7 @@ import my_datasets as md
 
 config = {}
 # general
-config['exp_name'] = 'exps_May4_yibo/i2cl_llama3_instruct'
+config['exp_name'] = 'exps_May13_desk/i2cl_time'
 config['gpus'] = ['0']
 config['models'] = ['meta-llama/Llama-2-7b-hf']  # 'gpt2-xl', 'EleutherAI/gpt-j-6B'
 #config['models'] = ['gpt2-xl']  # 'gpt2-xl', 'EleutherAI/gpt-j-6B'
@@ -14,7 +14,7 @@ config['models'] = ['meta-llama/Meta-Llama-3-8B-Instruct'] # 'meta-llama/Meta-Ll
 
 config['datasets'] = list(md.target_datasets.keys())
 config['seed'] = 42
-config['run_num'] = 5  # number of runs
+config['run_num'] = 1  # number of runs
 config['run_baseline'] = False  # whether run baseline
 config['metric'] = 'acc'  # 'acc', 'macro_f1'
 config['bs'] = 1  # batch size

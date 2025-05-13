@@ -1,2 +1,2 @@
 #!/bin/bash
-python run_task_vector.py
+python run_i2cl.py

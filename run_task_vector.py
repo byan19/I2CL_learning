@@ -57,7 +57,6 @@ def target_layer_selection(args, model_wrapper, tokenizer, evaluator, context_ve
 
 def main(args):
     # set global seed
-    pdb.set_trace()
     utils.set_seed(args.config['seed'])
     # set device
     args.device = utils.set_device(args.gpu)
