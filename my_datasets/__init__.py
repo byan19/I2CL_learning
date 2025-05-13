@@ -10,6 +10,7 @@ from .rotten_tomatoes import RottenTomatoes
 from .hate_speech18 import HateSpeech18
 from .emo import EMO
 
+'''
 target_datasets = {
     'agnews': AGNews,
     'dbpedia': DBPedia,
@@ -20,6 +21,11 @@ target_datasets = {
     'mr': RottenTomatoes,
     'hate_speech18': HateSpeech18,
     'emo': EMO,
+}
+'''
+
+target_datasets = {
+    'dbpedia': DBPedia,
 }
 
 '''
