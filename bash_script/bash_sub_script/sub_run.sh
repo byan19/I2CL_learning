@@ -1,2 +1,2 @@
 #!/bin/bash
-python run_i2cl.py
+python run_soft_prompt.py
