@@ -9,11 +9,35 @@ import torch
 import pdb
 from multiprocessing import Process, Queue
 
+from huggingface_hub import login
 import utils
 import my_datasets as md
 import evaluator as ev
 
 
+def run_task(gpu_id, config, model_name, dataset_name):
+    #while not task_queue.empty():
+        #model_name, dataset_name = task_queue.get()
+    print(f"Running {model_name} on {dataset_name} with GPU {gpu_id}")
+    input_args = argparse.Namespace()
+    cur_config = copy.deepcopy(config)
+    input_args.model_name = model_name
+    input_args.dataset_name = dataset_name
+    input_args.gpu = gpu_id
+    input_args.config = cur_config
+    try:
+        main(input_args)
+        gc.collect()
+        torch.cuda.empty_cache()
+        print(f"CUDA memory cleared for GPU {gpu_id}")
+        time.sleep(5)
+    finally:
+        # Clean up CUDA memory after each task
+        gc.collect()
+        torch.cuda.empty_cache()
+        print(f"CUDA memory cleared for GPU {gpu_id}")
+        time.sleep(5)
+        
 def target_layer_selection(args, model_wrapper, tokenizer, evaluator, context_vector_dict):
     num_layers = model_wrapper.num_layers
     with torch.no_grad():
@@ -191,6 +215,11 @@ def get_args():
 
 
 if __name__ == "__main__":
+    
+    hf_token = "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"
+    
+    # Log in using the token
+    login(token=hf_token)
     # get args
     args = get_args()
     # load config
@@ -198,30 +227,12 @@ if __name__ == "__main__":
     # Generate all combinations of models and datasets
     combinations = list(itertools.product(config['models'], config['datasets']))
     # Queue to hold tasks
-    task_queue = Queue()
-    for combine in combinations:
-        task_queue.put(combine)
-
-    def run_task(gpu_id, config):
-        while not task_queue.empty():
-            model_name, dataset_name = task_queue.get()
-            print(f"Running {model_name} on {dataset_name} with GPU {gpu_id}")
-            input_args = argparse.Namespace()
-            cur_config = copy.deepcopy(config)
-            input_args.model_name = model_name
-            input_args.dataset_name = dataset_name
-            input_args.gpu = gpu_id
-            input_args.config = cur_config
-            try:
-                main(input_args)
-            finally:
-                # Clean up CUDA memory after each task
-                gc.collect()
-                torch.cuda.empty_cache()
-                print(f"CUDA memory cleared for GPU {gpu_id}") 
-                time.sleep(5)
+    print(combinations)
+    for model_name, dataset_name in combinations:
+        run_task('0', config, model_name, dataset_name)  # without parallelisation
     
-    run_task('0', config) # without parallelisation
+    
+    #run_task('0', config) # without parallelisation
     '''
     # Create a process for each GPU
     processes = [Process(target=run_task, args=(gpu_id, config)) for gpu_id in config['gpus']]
